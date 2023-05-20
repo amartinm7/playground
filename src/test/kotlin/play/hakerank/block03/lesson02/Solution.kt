@@ -1,4 +1,4 @@
-package hakerank.block03.lesson02
+package play.hakerank.block03.lesson02
 
 /**
  * Tower Breakers

@@ -1,4 +1,4 @@
-package hakerank.block03.lesson03
+package play.hakerank.block03.lesson03
 
 class Solution {
 

@@ -1,4 +1,4 @@
-package hakerank.training.lesson01
+package play.hakerank.training.lesson01
 
 class Solution {
     /*

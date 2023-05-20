@@ -1,4 +1,4 @@
-package hakerank.training.lesson01
+package play.hakerank.training.lesson01
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest

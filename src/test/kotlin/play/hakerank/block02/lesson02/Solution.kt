@@ -1,4 +1,4 @@
-package hakerank.block02.lesson02
+package play.hakerank.block02.lesson02
 
 import kotlin.math.abs
 

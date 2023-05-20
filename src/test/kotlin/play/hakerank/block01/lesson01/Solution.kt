@@ -1,4 +1,4 @@
-package hakerank.block01.lesson01
+package play.hakerank.block01.lesson01
 
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicInteger

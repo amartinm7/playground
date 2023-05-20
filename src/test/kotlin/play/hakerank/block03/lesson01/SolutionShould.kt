@@ -1,4 +1,4 @@
-package hakerank.block03.lesson01
+package play.hakerank.block03.lesson01
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest

@@ -1,4 +1,4 @@
-package hakerank.block03.lesson04
+package play.hakerank.block03.lesson04
 
 /**
  * Palindrome

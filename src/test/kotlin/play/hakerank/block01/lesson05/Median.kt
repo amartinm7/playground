@@ -1,4 +1,4 @@
-package hakerank.block01.lesson05
+package play.hakerank.block01.lesson05
 
 class Median {
 

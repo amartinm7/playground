@@ -1,4 +1,4 @@
-package hakerank.block02.lesson01
+package play.hakerank.block02.lesson01
 
 /**
 Given an array of integers, where all elements but one occur twice, find the unique element.
