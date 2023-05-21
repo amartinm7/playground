@@ -1,4 +1,4 @@
-package play.hakerank.block04
+package play.hakerank.block04.lesson01
 
 /**
  * Complete the 'gridChallenge' function below.
