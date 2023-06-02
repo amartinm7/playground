@@ -159,3 +159,26 @@ The event-first approach forces an `inversion of responsibility`; it is a fundam
 
 ![event-first-pattern](_img/event-first-pattern.jpg)
 
+When new requirements are comming, 
+for the event-command-based system, we need to change the main purchasing application to call these new systems. 
+But for the pure event-first solution, we can simply add new processors (consumers) of the existing events, such as why(item) and checkInventory().
+
+Notice how the event-driven approach allows many processors to react to the same “purchased” event (published via the /user-purchases topic)? This flexibility means functionality can run in parallel and be added, extended, upgraded or replaced without taking the system down. Decoupling is the key. The “event” also affords the opportunity to propagate versioning, security tokens, correlation IDs and other useful information.
+
+The tradeoff of the `event-first` pattern:
+- ability to support `traceability` (`observability`), 
+- failure paths, 
+- scaling 
+- and explanation about why things have gone wrong
+
+### Benefits of the event-first approach
+
+The pure event-first approach described above demonstrates:
+
+- Decoupling: Processors don’t know anything about upstream or downstream processors
+- Encapsulation: There are clean boundaries between processors.
+- Inverted knowledge: Knowledge and responsibility are reversed.
+- Evolutionary change: The system and events can change over time.
+- Event sourcing: When using a log and log-aware stream processors, we gain the ability to potentially 
+rebuild and restore application state. It’s not a free lunch; the application state needs to be captured and managed.
+- Evolutionary architecture is a natural benefit from event-first thinking and event-driven architectures
