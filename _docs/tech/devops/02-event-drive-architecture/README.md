@@ -127,6 +127,7 @@ The importance of events and event first thinking:
 
 ## Event-first versus event-command patterns for event-driven design
 
+### event-command
 Exposing an REST API is `event-command patterns.
 REST applications are an `event → command pattern`
 Calls are generally synchronously (http synchronously) (but sometimes can be asynchronously like websockets or whatever)
@@ -138,15 +139,19 @@ They are coupled in multiple ways:
 - Secondly, the method being called is also known (i.e., an API call to doStuff), 
 - and lastly, the calls tended to return a value (we have to wait to get the value)
 
-The event-first approach is unique in that it processes the event as a reaction; 
+### event-first
+
+The `event-first` approach is unique in that it processes the event as a reaction; 
 the emitter doesn’t call on a specific function; the API has been removed and it instead just sends an event. 
 The emitter of the event doesn’t know which processors (or functions) are going to consume it, and the event becomes the API. 
 This decoupling allows the set of consuming apps to change over time without any upstream changes required in the emitter.
 
-Event-first analog: I walk into a room, generate an “entered room” event and the light turns on. This is a reaction to an event.
+`Event-first` analog: I walk into a room, generate an “entered room” event and the light turns on. This is a reaction to an event.
 
-Event-command analog: I walk into a room, flip the light switch and the light turns on. This is a command.
+`Event-command` analog: I walk into a room, flip the light switch and the light turns on. This is a command.
 
-In the event-first analog, I have no knowledge and don’t ask for the lights to be turned on;. Instead, a sensor detects my presence; it has the responsibility. In the event-command analog, I have the responsibility of knowing how to turn on the light and also making it happen.
+In the `event-first` analog, I have no knowledge and don’t ask for the lights to be turned on;. Instead, a sensor detects my presence; `it has the responsibility`. 
+In the `event-command` analog, `I have the responsibility` of knowing how to turn on the light and also making it happen.
 
-The event-first approach forces an `inversion of responsibility; it is a fundamental paradigm shift of how applications are developed
+The event-first approach forces an `inversion of responsibility`; it is a fundamental paradigm shift of how applications are developed
+
