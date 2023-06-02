@@ -142,3 +142,11 @@ The event-first approach is unique in that it processes the event as a reaction;
 the emitter doesn’t call on a specific function; the API has been removed and it instead just sends an event. 
 The emitter of the event doesn’t know which processors (or functions) are going to consume it, and the event becomes the API. 
 This decoupling allows the set of consuming apps to change over time without any upstream changes required in the emitter.
+
+Event-first analog: I walk into a room, generate an “entered room” event and the light turns on. This is a reaction to an event.
+
+Event-command analog: I walk into a room, flip the light switch and the light turns on. This is a command.
+
+In the event-first analog, I have no knowledge and don’t ask for the lights to be turned on;. Instead, a sensor detects my presence; it has the responsibility. In the event-command analog, I have the responsibility of knowing how to turn on the light and also making it happen.
+
+The event-first approach forces an `inversion of responsibility; it is a fundamental paradigm shift of how applications are developed
