@@ -37,3 +37,108 @@ and event first, and why event-driven programming fulfills foundational requirem
 supports evolution and elasticity.
 
 ## event-first approach
+
+Asynchonous consuming versus synchronous requests.
+Consume messages (Kafka) vs serve requests (REST)
+
+The value of events is that a sequence of related events represent behavior 
+(e.g., an item was added and then removed from a shopping cart, an error recurs every 24 hours 
+or users always clicks through a site in a particular order)
+
+A sequence of related events is commonly called a stream
+
+When thinking of APIs, we start with the event rather than the highly coupled concept of a command, 
+e.g., an event-X has occurred, rather than command-Y should be executed. 
+This thinking underpins event-driven streaming systems.
+
+A stream of events captures temporal behavior
+
+## Considerations of the event-driven architecture
+
+There are many considerations when evaluating the event-driven architecture. 
+Events initially start out to as atomic and drive reactionary callbacks (functions). 
+As a use case evolves, workflows develop and the criticality of the application generally increases along 
+with the nature in which an event is considered.
+
+This raises numerous questions: 
+- Is ordering important? 
+- Do I want to ensure transactionality? 
+- How do I trust the execution? 
+- Security? 
+- Lineage? 
+- Where did the event come from?
+
+The key realization for the adoption of `event-first` thinking is that an event represents `a fact, something happened`; 
+it is immutable and therefore changes how we think about our domain model
+
+The basic attributes of an event include time, source, key, header, metadata and payload
+
+The other consideration is that events do not exist in isolation, an event tends to be part of a flow of information, a stream
+
+We define a stream as an unbounded sequence of related events that are associated through the use of an “eventKey,” 
+a key that ties multiple events together.
+
+In the real world, the nature of the “event” can be described as:
+
+- Atomic: something happened (bid on an item, send an email, device temperature)
+- Related: a stream or sequence of events (tracking a pricing change, device metrics changes over time)
+- Behavioral: the accumulation of facts captures behavior
+
+## Transitioning to event-first thinking
+
+Event-first thinking changes how you think about what you are building
+
+How is the event treated within a system? All of the following questions get asked as the event-driven architecture is developed:
+
+- Is it observable, and are the flows of streams behaving as expected?
+- Is it trusted, meaning transactional, exactly one or at least once? Will it scale?
+- Is stateless processing, such as filtering, projection, cleaning or enrichment required? Is stateful processing, such as aggregations or stateful sequence processing required?
+- Is a materialized view against the stream required? How many transactions per second are required for a windowed view?
+- Do we want to scale/fan/map out (parallelize), fan in/collect and, build materialized views?
+- Does it support error handling, such as error flows and dead letter queue?
+- Does it send and transform events from one stream into others (stream processing)?
+- Does it react and drive intelligence from the state collected from a stream (stream processing)?
+
+In terms of increased adoption, we generally see these patterns as characteristic of an event-driven organization:
+
+- Data pipelines (ETL, integration)
+- Monitoring and alerting, including log collection and aggregation
+- Event-driven microservices
+- Enterprise wide event-driven microservices
+- IoT
+- Customer 360
+- Digital transformation
+- Real-time enterprise
+- Central nervous system/digital nervous system
+
+By embracing event-first thinking, we naturally inherit the foundations of event streaming platforms like event sourcing, replayability, stream processing and dataflow design, amongst others. We should also incorporate event-first thinking into an architecture that leverages a serverless stack to be event driven, multi-cloud and elastic.
+
+The importance of events and event first thinking:
+
+- Capture facts
+- Capture behavior
+- Provide a representation of the real world
+- Model use cases of how we think
+- Supports repeated evaluation and processing (a time machine)
+- Provide horizontal scaling
+- Speak the same language as the business
+
+(`event-storming` practice to identify the events)
+
+## Event-first versus event-command patterns for event-driven design
+
+Exposing an REST API is `event-command patterns.
+REST applications are an `event → command pattern`
+Calls are generally synchronously (http synchronously) (but sometimes can be asynchronously like websockets or whatever)
+
+Problems:
+
+They are coupled in multiple ways: 
+- Firstly, the endpoint is known (i.e., the service address). 
+- Secondly, the method being called is also known (i.e., an API call to doStuff), 
+- and lastly, the calls tended to return a value (we have to wait to get the value)
+
+The event-first approach is unique in that it processes the event as a reaction; 
+the emitter doesn’t call on a specific function; the API has been removed and it instead just sends an event. 
+The emitter of the event doesn’t know which processors (or functions) are going to consume it, and the event becomes the API. 
+This decoupling allows the set of consuming apps to change over time without any upstream changes required in the emitter.
