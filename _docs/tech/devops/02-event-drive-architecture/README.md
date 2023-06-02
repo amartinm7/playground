@@ -155,3 +155,7 @@ In the `event-command` analog, `I have the responsibility` of knowing how to tur
 
 The event-first approach forces an `inversion of responsibility`; it is a fundamental paradigm shift of how applications are developed
 
+![event-command-pattern](_img/event-command-pattern.jpg)
+
+![event-first-pattern](_img/event-first-pattern.jpg)
+
