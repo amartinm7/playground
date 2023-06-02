@@ -12,3 +12,4 @@ Topics
 - command-bus
 - eventual consistency
 - domain driven design DDD -> `event-storming` practice to identify the events and the streams
+- cluster

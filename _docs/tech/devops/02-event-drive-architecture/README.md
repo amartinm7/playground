@@ -182,3 +182,20 @@ The pure event-first approach described above demonstrates:
 - Event sourcing: When using a log and log-aware stream processors, we gain the ability to potentially 
 rebuild and restore application state. It’s not a free lunch; the application state needs to be captured and managed.
 - Evolutionary architecture is a natural benefit from event-first thinking and event-driven architectures
+
+When you use the pure, event-driven approach, the architecture can change over time as different processors may react to 
+events, which can be reprocessed while the data model evolves simultaneously. Perhaps the domain model has changed, or 
+functionality is being extended. None of the originating events are lost, and the behavior is captured in the stream. 
+With these foundations, you then have a system that supports architectural evolution as well as data and domain evolution.
+
+This revaluation on technical design pushes us towards a pure eventing model where we throw out the event-command pattern 
+and simply emit events. The benefit of this approach meets many modern requirements where systems are elastic, easily composible, 
+expected to run 24×7 and, most importantly, are evolvable. 
+The ability to progress domain models that are supported by events and remodel event streams is an essential requirement for the modern business.
+
+Reference: 
+- For a deep dive on `events vs commands`, check out Ben Stopford’s article 
+[Build Services on a Backbone of Events](https://www.confluent.io/blog/build-services-backbone-events/).    
+- Another great book on these principles called
+[Building Evolutionary Architectures](https://www.thoughtworks.com/books/building-evolutionary-architectures). 
+- Martin Fowler’s [Focusing on Events paints](https://martinfowler.com/eaaDev/EventNarrative.html)
