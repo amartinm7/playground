@@ -10,3 +10,4 @@ Topics
 - CQRS: command query response segregation
 - event-bus
 - command-bus
+- eventual consistency
