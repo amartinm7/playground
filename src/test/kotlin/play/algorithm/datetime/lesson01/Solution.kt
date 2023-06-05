@@ -6,11 +6,11 @@ data class Loan(val amount: Int, val dateTime: OffsetDateTime)
 
 class LoanRepository(private val store: MutableList<Loan>) {
 
-    private fun OffsetDateTime.less60() = minusMinutes(60)
+    private fun OffsetDateTime.minus60Minutes() = minusMinutes(60)
 
     private fun removeLoans(now: OffsetDateTime): MutableList<Loan> =
         store.also {
-            store.removeIf { item -> item.dateTime.isBefore(now.less60()) }
+            store.removeIf { item -> item.dateTime.isBefore(now.minus60Minutes()) }
         }
 
     fun processLoan(loan: Loan) {
@@ -36,6 +36,7 @@ typealias GetLoanVolumeServiceExec = (OffsetDateTime) -> Int
 typealias ProcessLoanServiceExec = (Loan) -> Unit
 
 class Solution {
+
     private fun bootstrapping(): Map<String, Any> {
         val syncList = java.util.Collections.synchronizedList(mutableListOf<Loan>())
         val repository = LoanRepository(syncList)
