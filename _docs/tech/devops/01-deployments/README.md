@@ -31,3 +31,21 @@ It's like you have a common car, and you change it for a ferrari. The ferrari is
 - horizontal: duplicate the instances, add more instances to the cluster. Cheap process. The point you have to think the microservices has to be stateless. 
 
 The `database` scales `vertically` and the `microservices horizontally`.
+
+## clusters
+
+Cluster is a set of computers working at the same time for some of the next responsabilities: 
+
+- `Failover o High Availability Computing Cluster` (Cluster de Alta Disponibilidad)
+Garantiza que una red permanezca siempre activa. Para ello, en caso de que una computadora falle, 
+ya sea por fallos de red, hardware o software, otra mantiene la red en funcionamiento 
+- `Load Balancing` (Cluster de Balanceo de Carga)
+El tipo de cluster load balancing es una estructura en la que todas las computadoras son responsables de realizar 
+una determinada tarea.
+Así, si uno de los equipos presenta un problema, se elimina automáticamente del sistema y la función inicial 
+que le fue asignada se comparte entre los demás nodos.
+- `High Performance Computing Cluster` (Cluster de Alto Rendimiento)
+Este tipo de cluster se utiliza para realizar tareas de alto rendimiento, con el fin de garantizar al máximo sus altas prestaciones.
+- `Procesamiento paralelo`
+Este tipo de cluster transforma una tarea compleja en varias tareas sencillas y las distribuye entre los 
+nodos integrados al sistema.

@@ -16,3 +16,4 @@ Topics
 - websockets https://www.wallarm.com/what/a-simple-explanation-of-what-a-websocket-is
 - conversation patterns
 - MSA microservice architecture -> single responsability principle
+- scaling vertically vs horizontally
