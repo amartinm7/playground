@@ -1,4 +1,4 @@
-# 00- Microservice architecture patterns
+# 00 - Microservice architecture patterns
 
 You are developing a business-critical enterprise application. 
 You need to deliver changes rapidly, frequently and reliably - as measured by the `DORA metrics` - in order for 
@@ -22,3 +22,15 @@ Average response time per service endpoint.
 Distribution of time required for each request.
 Average execution time for the fastest 10% and slowest 10% queries.
 Success/failure rate by service.
+
+## ACID over BASE
+
+System operations are best implemented as `ACID transactions`. That’s because ACID transactions are simple and 
+familiar programming model. The challenge, however, is that ACID transactions don’t work well across service boundaries. 
+All participating services and their databases must, for example, support 2PC (two-phase-commit), which limits 
+your choice of technologies and reduces availability since all participants must be available to commit 
+the distributed transaction. Consequently, an operation that spans services must use `eventually consistent (BASE) 
+transactions` (e.g. Sagas), which are more complicated than ACID transactions. As a result, the desire to implement 
+an operation using an ACID transaction acts as an attractive force between the operation’s subdomains.
+
+![prefer ACID over BASE](_img/acid_vs_base.jpg)
