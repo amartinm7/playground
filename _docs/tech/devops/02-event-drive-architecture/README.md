@@ -199,3 +199,12 @@ Reference:
 - Another great book on these principles called
 [Building Evolutionary Architectures](https://www.thoughtworks.com/books/building-evolutionary-architectures). 
 - Martin Fowler’s [Focusing on Events paints](https://martinfowler.com/eaaDev/EventNarrative.html)
+
+## conversational patterns
+
+- message patterns: there is a publisher who sends a message to a topic and there some subscribers who reads from this topic. 
+The publisher and the subscribers don't know each to others. `Loosely coupled components`
+- conversation patterns: there is a provider and several subscribers. 
+The provider knows to the subscribers. `High coupled components`, there is a connection between each of them.
+
+![conversational-patterns](_img/conversational_patterns.jpg)
