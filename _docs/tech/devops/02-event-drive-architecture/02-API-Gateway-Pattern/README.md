@@ -3,7 +3,7 @@
 reference:
 - https://microservices-io.translate.goog/patterns/apigateway.html
 
-Take into account that the communication is via "http"
+Take into account that the communication is via `http
 
 ![API-Gateway](_img/api-gateway.jpg)
 
