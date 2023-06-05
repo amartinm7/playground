@@ -12,7 +12,7 @@ Topics
 - command-bus
 - eventual consistency
 - domain driven design DDD -> `event-storming` practice to identify the events and the streams
-- bounded context: https://microservices.io/patterns/decomposition/decompose-by-business-capability.html
+- bounded context: https://microservices.io/patterns/decomposition/decompose-by-subdomain.html, https://microservices.io/patterns/decomposition/decompose-by-business-capability.html
 - cluster
 - websockets https://www.wallarm.com/what/a-simple-explanation-of-what-a-websocket-is
 - conversation patterns
