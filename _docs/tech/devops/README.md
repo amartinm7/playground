@@ -37,3 +37,6 @@ drop in performance levels, making excessive demands on the resources of the sys
 - `Spike Tests` Spike testing seeks to understand implications to the operation of systems when activity levels are 
 above average. Unlike stress testing, spike testing takes into account the number of users and the complexity of actions 
 performed (hence the increase in several business processes generated).
+
+related: 
+- circuit breaker
