@@ -1,7 +1,7 @@
 # 03 - Rest vs gRPC
 
 
-## 
+## Rest vs gRPC
 
 The architectural decision is, the micro-service will expose a gRPC API for the internal micro-services and 
 a REST API for the web application (external clients).

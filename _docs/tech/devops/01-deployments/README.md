@@ -22,3 +22,12 @@ reference:
 ![canaru-deploymen](_img/canary-deployment.jpg)
 
 - `A/B Testing deployment`: In A/B testing, different versions of the same service run simultaneously as “experiments” in the same environment for a period of time. Experiments are either controlled by feature flags toggling, A/B testing tools, or through distinct service deployments. It is the experiment owner’s responsibility to define how user traffic is routed to each experiment and version of an application. Commonly, user traffic is routed based on specific rules or user demographics to perform measurements and comparisons between service versions. Target environments can then be updated with the optimal service version.
+
+## Scaling services
+
+- vertical: over the same instance you add more power, so the instance grows, and it's bigger, taller. 
+It's really expensive in some cases, because you are asking for more memory and CPU. 
+It's like you have a common car, and you change it for a ferrari. The ferrari is plenty of power but at the same time is really expensive. 
+- horizontal: duplicate the instances, add more instances to the cluster. Cheap process. The point you have to think the microservices has to be stateless. 
+
+The `database` scales `vertically` and the `microservices horizontally`.
