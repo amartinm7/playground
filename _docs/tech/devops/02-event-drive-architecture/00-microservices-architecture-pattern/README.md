@@ -34,3 +34,16 @@ transactions` (e.g. Sagas), which are more complicated than ACID transactions. A
 an operation using an ACID transaction acts as an attractive force between the operation’s subdomains.
 
 ![prefer ACID over BASE](_img/acid_vs_base.jpg)
+
+## Eventual consistency
+
+The information is spread between several microservices and their databases. So sometimes, when you update a resource 
+into a microservice, the updated information can take a time to spread on the remaining microservices. This is a problem. 
+And this is why is called eventual consistency, because to be consistence maybe has to take a time to become.
+
+## Anti-corruption layer Pattern
+
+How do you prevent a legacy monolith’s domain model from polluting the domain model of a new service?
+Define an anti-corruption layer, which translates between the two domain models.
+
+
