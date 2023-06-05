@@ -37,3 +37,33 @@ In the `Choreography-based` example the transmitter emits a domain event `order 
 consume the message. It's only saying that the `order is created`. 
 In the `Choreography-based` example the transmitter emits a domain event `reserves credit` so it's asking another known microservice 
 that it has to do something. It's doing a command (emite una orden)
+
+## Saga is a transactional pattern
+
+Meanwhile, the communication between the microservices is asynchronous (kafka messages), if there's a rollback, all the 
+microservices has to do a rollback in the status of their aggregates. To do that, we need to compensate the aggregate 
+with another actions. 
+
+For instance, in the example before, if the order is pending, and the customer has not credited, the customer microservice, 
+doesn't update the status on its database retaining the order amount, and emits an event to reject the order transaction. 
+So when the order microservice reads the reject message, update the status of the order to reject. 
+
+## Resulting context
+
+This pattern has the following benefits:
+
+- It enables an application to maintain data consistency across multiple services without using distributed transactions
+
+This solution has the following drawbacks:
+
+- The programming model is more complex. For example, a developer must design compensating transactions that explicitly undo changes made earlier in a saga.
+
+There are also the following issues to address:
+
+- In order to be reliable, a service must atomically update its database and publish a message/event. It cannot use the traditional mechanism of a distributed transaction that spans the database and the message broker. Instead, it must use one of the patterns listed below.
+
+- A client that initiates the saga, which an asynchronous flow, using a synchronous request (e.g. HTTP POST /orders) needs to be able to determine its outcome. There are several options, each with different trade-offs:
+
+  * The service sends back a response once the saga completes, e.g. once it receives an OrderApproved or OrderRejected event.
+  * The service sends back a response (e.g. containing the orderID) after initiating the saga and the client periodically polls (e.g. GET /orders/{orderID}) to determine the outcome
+  * The service sends back a response (e.g. containing the orderID) after initiating the saga, and then sends an event (e.g. websocket, web hook, etc) to the client once the saga completes.
