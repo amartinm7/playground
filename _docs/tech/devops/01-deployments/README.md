@@ -49,3 +49,7 @@ Este tipo de cluster se utiliza para realizar tareas de alto rendimiento, con el
 - `Procesamiento paralelo`
 Este tipo de cluster transforma una tarea compleja en varias tareas sencillas y las distribuye entre los 
 nodos integrados al sistema.
+
+Another classification is regarding the type:
+- `physical cluster`: the nodes are machines
+- `virtual cluster`: the nodes are virtual nodes, so one machine can handle several of them.
