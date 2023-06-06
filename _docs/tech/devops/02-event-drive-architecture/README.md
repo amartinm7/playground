@@ -208,3 +208,7 @@ The publisher and the subscribers don't know each to others. `Loosely coupled co
 The provider knows to the subscribers. `High coupled components`, there is a connection between each of them.
 
 ![conversational-patterns](_img/conversational_patterns.jpg)
+
+## buses
+
+https://barryvanveen.nl/articles/59-different-kinds-of-service-bus-command-bus-service-bus-and-query-bus
