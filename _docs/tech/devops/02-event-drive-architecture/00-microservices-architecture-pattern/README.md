@@ -46,4 +46,17 @@ And this is why is called eventual consistency, because to be consistence maybe 
 How do you prevent a legacy monolith’s domain model from polluting the domain model of a new service?
 Define an anti-corruption layer, which translates between the two domain models.
 
+## CAP theorem
 
+In a distributed system is not guarantee simultaneously at the same time when a communication network error occurs:
+- (C)onsistency
+- (A)vailability
+- (P)artitioning
+
+Only two of them are possible.
+If the system is (P)artitioned you have to choose between (C)onsistency or (A)vailability.
+
+- (C)onsistency: you can return the written more recently updated if everything goes well, or return an error if the system crash
+- (A)vailability: you can return the written more recently updated if everything goes well, or return not the last written if the system crash
+
+![CAP Theorem](_img/CAP_Theorem_Venn_Diagram.png)
