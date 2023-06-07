@@ -2,7 +2,7 @@
 
 ## S: Single Responsibilty Principle
 
-The classes has only a purpose 
+The classes have only a purpose 
 
 ## O: Open closed prinpiple
 
