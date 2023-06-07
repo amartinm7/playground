@@ -77,6 +77,7 @@ And this is why is called eventual consistency, because to be consistence maybe 
 ## Anti-corruption layer Pattern
 
 How do you prevent a legacy monolith’s domain model from polluting the domain model of a new service?
+
 Define an anti-corruption layer, which translates between the two domain models.
 
 ## CAP theorem
