@@ -25,12 +25,12 @@ This kind of thinking makes sense when designing services since it will help ens
 
 Forces
 - The architecture must be stable
-- Services must be cohesive. A service should implement a small set of strongly related functions.
-- Services must conform to the Common Closure Principle - things that change together should be packaged together - to ensure that each change affect only one service
-- Services must be loosely coupled - each service as an API that encapsulates its implementation. The implementation can be changed without affecting clients
-- A service should be testable
-- Each service be small enough to be developed by a “two pizza” team, i.e. a team of 6-10 people
-- Each team that owns one or more services must be autonomous. A team must be able to develop and deploy their services with minimal collaboration with other teams.
+- Services must be `cohesive`. A service should implement a small set of strongly related functions.
+- Services must conform to the Common `Closure Principle` - things that change together should be packaged together - to ensure that each change affect only one service
+- Services must be `loosely coupled` - each service as an API that encapsulates its implementation. The implementation can be changed without affecting clients
+- A service should be `testable`
+- Each service be small enough to be developed by a `“two pizza”` team, i.e. a team of `6-10` people
+- Each team that owns one or more services must be `autonomous. A team must be able to develop and deploy their services with minimal collaboration with other teams.
 
 
 You are developing a business-critical enterprise application. 
