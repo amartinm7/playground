@@ -20,6 +20,7 @@ Topics
 - scaling vertically vs horizontally
 - DORA metrics
 - circuit breaker
+- Actors, Commands, Events, and Subscriptions
 
 
 # What are the different types of performance tests?
