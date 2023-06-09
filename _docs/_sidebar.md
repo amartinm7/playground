@@ -4,6 +4,7 @@
   - [scrum](tech/agile/scrum/README.md)
 - [development](tech/development/README.md)
   - [00-Solid](tech/development/00-Solid/README.md)
+  - [01-Testing](tech/development/01-Testing/README.md)
   - [02-event-drive-architecture](tech/development/02-event-drive-architecture/README.md)  
     - [00-microservices-architecture-pattern](tech/development/02-event-drive-architecture/00-microservices-architecture-pattern/README.md)
     - [01-Sagas](tech/development/02-event-drive-architecture/01-Sagas/README.md)
