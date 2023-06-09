@@ -20,15 +20,18 @@ run the server
 docsify serve ./_docs
 ```
 
+Generate de _sidebar.md file
 ```bash
 docsify generate <path> [--sidebar _sidebar.md]
 
-docsify generate _docs/tech/devops [--sidebar _sidebar.md]
+docsify generate _docs
+```
 
-
+```bash
+# Utilities for generate all the _sidebar.md files, althought you don't need it
 find _docs -type d | grep -v _img | xargs -I{} sh -c 'docsify generate "{}"'
 
-
+# utility to delete all the _sidebar.md in order to regenerate new ones
 find _docs -type f -name "_sidebar.md" -exec rm {} \;
 ```
 
