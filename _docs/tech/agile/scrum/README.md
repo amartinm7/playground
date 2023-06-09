@@ -1,6 +1,6 @@
 # Scrum
 
-## ceremonies, in order
+## Ceremonies, in order
 - daily
 - product backlog refinement
 - review
