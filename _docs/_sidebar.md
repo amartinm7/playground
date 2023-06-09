@@ -1,6 +1,7 @@
 - [Home](README.md)
 
-
+- [agile](tech/agile/README.md)
+  - [scrum](tech/agile/scrum/README.md)
 - [development](tech/development/README.md)
   - [00-Solid](tech/development/00-Solid/README.md)
   - [02-event-drive-architecture](tech/development/02-event-drive-architecture/README.md)  
@@ -10,7 +11,7 @@
     - [03-CQRS](tech/development/02-event-drive-architecture/03-CQRS/README.md)
     - [05-service-buses](tech/development/02-event-drive-architecture/05-service-buses/README.md)
     - [06-Domain-driven-design](tech/development/02-event-drive-architecture/06-Domain-driven-design/README.md)
-  - [03-REST-vs_gRPC](tech/development/03-REST-vs_gRPC/README.md)
+  - [03-REST-vs-gRPC](tech/development/03-REST-vs-gRPC/README.md)
 - [devops](tech/devops/README.md)
   - [01-deployments](tech/devops/01-deployments/README.md)
   - [04-kafka_for_beginners](tech/devops/04-kafka_for_beginners/README.md)
