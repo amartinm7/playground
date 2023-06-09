@@ -19,3 +19,17 @@ run the server
 ```bash
 docsify serve ./_docs
 ```
+
+```bash
+docsify generate <path> [--sidebar _sidebar.md]
+
+docsify generate _docs/tech/devops [--sidebar _sidebar.md]
+
+
+find _docs -type d | grep -v _img | xargs -I{} sh -c 'docsify generate "{}"'
+
+
+find _docs -type f -name "_sidebar.md" -exec rm {} \;
+```
+
+
