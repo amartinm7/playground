@@ -22,3 +22,11 @@ Enterprise API features:
 - Rate Limits. The values can vary for every consumer and perhaps they don’t make sense for internal consumers.
 - Security. The application of security restrictions and access (authentication and authorization) to a path cannot be relevant for all of the consumers.
 - Streaming. REST does not support bi-directional communication and other techniques like polling, callbacks — preferred — and HTML5 Websockets can be used but they require extra changes in the API Consumer side and they have other implications and drawbacks.
+
+## http codes
+
+![http_codes](_img/http_codes.png)
+
+## Responsabilities
+
+![Responsabilities](_img/responsavility.jpg)

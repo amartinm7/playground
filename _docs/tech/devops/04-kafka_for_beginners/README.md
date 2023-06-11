@@ -2,6 +2,8 @@
 
 ## 1. Kafka Introduction
 
+![Apache_Kafka_Architecture](_img/Apache_Kafka_Architecture.jpeg)
+
 ### Kafka in 5 minutes
 
 Allows to decouple data streams & systems
