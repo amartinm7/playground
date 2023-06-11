@@ -1,4 +1,4 @@
-- [Home](README.md)
+- [Main Index](README.md)
 
 - [agile](tech/agile/README.md)
   - [communication_styles](tech/agile/communication_styles/README.md)
