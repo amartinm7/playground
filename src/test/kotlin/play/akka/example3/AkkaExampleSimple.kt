@@ -36,7 +36,7 @@ class ChildActor : AbstractLoggingActor() {
 
 class ParentActor : AbstractLoggingActor() {
 
-    //restart all child Actors if one throws an exception.
+    //WARN restart all child Actors if one throws an exception.
     override fun supervisorStrategy() = AllForOneStrategy(-1, Duration.Inf()) {
         when (it) {
             is ActorInitializationException -> SupervisorStrategy.stop()
