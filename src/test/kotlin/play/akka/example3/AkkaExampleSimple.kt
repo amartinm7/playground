@@ -60,12 +60,18 @@ class ParentActor : AbstractLoggingActor() {
 }
 
 fun main() {
-    // create actor system, the engine
+    // create actor system, the engine itself
     val actorSystem = ActorSystem.create("Advanced")
+    // create the parent actor. This actor will create the child actor inside
     val actorRef = actorSystem.actorOf(Props.create(ParentActor::class.java), "parent")
+    //
     actorSystem.log().info("Sending Hello KotlinX")
+    // send a message to the parent
     actorRef.tell("Hello Kotlin", ActorRef.noSender())
+    //
     actorSystem.log().info("Sending DIE message to child1. We expect all child actors to restart")
-    actorSystem.actorSelection("akka://part2/user/parent/child1").tell("DIE", ActorRef.noSender())
+    // die a child
+    actorSystem.actorSelection("akka://Advanced/user/parent/child1").tell("DIE", ActorRef.noSender())
+    // finish engine
     actorSystem.terminate()
 }
