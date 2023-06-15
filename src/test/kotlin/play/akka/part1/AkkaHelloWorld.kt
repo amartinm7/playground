@@ -1,4 +1,4 @@
-package play.akka.example2
+package play.akka.part1
 
 import akka.actor.AbstractLoggingActor
 import akka.actor.ActorRef
@@ -6,10 +6,8 @@ import akka.actor.ActorSystem
 import akka.actor.Props
 import akka.japi.pf.ReceiveBuilder
 
-data class Greeting(val message: String, val requestId: String)
-
 fun main() {
-
+    data class Greeting(val message: String, val requestId: String)
     // create actor1
     class HelloKotlinActor : AbstractLoggingActor() {
         override fun createReceive() =
@@ -27,7 +25,7 @@ fun main() {
     }
 
     // create actor system, the engine
-    val actorSystem = ActorSystem.create("kotlin-example")
+    val actorSystem = ActorSystem.create("part1")
 
     // create actor system, the engine
     val actorRef1 = actorSystem.actorOf(Props.create(HelloKotlinActor::class.java))
