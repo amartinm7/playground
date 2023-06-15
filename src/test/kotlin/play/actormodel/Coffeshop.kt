@@ -12,30 +12,28 @@ fun main() = runBlocking {
 
     data class Menu(val beans: String)
 
-    suspend fun makeCoffee(ordersChannel: ReceiveChannel<Menu>) {
+    suspend fun makeCoffee(ordersChannel: ReceiveChannel<Menu>, actorName: String) {
         for (order in ordersChannel) {
             println("${this.coroutineContext} Processing coffee... ")
             when (order) {
-                is Menu -> println("do coffee $order")
+                is Menu -> println("$actorName do coffee $order")
                 else -> println("don't do anything")
             }
         }
     }
 
-    val orders = listOf(Menu("1"), Menu("2"), Menu("3"), Menu("4"))
+    val orders = (0 .. 100).map { Menu("beans-$it") }
 
     val ordersChannel = Channel<Menu>()
 
     val spentTime = measureTimeMillis {
         launch(CoroutineName("actor-1")) {
             println("${this.coroutineContext}")
-            makeCoffee(ordersChannel)
-            delay(2000)
+            makeCoffee(ordersChannel, "actor-1")
         }
         launch(CoroutineName("actor-2")) {
             println("${this.coroutineContext}")
-            makeCoffee(ordersChannel)
-            delay(1000)
+            makeCoffee(ordersChannel, "actor-2")
         }
     }
 
