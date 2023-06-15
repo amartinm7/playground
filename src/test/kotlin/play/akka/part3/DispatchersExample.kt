@@ -7,6 +7,39 @@ import akka.actor.Props
 import akka.japi.pf.ReceiveBuilder
 import com.typesafe.config.ConfigFactory
 
+val theConfigFile =
+"""
+actor1-dispatcher {
+    type = Dispatcher
+    executor = "thread-pool-executor"
+    thread-pool-executor {
+        fixed-pool-size = 16
+    }
+    throughput = 1
+}
+
+actor2-dispatcher {
+    type = PinnedDispatcher
+    executor = "thread-pool-executor"
+}
+
+akka.actor.deployment {
+    /actor1 {
+        dispatcher = actor1-dispatcher
+    }
+}
+
+akka.quartz {
+  schedules {
+    HelloKotlin {
+      description = "A Hello Kotlin Task!"
+      expression = "*/5 * * ? * *"
+    }
+  }
+}
+"""
+
+
 fun main(args: Array<String>) {
 
     // Actor class
@@ -14,7 +47,7 @@ fun main(args: Array<String>) {
         override fun createReceive() = ReceiveBuilder().match(String::class.java) { log().info(it) }.build()
     }
     //
-    val dispatcherConfig = ConfigFactory.parseResources("play/akka/part3/part3.conf")
+    val dispatcherConfig = ConfigFactory.parseResources("play/akka/part3/dispatcher.conf")
     val actorSystem = ActorSystem.create("part3", dispatcherConfig)
     // instance the actors in the system
     val actorRef1 = actorSystem.actorOf(Props.create(HelloKotlinActor::class.java), "actor1")

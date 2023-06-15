@@ -46,6 +46,9 @@ dependencies {
 
     implementation("com.typesafe.akka:akka-persistence-typed_${ScalaBinary}")
     testImplementation("com.typesafe.akka:akka-persistence-testkit_${ScalaBinary}")
+
+    // https://mvnrepository.com/artifact/com.enragedginger/akka-quartz-scheduler
+    implementation("com.enragedginger:akka-quartz-scheduler_3:1.9.3-akka-2.6.x")
 }
 
 tasks.withType(Test::class).configureEach {
