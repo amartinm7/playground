@@ -1,13 +1,14 @@
-package play.akka.example
-
 import akka.actor.AbstractActor
 import akka.actor.ActorRef
 import akka.actor.ActorSystem
 import akka.actor.Props
+import akka.actor.TypedActor
 import akka.pattern.Patterns
+import akka.pattern.Patterns
+
 import akka.util.Timeout
-import scala.concurrent.Future
-import scala.concurrent.duration.Duration
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
 
 // Define a message class for communication between actors
 data class Greeting(val message: String, val requestId: String)
@@ -37,7 +38,19 @@ class SubscriberActor : AbstractActor() {
     }
 }
 
+fun <T> akkaFutureToCompletableFuture(akkaFuture: scala.concurrent.Future<Any>): CompletableFuture<T> {
+    val completableFuture = CompletableFuture<T>()
+    akkaFuture.onComplete {
+        when (it) {
+            is akka.pattern.Status.Success -> completableFuture.complete(it.result() as T)
+            is akka.pattern.Status.Failure -> completableFuture.completeExceptionally(it.cause())
+        }
+    }
+    return completableFuture
+}
+
 fun main() {
+
     // Create an ActorSystem
     val system = ActorSystem.create("MyActorSystem")
 
@@ -54,25 +67,22 @@ fun main() {
     system.eventStream().publish(Greeting("Hello, Actors 2!", requestId2))
 
     // Receive the responses from the SubscriberActors
-    val responses: List<Future<Any>> = listOf(
-        Patterns.ask(subscriberActor1, Subscribe(requestId1, subscriberActor1), Timeout(Duration.fromNanos(5000L))),
-        Patterns.ask(subscriberActor2, Subscribe(requestId2, subscriberActor2), Timeout(Duration.fromNanos(5000L))),
-    )
+    val response1: scala.concurrent.Future<Any> =
+        PatternsCS.ask(subscriberActor1, Subscribe(requestId1, TypedActor.self()), Timeout(5, TimeUnit.SECONDS))
+    val response2: scala.concurrent.Future<Any> =
+        PatternsCS.ask(subscriberActor2, Subscribe(requestId2, TypedActor.self()), Timeout(5, TimeUnit.SECONDS))
 
-    // Combine and calculate the sum of the responses
-//    val aggregatedResponse: Future<List<GreetingResponse>> =
-//        Future.sequence(responses)
-//            .map { results ->
-//                results.mapNotNull { it as? GreetingResponse }
-//            }
+    // Calculate the sum of the responses
+    val sum = response1.onComplete<Any>()
 
-//    val sum: Int =
-//        Await.result(aggregatedResponse, Duration.fromNanos(5000L))
-//            .map { it.result }
-//            .sum()
-//
-//    println("Sum of responses: $sum")
+    thenCombine(response2) { result1, result2 ->
+        val responseList = listOf(result1, result2).mapNotNull { it as? GreetingResponse }
+        responseList.sumBy { it.result }
+    }
+
+    val result: Int = sum.get()
+    println("Sum of responses: $result")
 
     // Terminate the ActorSystem
-    // system.terminate()
+    system.terminate()
 }

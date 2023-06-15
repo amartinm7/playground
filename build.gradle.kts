@@ -42,10 +42,11 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     // akka dependencies
-    implementation(platform("com.typesafe.akka:akka-bom_${ScalaBinary}:2.8.2"))
-
-    implementation("com.typesafe.akka:akka-persistence-typed_${ScalaBinary}")
-    testImplementation("com.typesafe.akka:akka-persistence-testkit_${ScalaBinary}")
+    implementation("com.typesafe.akka:akka-actor_2.13:2.8.2")
+    implementation("com.typesafe.akka:akka-actor-typed_2.13:2.8.2")
+    implementation("com.typesafe.akka:akka-actor-testkit-typed_2.13:2.8.2")
+    implementation("com.typesafe.akka:akka-stream_2.13:2.8.2")
+    implementation("com.typesafe.akka:akka-testkit_2.13:2.8.2")
 
     // https://mvnrepository.com/artifact/com.enragedginger/akka-quartz-scheduler
     implementation("com.enragedginger:akka-quartz-scheduler_3:1.9.3-akka-2.6.x")
