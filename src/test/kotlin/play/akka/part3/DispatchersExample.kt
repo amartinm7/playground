@@ -39,6 +39,12 @@ akka.quartz {
 }
 """
 
+//Dispatcher (default) — One mailbox per Actor, backed by a thread pool, and can be shared across multiple actors. Since the thread pool is shared, this is recommended for non-blocking actors that perform short lived tasks.
+//
+//Pinned Dispatcher — One mailbox per Actor, backed by a single threaded pool, and cannot be shared across actors (ie the Actor is assigned it’s own thread). Useful for Actors that perform long running, blocking tasks (such as Database Calls).
+//
+//CallingThreadDispatcher — One mailbox per Actor per Thread and does not create any new threads. In other words, the thread that sends a message to an actor is also used to deliver and process the message. This is useful for testing to create deterministic behaviour.
+
 
 fun main(args: Array<String>) {
 
