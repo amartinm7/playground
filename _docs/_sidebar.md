@@ -21,6 +21,7 @@
   - [05-elasticsearch](tech/devops/05-elasticsearch/README.md)
 - [languages](tech/languages/README.md)
   - [00-kotlin](tech/languages/00-kotlin/README.md)
+    - [00-coroutines-and-channels](tech/languages/00-kotlin/00-coroutines-and-channels/README.md)
   - [01-nodejs](tech/languages/01-nodejs/README.md)
 - [tooling](tech/tooling/README.md)
   - [01-setting-ssh-github](tech/tooling/01-setting-ssh-github/README.md)

@@ -1,4 +1,4 @@
-# Coroutines and channels
+# Coroutines and channels: actors model
 
 ![intro](_img/20.jpg)
 
