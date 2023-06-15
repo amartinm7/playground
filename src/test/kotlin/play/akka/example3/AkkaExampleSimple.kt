@@ -12,8 +12,6 @@ import akka.actor.SupervisorStrategy
 import akka.japi.pf.ReceiveBuilder
 import scala.concurrent.duration.Duration
 
-data class Greeting(val message: String, val requestId: String)
-
 class ChildActor : AbstractLoggingActor() {
 
     override fun preStart() {
