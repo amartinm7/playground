@@ -6,7 +6,6 @@ import akka.actor.ActorSystem
 import akka.actor.Props
 import akka.pattern.Patterns
 import akka.util.Timeout
-import scala.concurrent.Await
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
 
