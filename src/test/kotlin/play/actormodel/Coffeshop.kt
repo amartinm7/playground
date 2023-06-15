@@ -41,6 +41,7 @@ fun main() = runBlocking {
     // there are some actors listening the channel to consume the messages one by one
     launch {
         for (order in orders) {
+            delay(200)
             ordersChannel.send(order) // only can send a message until the message is consumed
         }
         ordersChannel.close()
