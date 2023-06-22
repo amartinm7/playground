@@ -1,7 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val ktor_version = "2.3.0"
-val ScalaBinary = "2.13"
 val group = "com.example"
 val version = "0.0.1-SNAPSHOT"
 
@@ -33,23 +31,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("io.ktor:ktor-client-core:$ktor_version")
-    implementation("io.ktor:ktor-client-cio:$ktor_version")
-    implementation("io.ktor:ktor-client-websockets:$ktor_version")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    // akka dependencies
-    implementation("com.typesafe.akka:akka-actor_2.13:2.8.2")
-    implementation("com.typesafe.akka:akka-actor-typed_2.13:2.8.2")
-    implementation("com.typesafe.akka:akka-actor-testkit-typed_2.13:2.8.2")
-    implementation("com.typesafe.akka:akka-stream_2.13:2.8.2")
-    implementation("com.typesafe.akka:akka-testkit_2.13:2.8.2")
-
-    // https://mvnrepository.com/artifact/com.enragedginger/akka-quartz-scheduler
-    implementation("com.enragedginger:akka-quartz-scheduler_3:1.9.3-akka-2.6.x")
+    // io.reactivex
+    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
 }
 
 tasks.withType(Test::class).configureEach {
