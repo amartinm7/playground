@@ -3,6 +3,7 @@ package play.observable.example2
 import org.slf4j.LoggerFactory
 import reactor.core.publisher.Flux
 import reactor.core.scheduler.Schedulers
+import java.util.concurrent.CompletableFuture
 
 class Concurrent {
 
@@ -33,4 +34,7 @@ fun main() {
             Person.NormalPerson(3)
         )
     )
+
+    CompletableFuture::class.java
+
 }

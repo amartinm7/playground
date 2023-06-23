@@ -78,30 +78,3 @@ Flux.fromIterable (personas)
     return Mono.just (p);
 }).subscribe (p -> Log.info(p.toString()));
 ```
-
-## Concurrent vs parallel
-
-A system is said to be `concurrent` if it can support two or more actions `in progress` at the same time. 
-A system is said to be `parallel` if it can support two or more actions executing `simultaneously`.
-
-concurrent is using `only a core of the CPU` and executing several tasks during the same period time. 
-The tasks are in progress, but the scheduler is changing between doing a task during the time. 
-So the effect is looks like the tasks are doing at the same time, but it's not, are doing at the same time 
-because are in progress, but everytime only one task is executing in the `core of the CPU`. 
-
-For instance: you have to eat the whole cake and you have to sing a song meanwhile. 
-You can't do the both task at the same time, or eat or sing, but you can bite a bit of cake and sing a little, 
-a keep on doing the same during the time until you have done the cake, and you have done to sing a song. 
-The tasks have a duration, an you can alternate the execution between them. `This is concurrency`
-
-But what's happened is you have `two cores of the CPU`, you can execute the task of eating a cake and the task of singing 
-at the same time. So this is `parallelism`
-
-Another example of `parallelism` is when you split a process in a set of tasks and every task is executed at the same time 
-in different `cores of the CPU`.
-
-## Throughput
-
-number of http requests or number I/O request per second.
-The amount of information you can process per second or per minute...
-
