@@ -18,9 +18,9 @@ and over the sequence we get another sequence from the previous ones, and we can
 - The program can `react` and `emit` a `signal` when something has happened in the item of the flow. This is the `reactive` part.
 So to handle the reactivity, we can create `actors` or `subscribers` to do whatever is needed.
 
-## Observable 
+## Observable or Mono/FLux
 
-Observable is a class which behaviour is listen/iterate over a Stream or Collection de objects. 
+Observable/Mono/Flux is a class which behaviour is listen/iterate over a Stream or Collection de objects. 
 
 In this example, create an Observable, and for item in the array, emits an event.
 The subscriber is listening for every event, and reacts over it. 
@@ -50,7 +50,58 @@ Observable.merge(observable1, observable2).subscribe { item: Long ->
 ![RxJavaSubscriptor.png](_img%2FRxJavaSubscriptor.png)
 
 
+## Example 1
 
+before starting import the next dependencies 
 
+- implementation("org.springframework.boot:spring-boot-starter-webflux") // MONO AND FLUX from Reactor 
+- implementation("io.reactivex.rxjava3:rxkotlin:3.0.1") // Observable from RxJava/RxKotlin
 
+They two projects to do the same, but we are going to do the same example in both
+
+the idea behind:
+
+- Create an Stream
+- Subscribe to the Stream to react to the items into the stream
+
+## monads
+
+Mono, Flux or Observable are `monads`, so they encapsulate a subject (Subject Under the Test when is testing)
+
+## Example of mono inside a mono
+## when we are mapping, but inside the logic we are calling to a method which is returning another mono. 
+```kotlin
+// flux fromIterable it's the same than just
+Flux.fromIterable (personas)
+.flatMap(p -> {
+    p. setEdad (p. getEdad() + 10);
+    return Mono.just (p);
+}).subscribe (p -> Log.info(p.toString()));
+```
+
+## Concurrent vs parallel
+
+A system is said to be `concurrent` if it can support two or more actions `in progress` at the same time. 
+A system is said to be `parallel` if it can support two or more actions executing `simultaneously`.
+
+concurrent is using `only a core of the CPU` and executing several tasks during the same period time. 
+The tasks are in progress, but the scheduler is changing between doing a task during the time. 
+So the effect is looks like the tasks are doing at the same time, but it's not, are doing at the same time 
+because are in progress, but everytime only one task is executing in the `core of the CPU`. 
+
+For instance: you have to eat the whole cake and you have to sing a song meanwhile. 
+You can't do the both task at the same time, or eat or sing, but you can bite a bit of cake and sing a little, 
+a keep on doing the same during the time until you have done the cake, and you have done to sing a song. 
+The tasks have a duration, an you can alternate the execution between them. `This is concurrency`
+
+But what's happened is you have `two cores of the CPU`, you can execute the task of eating a cake and the task of singing 
+at the same time. So this is `parallelism`
+
+Another example of `parallelism` is when you split a process in a set of tasks and every task is executed at the same time 
+in different `cores of the CPU`.
+
+## Throughput
+
+number of http requests or number I/O request per second.
+The amount of information you can process per second or per minute...
 

@@ -12,6 +12,31 @@ This article introduces you to the concept of Coroutines and Channels through il
 
 **NOTE:** At the time of this writing, Channels are in experimental stage.
 
+# **Runblocking**
+
+With this instruction we are saying that whatever is going to execute inside the block is going to wait to be done.
+So the main thread is blocked until the coroutines inside are done, for instance
+
+```kotlin
+runBlocking{
+    // whatever to wait for until is done
+}
+```
+Runs a new coroutine and blocks the current thread until its completion. 
+This function should not be used from a coroutine. 
+It is designed to bridge regular blocking code to libraries that are written in suspending style, 
+to be used in main functions and in tests.
+```kotlin
+expect fun <T> runBlocking(
+    context: CoroutineContext = EmptyCoroutineContext, 
+    block: suspend CoroutineScope.() -> T
+): T
+```
+Remember for kotlin you can specify some many params and the last one can be a block 
+which can be a lambda. Why is you can use runBlocking {} in this way, because the {} means the 
+second parameter.
+
+
 # **Single Thread Coffee Shop**
 
 I’ll use the analogy of ordering a Cappuccino at a coffee shop to explain Coroutines and Channels. Let’s start with one Barista serving orders.
