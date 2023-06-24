@@ -437,6 +437,68 @@ Allof then apply Thread[ForkJoinPool.commonPool-worker-1,5, main]
 TravelPage[quotation=Quotation[server=ServerA,amount=41],weather=Weather[server=ServerB,v
 ```
 
+## handling exceptions
+
+How to deal with exceptions: 
+
+- exceptionally)
+- whenComplete()
+- handle()
+
+We can use the `exceptionally()` or `handle (T, exception)` or `whenOnComplete(T, exception)`
+
+```java
+Supplier<Weather> w = () -> getWeather () ;
+CompletableFuture<Weather> cf = 
+        CompletableFuture.supplyAsync(w)
+        .exceptionally(t -> new Weather (...));
+
+// or handle
+
+cf.handle ( (weather, exception) -> {
+    if (exception != null) {
+        logger.error (exception);
+        return new Weather (...)
+    } else{
+        return weather;
+    }
+});
+
+// or whenOnComplete
+
+cf.whenComplete( (weather, exception) -> {
+    if (exception != null)
+    logger .error (exception);
+});
+```
+
+## wrap up
+
+Creating completable future with `supplier` and `runnable`:
+
+![creating_completable_future_table.jpg](_img%2Fcreating_completable_future_table.jpg)
+
+Creating completable future with `allOf` and `anyOf`:
+
+![creating_completable_future_table_2.jpg](_img%2Fcreating_completable_future_table_2.jpg)
+
+Creating completable future supported tasks:
+
+![completable_future_supported_tasks.jpg](_img%2Fcompletable_future_supported_tasks.jpg)
+
+Creating completable future chaining tasks:
+
+![completable_future_chaining.jpg](_img%2Fcompletable_future_chaining.jpg)
+
+Creating completable future chaining tasks, and get both values :
+
+![completable_future_chaining_2.jpg](_img%2Fcompletable_future_chaining.jpg)
+
+Creating completable future chaining tasks, and get a value:
+
+![completable_future_chaining_3.jpg](_img%2Fcompletable_future_chaining_3.jpg)
+
+
 ## Conclusions
 
 
