@@ -498,8 +498,26 @@ Creating completable future chaining tasks, and get a value:
 
 ![completable_future_chaining_3.jpg](_img%2Fcompletable_future_chaining_3.jpg)
 
-
 ## Conclusions
+
+CompletionStage is interface
+CompletionFuture is implementation
+
+All these things are created for I/O tasks, no for inmemory tasks.
+The CompletionStage API is useless for inmmemory tasks. The performance is worst. Decrease the performance and the throughput
+
+One executorService is best, faster than having more executorServices.
+
+Be carefully with the number of threads of every executorService.
 
 
 ![completableFutures.jpg](_img%2FcompletableFutures.jpg)
+
+Next steps:
+
+- Loom project for java, similar to kotlin coroutines
+
+references:
+
+- https://github.com/JosePaumard
+- https://www.youtube.com/user/JPaumard
