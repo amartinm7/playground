@@ -142,6 +142,8 @@ It's better join, because doesn't throw any exception.
 
 ![async-tips-2.jpg](_img%2Fasync-tips-2.jpg)
 
+- divide your processing in small I/O operations and chain them!
+
 Example with executor
 
 ![completableFuture-chained.jpg](_img%2FcompletableFuture-chained.jpg)
@@ -152,5 +154,290 @@ Example with completableFutures
 
 ![completableFutures-chained.jpg](_img%2FcompletableFutures-chained.jpg)
 
+Another example, the outcome of one future is the another future to pass to the 
+next future.
+
+`Reminder: when you call a java method all the arguments are evaluated and resolved if they are Futures`
+`Reminder: use composition over combination when we were using futures (thenCompose() over thenCombine())`
+
+```java
+// chained futures
+CompletableFuture<Quotation> quotationCF = 
+        CompletableFuture.supplyAsync( ( ) -> getQuotation ( )) ;
+CompletableFuture<EmailInfos> infosCF = 
+        quotationCF .thenApply (quotation -> email(quotation));
+CompletableFuture<Boolean> doneCF = 
+        infosCF.thenApply (emailInfos -> writeToDB(emailInfos));
+
+doneCF .thenApply (done -> updateGUI (done)) ;
+// to execute the futures, and block the main thread
+doneCF.join()
+// to get the results
+Object results = doneCF.get()
+```
+
+## Run three task in parallel, and get the first one in being ready: `any0f`
+
+You can run three task, and `anyOf` get the faster completed, but the result can change 
+in every execution. If the three task are completed at the same time, is returned one, 
+but if you run the same code another time, you can get another which is done. 
+Take care of this.
+
+```java
+Supplier<Weather> w1 = () -> getWeatherA();
+Supplier<Weather> w2 = () -> getWeatherB();
+Supplier<Weather> w3 = () -> getWeatherC();
+
+// create the completableFutures
+CompletableFuture<Weather> cf1 = CompletableFuture.supplyAsync(w1);
+CompletableFuture<Weather> cf3 = CompletableFuture.supplyAsync(w1);
+CompletableFuture<Weather> cf4 = CompletableFuture.supplyAsync(w1);
+
+// pass the completeFutures
+// return Object because the futures can be of any type
+CompletableFuture<Object> weatherCF = CompletableFuture.any0f(cf1, cf2, cf3) ; // return Object 
+
+// when there was a task ready, the completefuture is resolved for this task. The others are skipped
+weatherCF.join();
+Weather result = (Weather)weatherCF.get();
+```
+
+```java
+CompletableFuture‹Weather> taskA = CompletableFuture.supplyAsync(fetchWeatherA);
+CompletableFuture<Weather> taskB = CompletableFuture.supplyAsync(fetchWeatherB);
+
+CompletableFuture.any0f(taskA, taskB)
+        .thenAccept (System.out: :printIn)
+        •join ();
+
+```
+
+## Run three task in parallel, and get the best result of them
+
+```java
+// create suppliers or callables, lambdas
+Supplier<Weather> w1 = () -> getWeatherA();
+Supplier<Weather> w2 = () -> getWeatherB();
+Supplier<Weather> w3 = () -> getWeatherC();
+
+// crete the completeFutures
+CompletableFuture<Quotation> cf1 = CompletableFuture.supplyAsync(q1);
+CompletableFuture<Quotation> cf2 = CompletableFuture.supplyAsync(q2);
+CompletableFuture<Quotation> cf3 = CompletableFuture.supplyAsync(q3);
+
+// pass the completeFutures
+CompletableFuture<Void> done = CompletableFuture.all0f(cf1, cf2, cf3);
+
+// to join, we have to join one by one and then do the join the final future
+Quotation bestQuotation = 
+        done.thenApply ( v ->
+            Stream.of (cf1, cf2, cf3)
+                .map (CompletableFuture: :join) // join one by one to resolve them
+                .min (comparing (Quotation: :amount))
+                .orElseThrow ())
+        ).join();
+
+```
+## Composing Async Tasks: combining dependant tasks. Run two task in parallel, for creating the result of another object
+
+first try, blocking for the response using a call method and blocking the main thread doing two get() calls
+
+```java
+// create CompletableFutures from suppliers
+var quotationCF = CompletableFuture.supplyAsync(() -> getQuotation ( )) ;
+var weatherCF = CompletableFuture.supplyAsync(() -> getWeather ()) ;
+
+// here the result is blocking for the response, which is not optimus
+var travelPage = new TravelPage (quotationCF .get (), weatherCF. get ()) ;
+```
+another variant using `thenCombine()`
+
+```java
+record class TravelPage(Quotation q, Weather w)
+
+CompletableFuture<Weather> anyWeather =
+        CompletableFuture.any0f(weatherCFs.toArray(CompletableFuture[]::new))
+        .thenApply(o -> (Weather) o);    
+    
+CompletableFuture<Quotation> bestQuotationCF = 
+        all0fQuotations.thenApply( v -> 
+            quotationCFs.stream()
+                .map (CompletableFuture: :join)
+                .min (Comparator.comparing (Quotation:: amount))
+                .orElseThrow()
+        );
+CompletableFuture‹TravelPage> pageCompletableFuture = bestQuotationCF.thenCombine(anyWeather,TravelPage::new);
+// CompletableFuture‹TravelPage> pageCompletableFuture = bestQuotationCF.thenCombine(anyWeather,(q, w) -> TravelPage(q, w));
+pageCompletableFuture.thenAccept(Svstem.out::println).join();
+```
+
+second try, using `allOf` method. Really complex, and you have to block the main thread doing a get() and join()
+
+```java
+// create CompletableFutures from suppliers
+var quotationCF = CompletableFuture.supplyAsync(() -> getQuotation ( )) ;
+var weatherCF = CompletableFuture.supplyAsync(() -> getWeather ()) ;
+
+// here the result is blocking for the response, which is not optimus
+var travelPage = new TravelPage (quotationCF .get (), weatherCF. get ()) ;
+
+// create another completefuture, but it's not needed in this example
+CompletableFuture<Void> done = CompletableFuture.all0f(quotationCF, weatherCF);
+
+// here we can use thenApply and after that, we have to wait to resolve the futures 
+and after that, to do join.
+var travelPage = 
+        done.thenApply (V -> 
+            new TravelPage (quotationCF.get () , weatherCF.get ())
+        .join()
+
+```
+
+third try, chaining the futures, you have to block the main thread doing a get() and join()
+
+```java
+// create CompletableFutures from suppliers
+var quotationCF = CompletableFuture.supplyAsync(() -> getQuotation ( )) ;
+var weatherCF = CompletableFuture.supplyAsync(() -> getWeather ()) ;
+
+// here the result is blocking for the response, which is not optimus
+var travelPage = new TravelPage (quotationCF .get (), weatherCF. get ()) ;
+
+// create another completefuture, but it's not needed in this example
+CompletableFuture<Void> done = CompletableFuture.all0f(quotationCF, weatherCF);
+
+// here we can chain the futures and do a final join to resolve all of them
+var travelPage =
+        quotationCF.thenApply ( quotation ->
+            new TravelPage (quotation, weatherCF .get ()
+        ).join()) ;
+
+```
+
+fourth try, using thenCompose() method
+
+```java
+// create CompletableFutures from suppliers
+var quotationCF = CompletableFuture.supplyAsync(() -> getQuotation ( )) ;
+var weatherCF = CompletableFuture.supplyAsync(() -> getWeather ()) ;
+
+// here the result is blocking for the response, which is not optimus
+var travelPage = new TravelPage (quotationCF .get (), weatherCF. get ()) ;
+
+// create another completefuture, but it's not needed in this example
+CompletableFuture<Void> done = CompletableFuture.all0f(quotationCF, weatherCF);
+
+// here we are going to compose or chain the futures, only a block with the final join(), 
+//but in between is not blocking        
+TravelPage travelPage = 
+        quotationCF. thenCompose( quotation ->
+            -> weatherCF.thenApply (
+                weather -> new TravelPage (quotation, weather)) 
+        ).join();
+```
+
+![wrapup.jpg](_img%2Fwrapup.jpg)
+
+## Controlling your threads: join `pool`
+
+Asynchronous tasks are executed in the `Common Fork / Join pool`
+
+![wrapup-threads.jpg](_img%2Fwrapup-threads.jpg)
+
+The number of threads is the number of CPU cores of the host machine
+
+The `executor service` has one queue of waiting list to serve the messages to the consumers. Every consumer is a handle by a thread.
+
+The `fork/join pool` has one queue of waiting list per every thread. And if the thread has consume all the messages in its queue or waiting list, 
+then starts stealing messages from another neighbour waiting list of another thread.
+
+![executorsevice_vs_joinpool.jpg](_img%2Fexecutorsevice_vs_joinpool.jpg)
+
+By default, a task is executed in the same thread as the one that created it
+By convention, if the methods ends with the "async" keyword, the function passed is executed in a new thread on the `join pool` 
+otherwise, the same thread is keep on using it.
+
+For instance `supplyAsync` is executed in another thread of the `join pool`
+
+```java 
+CompletableFuture<Quotation> quotationCF = 
+        CompletableFuture. supplyAsync( () -> getQuotation ( ));
+```
+
+meanwhile `thenApply` is executed in the same thread.
+
+```java 
+CompletableFuture<Boolean> doneCF = 
+        infosCF.thenApply (
+            emailInfos -> writeToDB(emailInfos)
+        );
+```
+
+```java
+Executor executor = Executors.newFixedThreadPool (4);
+// example for our custom executor
+CompletableFuture<Quotation> quotationCF = 
+        CompletableFuture. supplyAsync (
+            () -> getQuotation (), executor);
+        }
+
+// here the SwingUtilities: :invokeLater implements the Executor interface, so you can use it. 
+doneCF. thenApplyAsync(done -> updateGUI (done),
+        SwingUtilities: :invokeLater);        
+```
+
+### ExecutorService as argument of async method to control the threads in which task are executing
+
+The `async` methods accepts the `Executor` interface, so we can pass then or an `executorService` or a `lambda`.
+
+```java
+public interface Executor {
+    void execute(Runnable task);
+}
+```
+
+
+
+In the earlier examples, we can create some executors and apply them to the `supplyAsync` and `thenApplyAsync`, as second parameter
+
+```java
+ExecutorService quotationExecutor = Executors.newFixedThreadPool (4, quotationThreadFactory);
+ExecutorService weatherExecutor = Executors.newFixedThreadPool (4, weatherThreadFactory);
+ExecutorService minExecutor = Executors.newFixedThreadPool (1, minThreadFactory);
+
+// pass the references to the async methods
+
+//finally close the executors        
+quotationExecutor.shutdown (); 
+weatherExecutor.shutdown();
+minExecutor.shutdown ();
+```
+we can pass from this execution
+
+```bash
+QB running in Thread[ForkJoinPool.commonPool-worker-5,5,main]
+WB running in Thread[ForkJoinPool.commonPool-worker-2,5,main]
+Q running in Thread [ForkJoinPool.commonPool-worker-6,5,main]
+WC running in Thread[ForkJoinPool.commonPool-worker-3,5,main]
+Q running in Thread[ForkJoinPool.commonPool-worker-4,5,main]
+Allof then apply Thread[ForkJoinPool.commonPool-worker-3,5,main]
+WA running in Thread[ForkJoinPool.commonPool-worker-1,5,main]
+```
+
+to this one, where all the executor are running
+
+```bash
+WB running in Thread[Weather-1,5,main]
+QA running in Thread[Quotation-0,5,main]
+QB running in Thread[Quotation-1,5,main]
+WC running in Thread[Weather-2,5,main]
+WA running in Thread[Weather-0,5,main]
+Q running in Thread[Quotation-2,5,main]
+Allof then apply Thread[ForkJoinPool.commonPool-worker-1,5, main]
+TravelPage[quotation=Quotation[server=ServerA,amount=41],weather=Weather[server=ServerB,v
+```
+
 ## Conclusions
+
+
 ![completableFutures.jpg](_img%2FcompletableFutures.jpg)
