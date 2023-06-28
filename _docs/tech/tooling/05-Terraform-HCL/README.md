@@ -52,3 +52,37 @@ So, this is how Terraform works, and this way, it tries to help you provision an
 - `terraform plan` Refreshing Terraform state in-memory prior to plan... The refreshed state will be used to calculate this plan, but will not be persisted to local or remote state storage.
 - `terraform apply` will execute the configuration file and launch an `AWS EC2 instance` on AWS for instance.
 - `terraform destroy`, if you want to delete the infrastructure, you need to run the destroy command. Delete  the previous created `AWS EC2 instance` on AWS for instance.
+
+### example
+
+create a `main.tf` file:
+
+```bash
+terraform {
+  required_providers {
+    docker =  {
+      source = "kreuzwerker/docker"
+      version = "3.0.2"
+    }
+  }
+}
+
+provider "docker" {
+}
+
+resource "docker_container" "web" {
+  image = "nginx:latest"
+  name = "web"
+  ports {
+    internal = 80
+    external =  80
+  }
+}
+```
+
+execute one by one: 
+- `terraform init`
+- `terraform plan`
+- `terraform apply`
+- wget -qO- http://localhost to check the infra is working. Nginx message is shown
+- `terraform destroy`
