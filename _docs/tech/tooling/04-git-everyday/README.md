@@ -1,4 +1,36 @@
-## **NAME**
+## **giteveryday - A useful minimum set of commands for Everyday Git**
+
+To push your code to a different remote repository, you can update the remote URL of your local Git repository and then push the changes to the new remote. Here's how you can do it:
+
+Check the current remote configuration of your Git repository by running the following command in your terminal or command prompt:
+
+```bash
+git remote -v
+````
+This command will display the current remote repository URL(s) associated with your local repository.
+
+Update the remote URL to the new repository. Use the following command to update the remote URL:
+
+```bash
+git remote set-url origin <new_remote_url>
+````
+
+Replace <new_remote_url> with the URL of the new remote repository where you want to push your code.
+
+Verify that the remote URL has been updated by running git remote -v again. It should now display the new remote URL.
+
+Finally, push your code to the new remote repository using the git push command:
+
+```bash
+git push -u origin <branch_name>
+````
+
+Replace <branch_name> with the name of the branch you want to push (master, main...). The -u flag is used to set the upstream branch, which allows you to use git push subsequently without specifying the branch name.
+
+With these steps, you should be able to push your code to the new remote repository.
+
+----
+
 
 giteveryday - A useful minimum set of commands for Everyday Git
 
