@@ -1,10 +1,10 @@
 Reliability of a system is a measure of how resistant it is to failures of various types, for example attacks, disk or network failures. Which of the following are true?
 Pick ONE OR MORE options
-Some companies disable parts of their system on purpose even on production. It is an extreme strategy. The idea to
+- Some companies disable parts of their system on purpose even on production. It is an extreme strategy. The idea to
 make the system experience failures often and so have proof it can handle them well.
-Indexing is one of the fundamental approaches to making a system resistant to node failures.
-Redundancy can help mitigate node failures in the system.
-Some of the failures can be classified as either network failures, crash failures or Byzantine failures. The most difficult of these are Byzantine failures.
+- Indexing is one of the fundamental approaches to making a system resistant to node failures.
+- Redundancy can help mitigate node failures in the system.
+- Some of the failures can be classified as either network failures, crash failures or Byzantine failures. The most difficult of these are Byzantine failures.
 
 
 The correct statements are:
