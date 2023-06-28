@@ -80,7 +80,7 @@ resource "docker_container" "web" {
 }
 ```
 
-execute one by one: 
+execute one by one (during the process some tmp files are created): 
 - `terraform init`
 - `terraform plan`
 - `terraform apply`
