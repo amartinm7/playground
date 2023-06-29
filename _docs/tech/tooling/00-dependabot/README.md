@@ -1,5 +1,35 @@
 # Dependabot
 
+over .github/dependabot.yml
+
+you can define a github-action to have your repo updated.
+
+```bash
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+
+  # Maintain dependencies for npm for JS projects
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "09:00"
+      timezone: "Europe/Madrid"
+    versioning-strategy: increase
+```
+
 Ignore updates
 
 ```bash
