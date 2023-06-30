@@ -43,3 +43,24 @@ specify that the configuration can load only inside/outside a web context.
 
 - @ConditionalOnWebApplication
 - @ConditionalOnNotWebApplication
+
+## Disabling Auto-Configuration Classes
+
+exclude the auto-configuration from loading.
+
+We could add the @EnableAutoConfiguration annotation with exclude or excludeName attribute to a configuration class:
+
+```kotlin
+@Configuration
+@EnableAutoConfiguration(
+  exclude={MySQLAutoconfiguration.class})
+public class AutoconfigurationApplication {
+    //...
+}
+```
+
+We can also set the spring.autoconfigure.exclude property
+
+```properties
+spring.autoconfigure.exclude=com.amm.autoconfiguration.PostgresAutoconfiguration
+```
