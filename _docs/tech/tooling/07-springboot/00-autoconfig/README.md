@@ -12,33 +12,32 @@ To do that:
 
 - create a resources/META-INF/spring folder
 - inside the folder, creates the `org.springframework.boot.autoconfigure.AutoConfiguration.imports` file
-- fill the file with the class names of the configurations to share
+- fill the file with the class names of the configurations to share.
+- the config files has the `@Configuration` annotation
 
-## @Configuration 
-
-### Class conditions
+## Class conditions
  
 - @ConditionalOnClass specify that we want to include a configuration bean if a specified class is present
 - @ConditionalOnMissingClass the opposite to before
 
-### Bean conditions
+## Bean conditions
 
 - @ConditionalOnBean include a bean only if a specified bean is present or not,
 - @ConditionalOnMissingBean the opposite to before
 
-### Property conditions
+## Property conditions
 
 - @ConditionalOnProperty specify if a configuration loads based on the presence and value of a Spring Environment property.
 
-### Resource conditions 
+## Resource conditions 
 
 - @ConditionalOnResource configuration loads only when a specified resource is present: a file is present, for instance
 
-### Custom Conditions
+## Custom Conditions
 
 define custom conditions by extending the SpringBootCondition class and overriding the getMatchOutcome() method.
 
-### Application Conditions
+## Application Conditions
 
 specify that the configuration can load only inside/outside a web context.
 
