@@ -211,4 +211,4 @@ The provider knows to the subscribers. `High coupled components`, there is a con
 
 ## buses
 
-https://barryvanveen.nl/articles/59-different-kinds-of-service-bus-command-bus-service-bus-and-query-bus
+[Different kinds of service bus: command bus, service bus and query bus](https://barryvanveen.nl/articles/59-different-kinds-of-service-bus-command-bus-service-bus-and-query-bus)
