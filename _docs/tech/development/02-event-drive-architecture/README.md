@@ -211,4 +211,34 @@ The provider knows to the subscribers. `High coupled components`, there is a con
 
 ## buses
 
+A service bus is a way of exchanging messages between components.
+
+When the bus receives a message, it dispatches the message to the receiver(s).
+
 [Different kinds of service bus: command bus, service bus and query bus](https://barryvanveen.nl/articles/59-different-kinds-of-service-bus-command-bus-service-bus-and-query-bus)
+
+As you can imagine, different messages can and should be handled in a different way. That is why we have different kinds of service buses. The 3 buses I want to discuss are:
+
+- Command bus
+- Query bus
+- Event bus
+
+### Command bus
+
+Messages (commands) signal the user's intention. Examples are CreateArticle or RegisterUser.
+One command is handled by exactly one handler.
+A command does not return any values.
+
+### Query bus
+
+Messages (queries) signal a question, different from a database query. Examples are LatestArticles or CommentsForArticle.
+One query is handled by exactly one handler.
+Queries return data.
+Queries should not change the state of the application.
+
+### Event bus
+
+Messages (events) signal an event has happened. Examples are ArticleWasCreated or UserWasRegistered.
+One event can be handled by any number of handlers ([0, inf]).
+Only holds primitives (strings, integers, booleans), not whole classes.
+Events should not return values.
