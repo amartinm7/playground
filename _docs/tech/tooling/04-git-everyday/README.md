@@ -1,5 +1,21 @@
 ## **giteveryday - A useful minimum set of commands for Everyday Git**
 
+```bash
+# first look for the files on the stash
+git stash
+# do the reset
+git reset --hard
+# or one by one
+git restore --staged
+# or restore unstaged files
+git restore .
+# discard any uncommitted changes to the branch but it's no a reset
+git checkout .
+#
+git clean -df
+git checkout -- .
+```
+
 To push your code to a different remote repository, you can update the remote URL of your local Git repository and then push the changes to the new remote. Here's how you can do it:
 
 Check the current remote configuration of your Git repository by running the following command in your terminal or command prompt:
@@ -31,6 +47,22 @@ With these steps, you should be able to push your code to the new remote reposit
 
 ----
 
+## Tagging
+
+```bash
+# list tags
+git tags
+# warning!!!!: create tag, don't use this
+git tag tagname
+# delete/remove tag
+git tag -d tagname
+# create tag good way
+git tag -a v1.0.0 -m 'version 1.0.0 coroutines'
+# push tags
+git push --tags
+# push tags force to override on remote
+git push -f --tags
+```
 
 giteveryday - A useful minimum set of commands for Everyday Git
 
