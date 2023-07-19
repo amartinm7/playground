@@ -1,4 +1,4 @@
-package lessons.coroutines
+package lessons.concurrency.coroutines.example1
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
@@ -14,13 +14,13 @@ import kotlinx.coroutines.withContext
 
 class Coroutines1 {
 
-    fun readURL() = runBlocking {
+    fun readURL() = runBlocking {// creates a coroutine here because starts a coroutines scope
         val response: String = HttpClient(CIO).get("http://google.com/").bodyAsText()
         println(response.substring(0, 100))
         println(">>> readURL thread: ${Thread.currentThread().name}")
     }
 
-    suspend fun differentThread() = withContext(Dispatchers.Default) {
+    suspend fun differentThread() = withContext(Dispatchers.Default) {// creates a coroutine here because starts a coroutines scope
         println(">>> differentThread thread ${Thread.currentThread().name}")
     }
 
@@ -31,17 +31,17 @@ class Coroutines1 {
     }
 }
 
-fun main() = runBlocking {
+fun main() = runBlocking { // creates a coroutine here because starts a coroutines scope
     println(">>> Main thread: ${Thread.currentThread().name}")
     val c = Coroutines1()
     c.readURL()
     c.differentThread()
     val job1:Job = launch(Dispatchers.Default) { // starting a coroutine
-        c.longRunningTask()  // calling the long running function
+        c.longRunningTask()  // calling the long-running function
     }
     // launch is fire and forget
     val job2:Job = launch(Dispatchers.Default) { // starting a coroutine
-        c.longRunningTask()  // calling the long running function
+        c.longRunningTask()  // calling the long-running function
     }
     val defer = async(Dispatchers.IO) {
         c.longRunningTask()

@@ -1,4 +1,4 @@
-package concurrency.futures
+package lessons.concurrency.futures
 
 import java.util.concurrent.Callable
 import java.util.concurrent.ExecutorService

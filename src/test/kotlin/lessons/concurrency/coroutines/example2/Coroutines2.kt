@@ -1,10 +1,12 @@
+package lessons.concurrency.coroutines.example2
+
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 
 // Simulating an API call to fetch cities
 suspend fun fetchCitiesFromMicroservice(): List<String> {
     delay(1000) // Simulating network delay
-    println("fetchCitiesFromMicroservice")
+    println("fetchCitiesFromMicroservice...")
     return listOf("City1", "City2", "City3")
 }
 
@@ -12,7 +14,7 @@ suspend fun fetchCitiesFromMicroservice(): List<String> {
 suspend fun sendCityAndGetAddress(city: String): String {
     delay(1000) // Simulating network delay
     println("sendCityAndGetAddress: $city")
-    return "Address for $city ${Thread.currentThread().name}"
+    return "Address for $city"
 }
 
 // Simulating an API call to send an address and get related zip codes
@@ -25,7 +27,7 @@ suspend fun sendAddressAndGetZipCodes(address: String): List<String> {
 // Simulating saving a zip code to the database
 suspend fun saveZipCodeToDatabase(zipCode: String) {
     delay(1000) // Simulating database save delay
-    println("Zip code saved to database: $zipCode ${Thread.currentThread().name}")
+    println("Zip code saved to database: $zipCode")
 }
 
 suspend fun main() {
@@ -64,13 +66,13 @@ suspend fun main() {
             zipCodesChannel.close()
         }
 
-        // Launch a coroutine to save zip codes to the database concurrently
-        launch(Dispatchers.Default) {
+        // Launch a coroutine to save zip codes to the database
+        launch {
             for (zipCode in zipCodesChannel) {
-                launch {
-                    saveZipCodeToDatabase(zipCode)
-                }
+                saveZipCodeToDatabase(zipCode)
             }
         }
     }
 }
+
+

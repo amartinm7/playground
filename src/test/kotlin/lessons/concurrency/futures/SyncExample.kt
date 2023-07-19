@@ -1,5 +1,4 @@
-package concurrency.futures
-
+package lessons.concurrency.futures
 
 data class Quotation1(val name: String, val value: Int)
 class SyncExample {

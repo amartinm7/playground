@@ -1,4 +1,4 @@
-package concurrency.futures
+package lessons.concurrency.futures
 
 import java.util.concurrent.CompletableFuture
 import java.util.function.Supplier

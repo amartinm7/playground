@@ -1,4 +1,4 @@
-package lessons.coroutines
+package lessons.concurrency.coroutines.example3
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -6,7 +6,7 @@ import kotlinx.coroutines.channels.*
 // Simulating an API call to fetch cities
 suspend fun fetchCitiesFromMicroservice(): List<String> {
     delay(1000) // Simulating network delay
-    println("fetchCitiesFromMicroservice...")
+    println("fetchCitiesFromMicroservice")
     return listOf("City1", "City2", "City3")
 }
 
@@ -14,7 +14,7 @@ suspend fun fetchCitiesFromMicroservice(): List<String> {
 suspend fun sendCityAndGetAddress(city: String): String {
     delay(1000) // Simulating network delay
     println("sendCityAndGetAddress: $city")
-    return "Address for $city"
+    return "Address for $city ${Thread.currentThread().name}"
 }
 
 // Simulating an API call to send an address and get related zip codes
@@ -27,12 +27,12 @@ suspend fun sendAddressAndGetZipCodes(address: String): List<String> {
 // Simulating saving a zip code to the database
 suspend fun saveZipCodeToDatabase(zipCode: String) {
     delay(1000) // Simulating database save delay
-    println("Zip code saved to database: $zipCode")
+    println("Zip code saved to database: $zipCode ${Thread.currentThread().name}")
 }
 
 suspend fun main() {
     runBlocking {
-        val cities = fetchCitiesFromMicroservice()
+        val cities = lessons.concurrency.coroutines.example2.fetchCitiesFromMicroservice()
 
         val citiesChannel = Channel<String>()
         val addressesChannel = Channel<String>()
@@ -49,7 +49,7 @@ suspend fun main() {
         // Launch a coroutine to send addresses to the channel
         launch {
             for (city in citiesChannel) {
-                val address = sendCityAndGetAddress(city)
+                val address = lessons.concurrency.coroutines.example2.sendCityAndGetAddress(city)
                 addressesChannel.send(address)
             }
             addressesChannel.close()
@@ -58,7 +58,7 @@ suspend fun main() {
         // Launch a coroutine to send zip codes to the channel
         launch {
             for (address in addressesChannel) {
-                val zipCodes = sendAddressAndGetZipCodes(address)
+                val zipCodes = lessons.concurrency.coroutines.example2.sendAddressAndGetZipCodes(address)
                 zipCodes.forEach { zipCode ->
                     zipCodesChannel.send(zipCode)
                 }
@@ -66,13 +66,13 @@ suspend fun main() {
             zipCodesChannel.close()
         }
 
-        // Launch a coroutine to save zip codes to the database
-        launch {
+        // Launch a coroutine to save zip codes to the database concurrently
+        launch(Dispatchers.Default) {
             for (zipCode in zipCodesChannel) {
-                saveZipCodeToDatabase(zipCode)
+                launch {
+                    lessons.concurrency.coroutines.example2.saveZipCodeToDatabase(zipCode)
+                }
             }
         }
     }
 }
-
-
