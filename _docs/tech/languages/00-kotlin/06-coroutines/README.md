@@ -28,7 +28,7 @@ The main difference between `async` and `launch` is that launch is used to start
 
 To get the result of a coroutine, you can call `await() on the Deferred instance. While waiting for the result, the coroutine that this await() is called from is suspended:
 
-```
+```kotlin
 import kotlinx.coroutines.*
 
 fun main() = runBlocking {
@@ -77,6 +77,30 @@ suspend fun loadData(): Int {
 ```
 
 ![coroutines-suspends-work.jpg](_img%2Fcoroutines-suspends-work.jpg)
+
+[video](https://www.youtube.com/watch?v=zEZc5AmHQhk)
+
+## coroutines and channels
+
+- the program creates three different coroutines.
+- there are two coroutines to produce and one for consume
+- the communication occurrs using the channel.
+- the producer sends a message throw the channel and the consumer receives the message. This process is one by one. 
+- So when the producer goes to send the message to the channel, it has to wait its turn. I mean, it's there's not any producer before, it can send the message. 
+- As we can see the first producer send the first message and waits or suspends the execution, because the channel is busy, and because the producer is waiting to send its message too. So when the producer A sends the message the producer B, which is suspended, can start another time and sends the B message. 
+- The dispatcher alternates the execution between the producers. So the dispatcher can suspends the producers in any moment. The execution of the messages can be random and the logs too. For this reason the producer A in this example, starts first and ends first.
+
+Take into account that meanwhile the channel is busy, it's not possible to send messages, the producers are blocked, suspended.
+
+![coroutines-and-channels-1.jpg](_img%2Fcoroutines-and-channels-1.jpg)!
+
+![coroutines-channel.jpg](_img%2Fcoroutines-channel.jpg)
+
+![coroutines-and-channels-2.jpg](_img%2Fcoroutines-and-channels-2.jpg)!
+
+![coroutines-and-channels-3.jpg](_img%2Fcoroutines-and-channels-3.jpg)!
+
+[video](https://www.youtube.com/watch?v=HpWQUoVURWQ)
 
 ## More examples
 
