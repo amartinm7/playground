@@ -36,14 +36,14 @@ fun main() = runBlocking { // creates a coroutine here because starts a coroutin
     val c = Coroutines1()
     c.readURL()
     c.differentThread()
-    val job1:Job = launch(Dispatchers.Default) { // starting a coroutine
+    val job1:Job = launch(Dispatchers.Default) {// creates a coroutine here because starts a coroutines scope // starting a coroutine
         c.longRunningTask()  // calling the long-running function
     }
     // launch is fire and forget
-    val job2:Job = launch(Dispatchers.Default) { // starting a coroutine
+    val job2:Job = launch(Dispatchers.Default) {// creates a coroutine here because starts a coroutines scope // starting a coroutine
         c.longRunningTask()  // calling the long-running function
     }
-    val defer = async(Dispatchers.IO) {
+    val defer = async(Dispatchers.IO) {// creates a coroutine here because starts a coroutines scope
         c.longRunningTask()
     }
     //blocks and return a value

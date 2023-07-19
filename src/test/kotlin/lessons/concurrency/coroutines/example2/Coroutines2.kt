@@ -3,6 +3,8 @@ package lessons.concurrency.coroutines.example2
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 
+/* Perfect example to do async nested calls */
+
 // Simulating an API call to fetch cities
 suspend fun fetchCitiesFromMicroservice(): List<String> {
     delay(1000) // Simulating network delay

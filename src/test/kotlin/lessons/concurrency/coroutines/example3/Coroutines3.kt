@@ -32,7 +32,7 @@ suspend fun saveZipCodeToDatabase(zipCode: String) {
 
 suspend fun main() {
     runBlocking {
-        val cities = lessons.concurrency.coroutines.example2.fetchCitiesFromMicroservice()
+        val cities = fetchCitiesFromMicroservice()
 
         val citiesChannel = Channel<String>()
         val addressesChannel = Channel<String>()
@@ -49,7 +49,7 @@ suspend fun main() {
         // Launch a coroutine to send addresses to the channel
         launch {
             for (city in citiesChannel) {
-                val address = lessons.concurrency.coroutines.example2.sendCityAndGetAddress(city)
+                val address = sendCityAndGetAddress(city)
                 addressesChannel.send(address)
             }
             addressesChannel.close()
@@ -58,7 +58,7 @@ suspend fun main() {
         // Launch a coroutine to send zip codes to the channel
         launch {
             for (address in addressesChannel) {
-                val zipCodes = lessons.concurrency.coroutines.example2.sendAddressAndGetZipCodes(address)
+                val zipCodes = sendAddressAndGetZipCodes(address)
                 zipCodes.forEach { zipCode ->
                     zipCodesChannel.send(zipCode)
                 }
@@ -70,7 +70,7 @@ suspend fun main() {
         launch(Dispatchers.Default) {
             for (zipCode in zipCodesChannel) {
                 launch {
-                    lessons.concurrency.coroutines.example2.saveZipCodeToDatabase(zipCode)
+                    saveZipCodeToDatabase(zipCode)
                 }
             }
         }

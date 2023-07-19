@@ -6,7 +6,7 @@ suspend functions are functions which are suspendable (waitable or stoppable), b
 
 When you have an usecase, controller or similar, you can create a coroutine to use the async I/O tasks. 
 
-To create a coroutine you need a GlobalScope or runBlocking... 
+To start a new coroutine, use one of the main coroutine builders: launch, async, or runBlocking. Different libraries can define additional coroutine builders.
 
 ```kotlin
 GlobalScope.launch { // when you do this you are creating a coroutine, if the IDE tell you coroutineScope, you are creating a coroutine
@@ -18,6 +18,67 @@ runBlocking {
 }
 
 ```
+## Create coroutines
+
+`async` starts a new coroutine and returns a `Deferred` object. `Deferred` represents a concept known by other names such as `Future` or `Promise`. It stores a computation, but it defers the moment you get the final result; it promises the result sometime in the future.
+
+The main difference between `async` and `launch` is that launch is used to start a computation that isn't expected to return a specific result. launch returns a `Job` that represents the `coroutine`. It is possible to wait until it completes by calling `Job.join()`.
+
+`Deferred` is a generic type that extends `Job`. An `async` call can return a Deferred<Int> or a Deferred<CustomType>, depending on what the lambda returns (the last expression inside the lambda is the result).
+
+To get the result of a coroutine, you can call `await() on the Deferred instance. While waiting for the result, the coroutine that this await() is called from is suspended:
+
+```
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    val deferred: Deferred<Int> = async {
+        loadData()
+    }
+    println("waiting...")
+    println(deferred.await())
+}
+
+suspend fun loadData(): Int {
+    println("loading...")
+    delay(1000L)
+    println("loaded!")
+    return 42
+}
+```
+
+`runBlocking is used as a bridge between regular and suspending functions, or between the blocking and non-blocking worlds. It works as an adaptor for starting the top-level main coroutine. It is intended primarily to be used in main() functions and tests.
+
+## how is working
+
+The program:
+- creates a main coroutine
+- creates a second T1 coroutine, on the thread-pool
+- the program can continue or into the main thread or into the async T1 thread.
+- the log trace waiting or loading can be written in any order at this moment because the thread-pool distpacher can alternate the main and T1 execution and suspends the functions meanwhile
+- finally to print the final log into the main program, we have to resolve the deferred promise, so the main gives the execution power to the T1 coroutine and waits until the execution returns the 42 value to print it. 
+- After that the coroutine is finished and the main finish too.
+
+```kotlin
+fun main () = runBlocking { // creates a 'main' coroutine
+    val deferred = async (Dispatchers.Default) { // creates a 'T1' coroutine
+        loadData()
+    } 
+    println("waiting...")
+    println(deferred.await()) // blocking call
+}
+
+suspend fun loadData(): Int {
+    println("loading...")
+    delay(1000L) // http call for instance
+    println("loaded!")
+    return 42
+}
+```
+
+![coroutines-suspends-work.jpg](_img%2Fcoroutines-suspends-work.jpg)
+
+## More examples
 
 example:
 ```kotlin

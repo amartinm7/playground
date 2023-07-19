@@ -10,7 +10,19 @@ If you’ve been using Kotlin, you’ve probably heard of Coroutines. Coroutines
 
 This article introduces you to the concept of Coroutines and Channels through illustrations.
 
-**NOTE:** At the time of this writing, Channels are in experimental stage.
+# **Coroutines**
+
+Coroutines is a new computation, and it's suspendable: when performing network requests, it is suspended and releases the underlying thread. When the network request returns the result, the computation is resumed.
+
+Coroutines run on top of threads and can be suspended. When a coroutine is suspended, the corresponding computation is paused, removed from the thread, and stored in memory. Meanwhile, the thread is free to be occupied by other tasks:
+
+![suspension-process.gif](_img%2Fsuspension-process.gif)
+
+When the computation is ready to be continued, it is returned to a thread (not necessarily the same one).
+
+The coroutine resumes only after the corresponding response is received:
+
+![suspend-requests.png](_img%2Fsuspend-requests.png)
 
 # **Runblocking**
 
