@@ -1,4 +1,4 @@
-package lessons.actormodel
+package lessons.concurrency.actormodel
 
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.channels.Channel

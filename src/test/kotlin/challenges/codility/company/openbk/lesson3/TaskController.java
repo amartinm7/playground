@@ -1,4 +1,4 @@
-package challenges.codility.openbk.lesson3;
+package challenges.codility.company.openbk.lesson3;
 
 import org.springframework.web.bind.annotation.*;
 

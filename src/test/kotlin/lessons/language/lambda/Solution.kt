@@ -1,4 +1,4 @@
-package lessons.algorithm.lambda
+package lessons.language.lambda
 
 class Solution {
 }

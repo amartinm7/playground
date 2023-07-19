@@ -1,4 +1,4 @@
-package lessons.observable.example2
+package lessons.observable.monoflux.example2
 
 import org.slf4j.LoggerFactory
 import reactor.core.publisher.Flux

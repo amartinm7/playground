@@ -1,4 +1,4 @@
-package lessons.algorithm.datetime.lesson01
+package challenges.codility.company.loans
 
 import java.time.OffsetDateTime
 

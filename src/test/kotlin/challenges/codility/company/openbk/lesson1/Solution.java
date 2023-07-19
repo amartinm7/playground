@@ -1,4 +1,4 @@
-package challenges.codility.openbk.lesson1;
+package challenges.codility.company.openbk.lesson1;
 
 class Solution {
 

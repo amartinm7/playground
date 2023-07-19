@@ -1,4 +1,4 @@
-package lessons.observable.example1
+package lessons.observable.monoflux.example1
 
 import io.reactivex.rxjava3.core.Observable
 import org.slf4j.LoggerFactory
@@ -10,7 +10,7 @@ class ReactorExample {
     fun reactor(): Unit {
 //        Mono.just(Person.SimplePerson())
 //            .subscribe { p -> log.info(" [Reactor] Persona: $p") }
-        Flux.just(listOf(Person.NormalPerson(1),Person.SimplePerson(2),Person.NormalPerson(3))).subscribe { p -> log.info(" [Reactor] Persona: $p") }
+        Flux.just(listOf(Person.NormalPerson(1), Person.SimplePerson(2), Person.NormalPerson(3))).subscribe { p -> log.info(" [Reactor] Persona: $p") }
     }
 
     fun rxjava3() {

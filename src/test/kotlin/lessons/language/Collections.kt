@@ -1,4 +1,4 @@
-package lessons.algorithm.experiments
+package lessons.language
 
 class Collections {
     // https://kotlinlang.org/docs/collection-parts.html

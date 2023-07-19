@@ -1,4 +1,4 @@
-package challenges.codility.openbk.lesson1;
+package challenges.codility.company.openbk.lesson1;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;

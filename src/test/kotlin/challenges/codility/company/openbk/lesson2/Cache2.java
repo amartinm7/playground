@@ -1,4 +1,4 @@
-package challenges.codility.openbk.lesson2;
+package challenges.codility.company.openbk.lesson2;
 
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.cache.annotation.CacheEvict;
