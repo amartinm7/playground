@@ -19,9 +19,15 @@ Solution:
 
 - over the first client or message, block the database record with the `pessimistic locking` so only the first client can update the record on the database. Use `SELECT FOR UPDATE`
 
+- We can acquire exclusive locks using ‘SELECT … FOR UPDATE' statements.
+
 ![pessimistic_lock.jpg](_img%2Fpessimistic_lock.jpg)
 
 [testing-pessimistic-locking-handling-spring-boot-jpa](https://blog.mimacom.com/testing-pessimistic-locking-handling-spring-boot-jpa/#:~:text=Using%20the%20%22test%2Doracle%22,to%20your%20pessimistic%20locking%20handling)
+
+[jpa-pessimistic-locking](https://www.baeldung.com/jpa-pessimistic-locking)
+
+[pessimistic-locking-jpa-spring-boot](https://refactorizando.com/pessimistic-locking-jpa-spring-boot/)
 
 ## Select for update
 
@@ -30,6 +36,17 @@ SELECT FOR UPDATE is a SQL command that’s useful in the context of transaction
 This is useful because it prevents the thrashing and unnecessary transaction retries that would otherwise occur when multiple transactions are attempting to read those same rows. Any time multiple transactions are likely to be working with the same rows at roughly the same time, SELECT FOR UPDATE can be used to increase throughput and decrease tail latency (compared to what you would see without using it).
 
 In other words: SELECT FOR UPDATE makes contended transactions process more smoothly (which generally also means they process more quickly and efficiently).
+
+### Lock Modes
+JPA specification defines three pessimistic lock modes that we're going to discuss:
+
+- PESSIMISTIC_READ allows us to obtain a shared lock and prevent the data from being updated or deleted. If there is a pessimistic_read lock in a row, you can only read the row.
+- PESSIMISTIC_WRITE allows us to obtain an exclusive lock and prevent the data from being read, updated or deleted. You have to wait until the lock is released until read, update or delete
+- PESSIMISTIC_FORCE_INCREMENT works like PESSIMISTIC_WRITE, and it additionally increments a version attribute of a versioned entity.
+- 
+All of them are static members of the LockModeType class and allow transactions to obtain a database lock. They all are retained until the transaction commits or rolls back.
+
+It's worth noting that we can obtain only one lock at a time. If it's impossible, a PersistenceException is thrown.
 
 ## CQRS
 
