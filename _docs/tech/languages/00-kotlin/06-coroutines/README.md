@@ -192,6 +192,15 @@ The producer can close a channel to indicate that no more elements are coming.
 
 Several types of channels are defined in the library. They differ in how many elements they can internally store and whether the send() call can be suspended or not. For all the channel types, the receive() call behaves similarly: it receives an element if the channel is not empty; otherwise, it is suspended.
 
+here is the implementation of every kind of channel
+
+```kotlin
+val rendezvousChannel = Channel<String>()
+val bufferedChannel = Channel<String>(10)
+val conflatedChannel = Channel<String>(CONFLATED)
+val unlimitedChannel = Channel<String>(UNLIMITED)
+```
+
 ### Unlimited channel
 
 An unlimited channel is the closest analog to a queue: producers can send elements to this channel and it will keep growing indefinitely. The send() call will never be suspended. If the program runs out of memory, you'll get an OutOfMemoryException. The difference between an unlimited channel and a queue is that when a consumer tries to receive from an empty channel, it becomes suspended until some new elements are sent.
@@ -220,13 +229,6 @@ A new element sent to the conflated channel will overwrite the previously sent e
 
 ![conflated-channel.gif](_img%2Fconflated-channel.gif)
 
-```kotlin
-val rendezvousChannel = Channel<String>()
-val bufferedChannel = Channel<String>(10)
-val conflatedChannel = Channel<String>(CONFLATED)
-val unlimitedChannel = Channel<String>(UNLIMITED)
-```
+###
 
 ![progress-and-concurrency.png](_img%2Fprogress-and-concurrency.png)
-
-
