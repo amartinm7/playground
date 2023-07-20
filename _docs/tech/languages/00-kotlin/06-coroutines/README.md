@@ -102,6 +102,21 @@ Take into account that meanwhile the channel is busy, it's not possible to send 
 
 [video](https://www.youtube.com/watch?v=HpWQUoVURWQ)
 
+## Sync coroutines scopes
+
+In this example loadContributorsConcurrent ocurrs in a suspendable function in a coroutine created in the `launch`. 
+
+Once the result is return, we can move the results to the main thread using `withContext(Dispatchers.Main)`
+
+```kotlin
+launch(Dispatchers.Default) {
+    val users = loadContributorsConcurrent(service, req)
+    withContext(Dispatchers.Main) {
+        updateResults(users, startTime)
+    }
+}
+```
+
 ## More examples
 
 example:
