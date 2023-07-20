@@ -1,5 +1,7 @@
 # Profiling
 
+[example](https://www.jetbrains.com/help/idea/tutorial-find-a-memory-leak.html#check-the-fix)
+
 Usually, the memory usage curve is saw-shaped: the chart goes up when new objects are allocated and periodically goes down when the memory is reclaimed by the garbage collector. You can see an example of this in the picture below:
 
 ![saw-teeth-memory-chart-2.png](_img%2Fsaw-teeth-memory-chart-2.png)
