@@ -104,9 +104,9 @@ Take into account that meanwhile the channel is busy, it's not possible to send 
 
 ## Sync coroutines scopes
 
-In this example loadContributorsConcurrent ocurrs in a suspendable function in a coroutine created in the `launch`. 
+In this example loadContributorsConcurrent occurs in a suspendable function in a coroutine created in the `launch`. 
 
-Once the result is return, we can move the results to the main thread using `withContext(Dispatchers.Main)`
+Once the result is return, we can move the results to the main thread using `withContext(Dispatchers.Main)` (or the opposite in some cases)
 
 ```kotlin
 launch(Dispatchers.Default) {
@@ -156,4 +156,76 @@ suspend fun doWorld() = coroutineScope { // this: CoroutineScope
     println("Hello")
 }
 ```
+
+### Concurrency
+
+To add concurrency, use channels (a queue).
+A channel can suspend send()and receive() operations. This happens when the channel is empty or full. The channel can be full if the channel size has an upper bound.
+
+```kotlin
+interface SendChannel<in E> {
+    suspend fun send(element: E)
+    fun close(): Boolean
+}
+
+interface ReceiveChannel<out E> {
+    suspend fun receive(): E
+}
+
+interface Channel<E> : SendChannel<E>, ReceiveChannel<E>
+```
+
+The producer can close a channel to indicate that no more elements are coming.
+
+Several types of channels are defined in the library. They differ in how many elements they can internally store and whether the send() call can be suspended or not. For all the channel types, the receive() call behaves similarly: it receives an element if the channel is not empty; otherwise, it is suspended.
+
+### Unlimited channel
+
+An unlimited channel is the closest analog to a queue: producers can send elements to this channel and it will keep growing indefinitely. The send() call will never be suspended. If the program runs out of memory, you'll get an OutOfMemoryException. The difference between an unlimited channel and a queue is that when a consumer tries to receive from an empty channel, it becomes suspended until some new elements are sent.
+
+![unlimited-channel.png](_img%2Funlimited-channel.png)
+
+### Buffered channel
+The size of a buffered channel is constrained by the specified number. Producers can send elements to this channel until the size limit is reached. All of the elements are internally stored. When the channel is full, the next `send` call on it is suspended until more free space becomes available.
+
+![buffered-channel.png](_img%2Fbuffered-channel.png)
+
+### "Rendezvous" channel
+The "Rendezvous" channel is a channel without a buffer, the same as a buffered channel with zero size. One of the functions (send() or receive()) is always suspended until the other is called.
+
+If the send() function is called and there's no suspended receive call ready to process the element, then send() is suspended. Similarly, if the receive function is called and the channel is empty or, in other words, there's no suspended send() call ready to send the element, the receive() call is suspended.
+
+The "rendezvous" name ("a meeting at an agreed time and place") refers to the fact that send() and receive() should "meet on time".
+
+![rendezvous-channel.png](_img%2Frendezvous-channel.png)
+
+### Conflated channel
+
+A new element sent to the conflated channel will overwrite the previously sent element, so the receiver will always get only the latest element. The send() call is never suspended.
+
+![conflated-channel.gif](_img%2Fconflated-channel.gif)
+
+```kotlin
+val rendezvousChannel = Channel<String>()
+val bufferedChannel = Channel<String>(10)
+val conflatedChannel = Channel<String>(CONFLATED)
+val unlimitedChannel = Channel<String>(UNLIMITED)
+```
+
+Coroutines can communicate with each other through channels.
+
+Channels are communication primitives that allow data to be passed between coroutines. One coroutine can send some information to a channel, while another can receive that information from it:
+
+![using-channel.png](_img%2Fusing-channel.png)
+
+A coroutine that sends (produces) information is often called a producer, and a coroutine that receives (consumes) information is called a consumer. One or multiple coroutines can send information to the same channel, and one or multiple coroutines can receive data from it:
+
+![using-channel-many-coroutines.png](_img%2Fusing-channel-many-coroutines.png)
+
+When many coroutines receive information from the same channel, each element is handled only once by one of the consumers. Once an element is handled, it is immediately removed from the channel.
+
+
+
+![progress-and-concurrency.png](_img%2Fprogress-and-concurrency.png)
+
 
