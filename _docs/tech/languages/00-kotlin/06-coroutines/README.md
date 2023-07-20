@@ -157,7 +157,20 @@ suspend fun doWorld() = coroutineScope { // this: CoroutineScope
 }
 ```
 
-### Concurrency
+### Channels for Concurrency
+
+Coroutines can communicate with each other through channels.
+
+Channels are communication primitives that allow data to be passed between coroutines. One coroutine can send some information to a channel, while another can receive that information from it:
+
+![using-channel.png](_img%2Fusing-channel.png)
+
+A coroutine that sends (produces) information is often called a producer, and a coroutine that receives (consumes) information is called a consumer. One or multiple coroutines can send information to the same channel, and one or multiple coroutines can receive data from it:
+
+![using-channel-many-coroutines.png](_img%2Fusing-channel-many-coroutines.png)
+
+When many coroutines receive information from the same channel, each element is handled only once by one of the consumers. Once an element is handled, it is immediately removed from the channel.
+
 
 To add concurrency, use channels (a queue).
 A channel can suspend send()and receive() operations. This happens when the channel is empty or full. The channel can be full if the channel size has an upper bound.
@@ -182,6 +195,8 @@ Several types of channels are defined in the library. They differ in how many el
 ### Unlimited channel
 
 An unlimited channel is the closest analog to a queue: producers can send elements to this channel and it will keep growing indefinitely. The send() call will never be suspended. If the program runs out of memory, you'll get an OutOfMemoryException. The difference between an unlimited channel and a queue is that when a consumer tries to receive from an empty channel, it becomes suspended until some new elements are sent.
+
+By default, a "Rendezvous" channel is created.
 
 ![unlimited-channel.png](_img%2Funlimited-channel.png)
 
@@ -211,20 +226,6 @@ val bufferedChannel = Channel<String>(10)
 val conflatedChannel = Channel<String>(CONFLATED)
 val unlimitedChannel = Channel<String>(UNLIMITED)
 ```
-
-Coroutines can communicate with each other through channels.
-
-Channels are communication primitives that allow data to be passed between coroutines. One coroutine can send some information to a channel, while another can receive that information from it:
-
-![using-channel.png](_img%2Fusing-channel.png)
-
-A coroutine that sends (produces) information is often called a producer, and a coroutine that receives (consumes) information is called a consumer. One or multiple coroutines can send information to the same channel, and one or multiple coroutines can receive data from it:
-
-![using-channel-many-coroutines.png](_img%2Fusing-channel-many-coroutines.png)
-
-When many coroutines receive information from the same channel, each element is handled only once by one of the consumers. Once an element is handled, it is immediately removed from the channel.
-
-
 
 ![progress-and-concurrency.png](_img%2Fprogress-and-concurrency.png)
 
