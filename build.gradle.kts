@@ -38,6 +38,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // io.reactivex
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    // okhttp
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
     //Ktor dependencies
     val ktor_version = "2.3.2"
     implementation("io.ktor:ktor-server-auth:$ktor_version")
