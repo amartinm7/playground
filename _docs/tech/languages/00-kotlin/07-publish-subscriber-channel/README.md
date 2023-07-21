@@ -40,7 +40,6 @@ class EventConsumer(private val channel: Channel<String>) {
 
 @Service
 class EventPublisher(private val channel: Channel<String>) {
-
     fun startPublishing() {
         GlobalScope.launch {
             while (true) {
