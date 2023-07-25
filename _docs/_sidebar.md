@@ -1,8 +1,8 @@
 - [Main Index](README.md)
 
 - [agile](tech/agile/README.md)
-  - [communication_styles](tech/agile/communication_styles/README.md)
-  - [scrum](tech/agile/scrum/README.md)
+  - [communication_styles](tech/agile/01-communication_styles/README.md)
+  - [scrum](tech/agile/02-scrum/README.md)
 - [development](tech/development/README.md)
   - [00-Solid](tech/development/00-Solid/README.md)
   - [01-Testing](tech/development/01-Testing/README.md)
