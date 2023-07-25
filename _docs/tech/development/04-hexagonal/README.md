@@ -17,6 +17,7 @@ Features:
 - change tolerance of the code 
 - Reusable code
 - Maintainability
+- adapters and ports
 
 ## Port and adapters
 
