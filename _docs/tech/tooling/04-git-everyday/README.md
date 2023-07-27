@@ -1,5 +1,7 @@
 ## **giteveryday - A useful minimum set of commands for Everyday Git**
 
+![git-cheat-sheet.jpeg](_img%2Fgit-cheat-sheet.jpeg)
+
 ```bash
 # first look for the files on the stash
 git stash
