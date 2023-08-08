@@ -82,10 +82,10 @@ Define an anti-corruption layer, which translates between the two domain models.
 
 ## CAP theorem
 
-In a distributed system is not guarantee simultaneously at the same time when a communication network error occurs:
-- (C)onsistency
-- (A)vailability
-- (P)artitioning
+In a distributed system ((P)artitioned) is not guarantee simultaneously at the same time when a communication network error occurs:
+- (C)onsistency: Consistencia significa que todos los clientes ven los mismos datos al mismo tiempo, independientemente del nodo al que se conecten. Para que esto suceda, siempre que se escriban datos en un nodo, se debe reenviar o replicar al instante a todos los demás nodos del sistema antes de que la escritura se considere 'satisfactoria'.
+- (A)vailability: Disponibilidad significa que cualquier cliente que realiza una solicitud de datos obtiene una respuesta, incluso si uno o más nodos están inactivos. Otra forma de indicar esto: todos los nodos activos del sistema distribuido devuelven una respuesta válida para cualquier solicitud, sin excepción.
+- (P)artitioning: La tolerancia de las particiones significa que el clúster debe continuar trabajando a pesar de las interrupciones de comunicación que se produzcan entre los nodos del sistema.
 
 Only two of them are possible.
 
@@ -96,3 +96,7 @@ If the system is (P)artitioned you have to choose between (C)onsistency or (A)va
 - (A)vailability: you can return the written more recently updated if everything goes well, or return not the last written if the system crash
 
 ![CAP Theorem](_img/CAP_Theorem_Venn_Diagram.png)
+
+
+
+[cap-theorem](https://www.ibm.com/es-es/topics/cap-theorem)
