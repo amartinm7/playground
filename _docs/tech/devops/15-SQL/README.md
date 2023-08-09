@@ -32,7 +32,7 @@
 🔸 SQLBOLT: https://sqlbolt.com/
 🔸 SQL Murder Mystery: https://lnkd.in/dbw9JUY5
 
-## Pros and cons, tradeoff of the indexes
+## indexes Pros and cons, tradeoff 
 
 Pros:
 - quick responses, better performance for looking rows
