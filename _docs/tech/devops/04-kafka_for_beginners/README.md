@@ -732,3 +732,23 @@ while(true) {
     1. Take all the consumers from a specific group down
     2. Use *kafka-consumer-groups* command to set the offset to what you want
     3. Restart consumers
+
+## Questions
+
+what's happen if I have 3 partitions and 4 consumers?
+
+How can I consume a topic from the beginning?
+- create a new consumer group and set up the offset to 0.
+
+does kafka retain the event message order?
+- Yes, in every partition the order is guaranteed
+
+How does partitions work?
+- every kafka message has an id. every message is always stored at the same partition using the id. In this way, when you consume over a partition you always consume a range of messages from and id-message to another. 
+- The partition can be compacted because in the partition is stored all the messages related between them. 
+- The partition can be compacted a delete all the messages if the last one is tombstone. This is an special message with the empty body. So when the compactation is happening, all the messages with that message id is removed. 
+
+
+
+
+

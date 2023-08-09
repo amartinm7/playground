@@ -6,6 +6,10 @@ reference:
 
 ## intro
 
+bigger to smaller:
+
+monolith -> SOA app -> microservices -> function as a service
+
 At the beginning, the systems were designed thinking in data, on databases, tables and rows. 
 
 Nowadays, the paradigm is changing in favour to event driven data architecture. 

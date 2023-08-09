@@ -31,3 +31,12 @@
 🔸 SQLZOO: https://sqlzoo.net/
 🔸 SQLBOLT: https://sqlbolt.com/
 🔸 SQL Murder Mystery: https://lnkd.in/dbw9JUY5
+
+## Pros and cons, tradeoff of the indexes
+
+Pros:
+- quick responses, better performance for looking rows
+
+Cons
+- maintain the index tree when some rows are deleted
+- maintain the index tree when an row is added
