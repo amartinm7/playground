@@ -39,4 +39,4 @@ Pros:
 
 Cons
 - maintain the index tree when some rows are deleted
-- maintain the index tree when an row is added
+- maintain the index tree when a row is added
