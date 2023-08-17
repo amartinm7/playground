@@ -53,3 +53,6 @@ nodos integrados al sistema.
 Another classification is regarding the type:
 - `physical cluster`: the nodes are machines
 - `virtual cluster`: the nodes are virtual nodes, so one machine can handle several of them.
+
+
+![semantic_versioning.jpeg](_img%2Fsemantic_versioning.jpeg)

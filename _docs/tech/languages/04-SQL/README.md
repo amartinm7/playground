@@ -40,3 +40,5 @@ Pros:
 Cons
 - maintain the index tree when some rows are deleted
 - maintain the index tree when a row is added
+
+![database_indexing.jpeg](_img%2Fdatabase_indexing.jpeg)

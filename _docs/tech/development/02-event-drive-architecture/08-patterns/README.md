@@ -29,3 +29,6 @@ Why are Patterns in Software Development Important?
 9️⃣ 𝗦𝗮𝗴𝗮 𝗣𝗮𝘁𝘁𝗲𝗿𝗻: Manages transactions spanning multiple services by breaking them into steps and providing compensating actions if something goes wrong.
 
 🔟 𝗖𝗤𝗥𝗦 𝗣𝗮𝘁𝘁𝗲𝗿𝗻: Separates the read and write operations for data, allowing independent optimization and scaling.
+
+
+![pub_sub-model.jpeg](_img%2Fpub_sub-model.jpeg)

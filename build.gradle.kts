@@ -7,11 +7,11 @@ plugins {
     id("org.springframework.boot") version "3.1.0"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.graalvm.buildtools.native") version "0.9.20"
-    id("org.jetbrains.kotlin.plugin.serialization") version ("1.8.22")
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
-    kotlin("plugin.jpa") version "1.8.22"
-    // kotlin("kapt") version "1.8.22"
+    id("org.jetbrains.kotlin.plugin.serialization") version ("1.9.0")
+    kotlin("jvm") version "1.9.0"
+    kotlin("plugin.spring") version "1.9.0"
+    kotlin("plugin.jpa") version "1.9.0"
+    // kotlin("kapt") version "1.9.0"
 }
 
 configurations {
@@ -74,6 +74,6 @@ kotlin {
 tasks.withType(KotlinCompile::class).configureEach {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
-        languageVersion = "1.9" // this is an improvement for data objects
+        languageVersion = "1.9" // kotlin version this is an improvement for data objects
     }
 }

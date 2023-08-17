@@ -3,6 +3,7 @@
 reference: 
 - https://www.confluent.io/blog/journey-to-event-driven-part-1-why-event-first-thinking-changes-everything/
 
+![event_driven_architecture.jpeg](_img%2Fevent_driven_architecture.jpeg)
 
 ## intro
 
