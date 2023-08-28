@@ -5,6 +5,8 @@ reference:
 
 - https://developer.harness.io/docs/first-gen/continuous-delivery/concepts-cd/deployment-types/deployment-concepts-and-strategies/
 
+![deployment_patterns.gif](_img%2Fdeployment_patterns.gif)
+
 ## Classification
 
 - `Basic deployment`: In a basic deployment, all nodes within a target environment are updated at the same time with a new service or artifact version. Because of this, basic deployments are not outage-proof and they slow down rollback processes or strategies. Of all the deployment strategies shared, it is the riskiest.
