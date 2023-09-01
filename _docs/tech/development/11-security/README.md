@@ -8,6 +8,10 @@
 
 ## jwt
 
+https://jwt.io/
+
+![jwt_example.png](_img%2Fjwt_example.png)
+
 ## oauth
 
 ![oauth.jpeg](_img%2Foauth.jpeg)
