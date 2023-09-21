@@ -9,3 +9,15 @@ https://home.robusta.dev/blog/stop-using-cpu-limits
 
 
 ![deploy-container.svg](..%2F..%2F..%2F..%2F..%2F..%2FIdeaProjects%2Fnotes%2Fdocs%2Fgo%2Fonboarding%2F14-profiling-kubernetes%2F_img%2Fdeploy-container.svg)
+
+## What is CPU Throttling
+
+CPU throttling means that applications are granted more constrained resources when they are near to the container’s CPU limit. In some cases, container throttling occurs even when CPU utilization is not close to the limit due to bugs in the Linux kernel.
+
+Consider a single-threaded application running on a limited CPU with a processing time of 200ms per operation. The following diagram shows an application that completes the request:
+
+![cpu-throttling-01.jpeg](_img%2Fcpu-throttling-01.jpeg)
+
+Now consider an application with a CPU limit of 0.4 CPUs. The application will only receive about 40ms of runtime for each 100ms. This means that instead of completing the request in 200ms, it will take a total of 440ms. This means the application is experiencing CPU throttling.
+
+![cpu-throttling-02.jpeg](_img%2Fcpu-throttling-02.jpeg)
