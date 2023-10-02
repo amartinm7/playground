@@ -1,0 +1,52 @@
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  flex-wrap: wrap;
+  width: 328px;
+  border-top: 1px solid #777;
+  border-right: 1px solid #666;
+  border-bottom: 1px solid #777;
+  border-left: 1px solid #666;
+}
+
+.box .buttons {
+  /*flex: 1 1 25%; !*grow | shrink | basis *!*/
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  cursor: pointer;
+  border-top: 1px solid #777;
+  border-right: 1px solid #666;
+  border-bottom: 1px solid #777;
+  border-left: 1px solid #666;
+  transition: all 0.25s ease-in-out;
+}
+.box .buttons:hover {
+  background-color: #FFC300;
+  border-color: #282c80;
+  color: #282c34;
+}
+
+.box .buttons:active {
+  background-color: #FFC888;
+  border-color: #282c80;
+  box-shadow: none;
+}
+.box .buttons:focus, .box .buttons:active:focus {
+  background-color: #FFC400;
+  border-color: #282c80;
+  outline: 5px auto #282c34;
+}
+.box .buttons:visited {
+  background-color: #FFC888;
+  border-color: #282c80;
+}
+
+.display {
+  flex: 1 1 100%; /*grow | shrink | basis */
+  border-top: 1px solid #777;
+  border-right: 1px solid #666;
+  border-left: 1px solid #666;
+}
