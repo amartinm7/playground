@@ -100,7 +100,7 @@ function Calculator() {
     calcButton('.', () => setBinaryOperation('.')),
     calcButton('=', () => setEqualsOperation('='))]
 
-  const cell = buttons.map((item, index) =>
+  const itemButton = buttons.map((item, index) =>
     <div key={item.label} className='buttons'
          onClick={item.func} role={item.label}
     >{item.label}</div>
@@ -111,7 +111,7 @@ function Calculator() {
     <div>
       {display}
       <div>
-        <div className="box">{cell}</div>
+        <div className="box">{itemButton}</div>
       </div>
     </div>
   );
