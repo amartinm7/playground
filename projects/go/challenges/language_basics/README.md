@@ -1,9 +1,9 @@
-# Go: hello world
+# Go language basics
 
 ## init: creating new go.mod
-over the helloworld folder execute 
+over the project folder execute
 ```bash
-`go mod init helloworld`
+`go mod init language_basics`
 ```
 
 ## clean: to add module requirements and sums
