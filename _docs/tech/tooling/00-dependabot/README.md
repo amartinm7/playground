@@ -20,7 +20,7 @@ updates:
       time: "09:00"
       timezone: "Europe/Madrid"
 
-  # Maintain dependencies for npm for JS projects
+  # Maintain dependencies for npm for JS source
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
