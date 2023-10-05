@@ -8,12 +8,17 @@ import (
 )
 
 func main() {
-	fmt.Println("Language basics!!")
+	fmt.Println("Language basics!! https://gobyexample.com/ , don't miss it")
 	timeExamples()
 	checkTypeExamples()
 	arrayExamples()
 	sliceExamples()
 	mapExamples()
+	rangeExample()
+	functionExamples()
+	returnMultipleValuesExamples()
+	closuresExamples()
+	recursionExamples()
 }
 
 func timeExamples() {
@@ -72,6 +77,7 @@ func arrayExamples() {
 }
 
 func sliceExamples() {
+	// slice is a dynamic array. You can increase the size and append new items
 	// arrays defines the size. They can't grow. Are a static structure
 	// slices are arrays without size. They can grow. Are a dynamic structure
 	// creates an empty slice
@@ -135,4 +141,111 @@ func mapExamples() {
 	if maps.Equal(n, n2) {
 		fmt.Println("n == n2")
 	}
+}
+
+func rangeExample() {
+	// for/range is a way to loop over the interfaces (objects)
+	// loop over a array
+	nums := [3]int{1, 2, 3}
+	for index, item := range nums {
+		if item == 3 {
+			fmt.Printf("[item,index]: [%d, %d]\n", item, index)
+		} else {
+			fmt.Println("[item]:", item)
+		}
+	}
+	// loop over a dictionary
+	myMap := map[string]string{"a": "apple", "b": "banana", "c": "chilli pepper"}
+	for key, value := range myMap {
+		fmt.Printf("[key,value]: [%s, %s]\n", key, value)
+	}
+	// loop over string
+	for index, valueUTF8 := range "go" {
+		fmt.Println(index, valueUTF8)
+	}
+}
+
+func functionExamples() {
+
+	myFunc := func(i interface{}) {
+		fmt.Printf("Hello function %d\n", i)
+	}
+
+	applyFunc := func(a int, b int) int {
+		return a + b
+	}
+	// if the params are the same type you can write it only one time
+	otherFunc := func(a, b, c int) int {
+		return a + b + c
+	}
+
+	myFunc(applyFunc(3, 4))
+	myFunc(otherFunc(3, 4, 5))
+}
+
+func returnMultipleValuesExamples() {
+	otherFunc := func(a, b, c int) (int, int) {
+		return a + b + c, a + b
+	}
+	value1, value2 := otherFunc(3, 4, 5)
+	fmt.Printf("Return values[key,value]: [%d, %d]\n", value1, value2)
+}
+
+func variadicParamsExamples() {
+	sumNumbers := func(nums ...int) {
+		fmt.Print(nums, " ")
+		total := 0
+		for _, num := range nums {
+			total += num
+		}
+		fmt.Println(total)
+	}
+	// arr[:]  // arr is an array; arr[:] is the slice of all elements
+	// you can pass a slice as variadicParams
+	array := [3]int{1, 2, 3}
+	sumNumbers(array[:]...)
+
+	nums := []int{1, 2, 3, 4}
+	sumNumbers(nums...)
+
+	sumNumbers(1, 2)
+	sumNumbers(1, 2, 3)
+}
+
+func closuresExamples() {
+	// closure is a function which can see the scope of an outer function
+	intSeq := func() func() int {
+		i := 0
+		// returns anonymous function
+		return func() int {
+			i++
+			return i
+		}
+	}
+	// here nextInt has a reference of a function
+	nextInt := intSeq()
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+}
+
+func recursionExamples() {
+	// factorial
+	var fact func(n int) int
+	fact = func(n int) int {
+		if n == 0 {
+			return 1
+		}
+		return n * fact(n-1)
+	}
+	fmt.Println(fact(7))
+	// fibonacci
+	var fib func(n int) int
+	fib = func(n int) int {
+		if n < 2 {
+			return n
+		}
+		return fib(n-1) + fib(n-2)
+	}
+	fmt.Println(fib(7))
 }
