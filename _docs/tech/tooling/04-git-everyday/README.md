@@ -466,3 +466,9 @@ refs/tags/v[0-9]*	david
 ## **GIT**
 
 Part of the [git[1]](https://git-scm.com/docs/git) suite
+
+## push to a branch 
+
+```bash
+push origin feat-whatever-branch-name
+```
