@@ -21,3 +21,5 @@ Consider a single-threaded application running on a limited CPU with a processin
 Now consider an application with a CPU limit of 0.4 CPUs. The application will only receive about 40ms of runtime for each 100ms. This means that instead of completing the request in 200ms, it will take a total of 440ms. This means the application is experiencing CPU throttling.
 
 ![cpu-throttling-02.jpeg](_img%2Fcpu-throttling-02.jpeg)
+
+
