@@ -1,5 +1,9 @@
 # Kubernetes
 
+►  This course is sponsored by Kasten 🙌🏼
+►  Free Kubernetes Backup and Migration - Download Kasten's K10 and Get 10 nodes free forever: https://www.kasten.io/nana
+
+
 ## Orchestration 
 
 ![kubernetes-orchestation.jpg](_img%2Fkubernetes-orchestation.jpg)
@@ -80,3 +84,42 @@ It's a problem. To avoid that we can use the `config-map`. Use a var into your c
 
 ![main-kubernetes-components-config-secrets-02.jpg](_img%2Fmain-kubernetes-components-config-secrets-02.jpg)
 
+### Main kubernetes components: volume
+
+Sometimes we need persist our status. For doing that we need local or remote storage. The piece of infrastructure to achieve this is called `volume. Volume allows you to connect your pod to a source to storage/persist the status.
+
+![main-kubernetes-components-volume-00.jpg](_img%2Fmain-kubernetes-components-volume-00.jpg)
+
+![main-kubernetes-components-volume-01.jpg](_img%2Fmain-kubernetes-components-volume-01.jpg)
+
+### Main kubernetes components: deployment and statefulset
+
+![main-kubernetes-components-service-features.jpg](_img%2Fmain-kubernetes-components-service-features.jpg)
+
+`Deployment` is the piece of infrastructure is order to create/destroy as many pods as we want. If a pod dies, kubernetes starts another pod for you automatically, for instance. So the `deployment` is the descriptor to do that. The pods don't have status, are stateless. So you can create/destroy as many pods as we want and the system remains the same, regarding status.
+
+![main-kubernetes-components-deployment-00.jpg](_img%2Fmain-kubernetes-components-deployment-00.jpg)
+
+![main-kubernetes-components-deployment-stateful.jpg](_img%2Fmain-kubernetes-components-deployment-stateful.jpg)
+
+`statefulset` is a `deployment` but for databases with status. Take care with this feature, because it's hard or dificult handle database replicas inside a kubernetes cluster. So it's usually to handle the persistence into another external system.
+
+![main-kubernetes-components-statefulset-00.jpg](_img%2Fmain-kubernetes-components-statefulset-00.jpg)
+
+![main-kubernetes-components-statefulset-01.jpg](_img%2Fmain-kubernetes-components-statefulset-01.jpg)
+
+![main-kubernetes-components-statefulset-02.jpg](_img%2Fmain-kubernetes-components-statefulset-02.jpg)
+
+![main-kubernetes-components-statefulset-03.jpg](_img%2Fmain-kubernetes-components-statefulset-03.jpg)
+
+### Main kubernetes components: wrap up
+
+![main-kubernetes-components-warapup-01.jpg](_img%2Fmain-kubernetes-components-warapup-01.jpg)
+
+![main-kubernetes-components-warapup-02.jpg](_img%2Fmain-kubernetes-components-warapup-02.jpg)
+
+![main-kubernetes-components-warapup-03.jpg](_img%2Fmain-kubernetes-components-warapup-03.jpg)
+
+![main-kubernetes-components-warapup-04.jpg](_img%2Fmain-kubernetes-components-warapup-04.jpg)
+
+![main-kubernetes-components-warapup-05.jpg](_img%2Fmain-kubernetes-components-warapup-05.jpg)
