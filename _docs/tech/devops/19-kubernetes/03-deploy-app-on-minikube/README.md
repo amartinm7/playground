@@ -14,7 +14,7 @@ https://minikube.sigs.k8s.io/docs/start/
 
 ## kubectl cli commands
 
-kubectl get pod | configmap | secret | .
+kubectl get pod | configmap | secret | ...
 
 kubectl get configmap
 
@@ -121,3 +121,9 @@ The ip is the cluster ip, is the ip of minikube in this case.
 ![minikube-kubectl-get-pod-00.jpg](_img%2Fminikube-kubectl-get-pod-00.jpg)
 
 ![minikube-kubectl-how-to-expose-external-ip-03.jpg](_img%2Fminikube-kubectl-how-to-expose-external-ip-03.jpg)
+
+## kaster k8 provider
+
+https://www.kasten.io/product/
+
+![kasten.jpg](_img%2Fkasten.jpg)
