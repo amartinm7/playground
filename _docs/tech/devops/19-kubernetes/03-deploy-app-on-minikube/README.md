@@ -1,5 +1,13 @@
 # Deploy app on minikube
 
+## minikube starting
+
+https://minikube.sigs.k8s.io/docs/start/
+
+![minikube-start.jpg](_img%2Fminikube-start.jpg)
+
+## Example
+
 ![minikube-deployment-overview-00.jpg](_img%2Fminikube-deployment-overview-00.jpg)
 
 ![minikube-deployment-overview.jpg](_img%2Fminikube-deployment-overview.jpg)
