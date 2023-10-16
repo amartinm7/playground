@@ -42,3 +42,20 @@ performed (hence the increase in several business processes generated).
 
 related: 
 - circuit breaker
+
+
+## Devops
+
+Monitoring - prometheus
+
+![devops-01.jpg](_img%2Fdevops-01.jpg)
+
+![devops-02.jpg](_img%2Fdevops-02.jpg)
+
+![devops-03.jpg](_img%2Fdevops-03.jpg)
+
+![devops-04.jpg](_img%2Fdevops-04.jpg)
+
+![devops-05.jpg](_img%2Fdevops-05.jpg)
+
+![devops-06.jpg](_img%2Fdevops-06.jpg)

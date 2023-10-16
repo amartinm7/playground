@@ -1,8 +1,15 @@
 ## **giteveryday - A useful minimum set of commands for Everyday Git**
 
+custom zsh and bash
+https://www.freecodecamp.org/espanol/news/como-configurar-tu-terminal-de-macos-con-zsh/
+
+the final step is to open the iterm setting and choose the right font and the use-ligadure checkbox.
+
 ![git-cheat-sheet.jpeg](_img%2Fgit-cheat-sheet.jpeg)
 
 ```bash
+# to see the git user configuration
+cat ~/.gitconfig
 # first look for the files on the stash
 git stash
 # do the reset
