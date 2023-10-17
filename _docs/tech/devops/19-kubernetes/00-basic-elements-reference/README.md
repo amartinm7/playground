@@ -16,7 +16,13 @@ Node: Kubernetes runs your workload by grouping containers into pods and assigni
 
 Pod: A group of one or more containers. Pods are defined by a PodSpec file, a specification for how to run the containers. Pods are the basic building block within Kubernetes for deployment, scaling, and replication.
 
+```bash
+kubectl get pods -o wide
+```
+
 ![kubernetes-objects-pod.jpg](_img%2Fkubernetes-objects-pod.jpg)
+
+
 
 ## Volume
 
@@ -36,6 +42,10 @@ Service: In Kubernetes, a service is a logical collection of pods and a means to
 
 Namespace: A virtual cluster that is backed by the same physical cluster. Physical clusters can have resources with the same name as long as they are in different namespaces. Namespaces are especially useful when you have multiple teams or projects using the same cluster.
 
+```bash
+kubectl get namespaces -o wide
+```
+
 ![kubernetes-objects-namespace.jpg](_img%2Fkubernetes-objects-namespace.jpg)
 
 ## Replicaset
@@ -47,6 +57,10 @@ ReplicaSet: Ensures that a specific number of pod replicas are running at any gi
 ## Deployment
 
 Deployment: Owns and manages ReplicaSets or individual pods. You describe a desired state in the deployment. The deployment then changes the actual state of the cluster to the desired state at a controlled rate.
+
+```bash
+kubectl apply -f nginx-deploy.yaml
+```
 
 ![kubernetes-objects-deployment.jpg](_img%2Fkubernetes-objects-deployment.jpg)
 
@@ -117,11 +131,11 @@ The data plane includes
 
 `kubelet` is the primary agent that runs on the worker nodes. Kubelet makes sure that the right containers are running in a pod and that they are healthy.
 
-A `Pod is a group of one or more containers. The containers in a pod are always colocated, scheduled together, and managed together; you cannot split containers in a pod across nodes. Applications in a pod can easily communicate with each other. Like individual application containers, pods are considered to be relatively ephemeral (rather than durable) entities. This means that pods can disappear if they become unhealthy, and new ones can take their place.
+A `Pod` is a group of one or more containers. The containers in a pod are always colocated, scheduled together, and managed together; you cannot split containers in a pod across nodes. Applications in a pod can easily communicate with each other. Like individual application containers, pods are considered to be relatively ephemeral (rather than durable) entities. This means that pods can disappear if they become unhealthy, and new ones can take their place.
 
 ## kubectl
 
-You can communicate with your control plane nodes using kubectl. kubectl is a command line interface (CLI) for communicating with the Kubernetes API server. It provides commands to create resources, view detailed information about the cluster and resources, and access troubleshooting tools. kubectl commands are used to roll out, scale, and automatically scale resources. 
+You can communicate with your control plane nodes using `kubectl`. `kubectl` is a command line interface (CLI) for communicating with the Kubernetes API server. It provides commands to create resources, view detailed information about the cluster and resources, and access troubleshooting tools. kubectl commands are used to roll out, scale, and automatically scale resources. 
 
 Syntax:
 
@@ -133,3 +147,15 @@ kubectl [command] [TYPE] [NAME] [flags]
 - Type: Specifies the resource type.
 - Name: Specifies the name of the resource.
 - Flag: Specifies optional flags.
+
+## EKS API
+
+The Amazon EKS control plane consists of at least two API server nodes and three etcd nodes across three Availability Zones. Amazon EKS automatically detects and replaces unhealthy control plane nodes, which removes a significant operational burden for running Kubernetes. With this capability, you can focus on building your applications instead of managing AWS infrastructure.
+
+To get started with Amazon EKS, you provision your cluster of worker nodes. Amazon EKS handles the provisioning, scaling, and management of the Kubernetes control plane in a highly available and secure configuration. You then connect to the Amazon EKS cluster using the graphical or command line interface. After you’ve connected to the Amazon EKS cluster, you’re ready to deploy your Kubernetes applications to your Amazon EKS cluster. You can do this the same way that you would with any other Kubernetes environment.
+
+You use the Amazon EKS API for anything that Amazon EKS manages. As you have learned, this includes the entire control plane (creating and managing the cluster). In later modules, you learn how Amazon EKS can also manage parts of the data plane using features such as managed node groups and AWS Fargate.
+
+![kubernetes-objects-eks-api.jpg](_img%2Fkubernetes-objects-eks-api.jpg)
+
+![kubernetes-objects-eks-api-samples.jpg](_img%2Fkubernetes-objects-eks-api-samples.jpg)
