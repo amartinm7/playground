@@ -1,11 +1,13 @@
 package lessons.concurrency.coroutines.basics.example02
 
 import java.net.URL
+import java.util.Random
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.yield
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 
@@ -14,19 +16,7 @@ class CoroutineExample {
     private fun readJsonFrom(url: String) = URL(url).readText()
 
     fun execute() = runBlocking {
-        val channel = Channel<String>()
-        launch {
-            repeat(10) {
-                launch {
-                    readJsonFrom(FAKE_URL(it))
-                        .also { println(it) }
-                        .let { channel.send(it) }
-                    delay(1000L)
-                }.invokeOnCompletion {
-                    channel.close()
-                }
-            }
-        }
+        val channel = Channel<String>(3)
         launch {
             channel.consumeEach {
                 delay(1000L)
@@ -50,6 +40,17 @@ class CoroutineExample {
                 delay(4000L)
                 Json.parseToJsonElement(it).jsonObject.getValue("completed").also { println("completed $it") }
             }
+        }
+        launch {
+            repeat(20) {
+                launch {
+                    readJsonFrom(FAKE_URL(it))
+                        .also { println(it) }
+                        .let { channel.send(it) }
+                }
+            }
+        }.invokeOnCompletion {
+            channel.close()
         }
     }
 

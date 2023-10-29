@@ -22,4 +22,20 @@ Now consider an application with a CPU limit of 0.4 CPUs. The application will o
 
 ![cpu-throttling-02.jpeg](_img%2Fcpu-throttling-02.jpeg)
 
+## Best practices for CPU limits and requests on Kubernetes
+
+Lets summarize:
+
+- Use CPU requests for everything (if you need help setting them, see KRR)
+- Make sure they are accurate
+- Do not use CPU limits.
+
+`CPU limits` vs `memory limits` are different topics
+
+## What about memory limits and requests?
+Everything in this post is about CPU and not memory. Memory is different because it is non-compressible - once you give memory you can't take it away without killing the process. We've covered the best practices for Kubernetes memory limits here. In short, our bottom line recommendation is:
+
+Always use memory limits
+Always use memory requests
+Always set your memory requests equal to your limitsS
 
