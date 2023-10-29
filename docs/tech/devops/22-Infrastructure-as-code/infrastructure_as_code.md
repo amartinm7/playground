@@ -1,4 +1,4 @@
-# 
+# infrastructure as code
 
 crossplane infrasctructura como datos vs terraform insfrastructura como codigo
 
