@@ -41,9 +41,14 @@ find docs -type f -name "_sidebar.md" -exec rm {} \;
 
 ## publishing on github: github-pages
 
+![github_pages.jpg](_img%2Fgithub_pages.jpg)
+
 - go to setting -> pages
 - into Build and deployment paragraph, select master-> /docs
 - configure deployment to static site. An static.yml is created and commit & push to master.
+
+![github_deploy.jpg](_img%2Fgithub_deploy.jpg)
+
 - into the index.html docsify file, setup the repo property `repo`
 
 ```javascript
@@ -67,10 +72,4 @@ rm _sidebar.md
 docsify generate /docs
 ```
 
-- every time you push the files over the docs folder, the deploy refresh the changes 
-
-
-![github_pages.jpg](_img%2Fgithub_pages.jpg)
-
-
-![github_deploy.jpg](_img%2Fgithub_deploy.jpg)
+- every time you push the files over the docs folder, the deploy refresh the changes
