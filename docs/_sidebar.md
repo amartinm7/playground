@@ -31,6 +31,7 @@
   - [Development](development/development.md)
 
 - Devops
+  - [How To Build An Internal Developer Platform](devops/00-IDP/How to Build an Internal Developer Platform.md)
   - [Deployment](devops/01-deployments/deployment.md)
   - [Performance](devops/02-Performance/performance.md)
   - [Profiling](devops/03-Profiling/profiling.md)
