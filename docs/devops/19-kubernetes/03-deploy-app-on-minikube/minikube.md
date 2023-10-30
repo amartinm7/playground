@@ -460,6 +460,14 @@ kubectl get rs -w
 
 ## deploy a nginx
 
+for creating the ingress-controller to expose an external ip. just do it only one time, when the minikube is installed into the machine
+
+````bash
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-ingress-controller ingress-nginx/ingress-nginx
+````
+(Not working for minikube)
+
 ```bash
 minikube delete
 
