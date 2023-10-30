@@ -64,12 +64,12 @@ find docs -type f -name "_sidebar.md" -exec rm {} \;
     }
 ```
 
-- remove _sidebar.md and regenerate the index
- 
+- remove `_sidebar.md` and regenerate the index
+
 ```bash
 rm _sidebar.md 
-
-docsify generate /docs
+#
+docsify generate .
 ```
 
 - every time you push the files over the docs folder, the deploy refresh the changes
