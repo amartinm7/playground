@@ -51,7 +51,7 @@ find docs -type f -name "_sidebar.md" -exec rm {} \;
       name: 'playground',
       repo: 'https://github.com/amartinm7/playground/tree/master/docs',
       loadSidebar: true,
-      subMaxLevel: 3,
+      subMaxLevel: 5,
       search: 'auto',
       loadNavbar: true,
       coverpage: true,

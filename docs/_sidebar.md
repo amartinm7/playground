@@ -49,7 +49,7 @@
   - [Basic elements](tech/devops/19-kubernetes/01-basic-elements/basic_elements.md)
   - [Kubernetes configuration](tech/devops/19-kubernetes/02-configuration/kubernetes_configuration.md)
   - [Minikube](tech/devops/19-kubernetes/03-deploy-app-on-minikube/minikube.md)
-  - [README](tech/devops/19-kubernetes/04-EKS/README.md)
+  - [EKS](tech/devops/19-kubernetes/04-EKS/EKS.md)
   - [Kubernetes](tech/devops/19-kubernetes/Kubernetes.md)
   - [Github actions](tech/devops/20-github-actions/github_actions.md)
   - [Service mesh](tech/devops/21-service-mesh/service_mesh.md)
