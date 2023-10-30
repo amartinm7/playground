@@ -477,6 +477,8 @@ minikube ip
 
 # here is the key: Starting tunnel for service nginx-service.  
 minikube service nginx-service
+# or
+minikube tunnel
 
 ```
 open a web page on the url http://127.0.0.1:61385/
