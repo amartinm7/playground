@@ -229,6 +229,21 @@ kubectl apply -f mongo-secret.yaml
 kubectl apply -f mongo.yaml
 kubectl apply -f webapp.yaml
 
+kubectl rollout status deployment/mongo-deployment
+
+kubectl get rs
+
+kubectl scale --current-replicas=3 --replicas=1 deployment/nginx-deployment
+
+kubectl get configmaps
+kubectl describe configmaps any-config-map
+
+kubectl get secret
+kubectl describe secret any-secret
+
+kubectl get svc
+kubectl describe svc any-services
+
 kubectl get all
 minikube kubectl -- get configmap
 minikube kubectl -- get secret
@@ -367,3 +382,103 @@ spec:
       targetPort: 3000
       nodePort: 30100
 ```
+
+### another example
+
+```bash
+minikube delete --all
+
+minikube start
+
+minikube dashboard
+
+kubectl apply -f https://k8s.io/examples/controllers/nginx-deployment.yaml
+
+kubectl apply -f ./deploy/nginx-deployment.yaml
+
+kubectl exec -it nginx-deployment-57c4449555-5frhd -c ping -- /bin/sh 
+/ wget -O- http://localhost:80
+
+kubectl get svc -o wide
+
+kubectl rollout status deployment/nginx-deployment
+
+kubectl get all
+
+###  update image and deploy
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1
+
+kubectl rollout status deployment/nginx-deployment
+
+kubectl get rs
+
+kubectl get pods
+
+## delete pods. You can delete a pod, but another can be created if replica is more than 1
+kubectl delete pod/nginx-deployment-cbdccf466-pgjnq 
+
+## delete deployment and pods
+kubectl delete deployment nginx-deployment --grace-period=-10
+
+kubectl delete deployment --all --namespace=default --grace-period=-10
+
+### scale: replicas of the pods
+kubectl scale --replicas=1 deployment/nginx-deployment
+
+kubectl scale --replicas=2 deployment/nginx-deployment
+
+### autoscale: min, max replicas of the pods
+kubectl autoscale deployment/nginx-deployment --min=10 --max=15 --cpu-percent=80
+
+### setup memory and controller
+kubectl set resources deployment/nginx-deployment -c=nginx --limits=cpu=200m,memory=512Mi
+
+
+### check the history
+kubectl rollout history deployment/nginx-deployment
+
+## check the history the revision number
+kubectl rollout history deployment/nginx-deployment --revision=1
+
+## Rolling Back to a Previous Revision
+kubectl rollout undo deployment/nginx-deployment
+
+## Rolling Back to a specific Revision
+kubectl rollout undo deployment/nginx-deployment --to-revision=2
+
+kubectl describe deployment nginx-deployment
+
+## Pause deploy
+kubectl rollout pause deployment/nginx-deployment
+
+## Resume deploy
+kubectl rollout resume deployment/nginx-deployment
+
+## Watch the status of the rollout until it's done.
+kubectl get rs -w
+```
+
+## deploy a nginx
+
+```bash
+minikube delete
+
+minikube start
+
+minikube dashboard
+
+kubectl apply -f ./deploy/nginx-deployment.yaml
+
+kubectl get all
+
+kubectl get svc nginx-service
+
+minikube ip
+
+# here is the key: Starting tunnel for service nginx-service.  
+minikube service nginx-service
+
+```
+open a web page on the url http://127.0.0.1:61385/
+
+![minikube-open-tunnel.jpg](_img%2Fminikube-open-tunnel.jpg)
