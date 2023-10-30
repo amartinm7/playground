@@ -65,4 +65,6 @@ docsify generate /docs
 ```
 - every time you push the files over the docs folder, the deploy refresh the changes 
 
+![github_pages.jpg](_img%2Fgithub_pages.jpg)
 
+![github_deploy.jpg](_img%2Fgithub_deploy.jpg)
