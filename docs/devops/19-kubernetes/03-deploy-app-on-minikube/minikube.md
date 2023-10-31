@@ -396,8 +396,15 @@ kubectl apply -f https://k8s.io/examples/controllers/nginx-deployment.yaml
 
 kubectl apply -f ./deploy/nginx-deployment.yaml
 
+
+# two steps command: first connect to the pod
 kubectl exec -it nginx-deployment-57c4449555-5frhd -c ping -- /bin/sh 
-/ wget -O- http://localhost:80
+
+# second command: inside the pod execute
+wget -O- http://localhost:80
+## or 
+curl  http://localhost:80
+
 
 kubectl get svc -o wide
 
@@ -413,6 +420,14 @@ kubectl rollout status deployment/nginx-deployment
 kubectl get rs
 
 kubectl get pods
+
+kubectl logs <POD-NAME>
+
+kubectl cluster-info
+
+kubectl get events
+
+kubectl config view
 
 ## delete pods. You can delete a pod, but another can be created if replica is more than 1
 kubectl delete pod/nginx-deployment-cbdccf466-pgjnq 
@@ -483,7 +498,7 @@ kubectl get svc nginx-service
 
 minikube ip
 
-# here is the key: Starting tunnel for service nginx-service.  
+# here is the key: Allow external traffic starting tunnel for service nginx-service.  
 minikube service nginx-service
 # or
 minikube tunnel
@@ -492,3 +507,13 @@ minikube tunnel
 open a web page on the url http://127.0.0.1:61385/
 
 ![minikube-open-tunnel.jpg](_img%2Fminikube-open-tunnel.jpg)
+
+## In real k8s: Allow external traffic
+
+By default, the pod is only accessible by its internal IP within the Kubernetes cluster. In order to make the hello-node container accessible from outside the kubernetes virtual network, you have to expose the pod as a kubernetes service.
+
+From our development machine we can expose the pod to the public internet using the `kubectl expose` command combined with the `--type="LoadBalancer"` flag. The flag is needed for the creation of an externally accessible ip:
+
+```bash
+kubectl expose deployment nginx-deployment --type="LoadBalancer"
+```
