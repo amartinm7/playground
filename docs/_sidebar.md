@@ -3,6 +3,7 @@
 - Agile
   - [Communication styles](agile/01-communication_styles/communication_styles.md)
   - [Scrum](agile/02-scrum/scrum.md)
+  - [Sprint Review](agile/02-scrum/sprint-review.md)
   - [Ship show ask](agile/04-ship-show-ask/ship_show_ask.md)
   - [Lean](agile/05-lean/lean.md)
   - [Agile](agile/agile.md)
@@ -28,6 +29,7 @@
   - [Big o annotation](development/09-big-o-notacion/big_o_annotation.md)
   - [Url anatomy](development/10-url-anatomy/url_anatomy.md)
   - [Security](development/11-security/security.md)
+  - [Backend for frontend](development/12-Backend_for_frontend/backend_for_frontend.md)
   - [Development](development/development.md)
 
 - Devops
@@ -106,4 +108,5 @@
   - [Kubernetes](tooling/13-kubernetes/kubernetes.md)
   - [Kcat](tooling/14-kcat/kcat.md)
   - [Curl](tooling/15-curl/curl.md)
+  - [Proxmox](tooling/16-proxmox/proxmox.md)
   - [Tooling](tooling/tooling.md)
