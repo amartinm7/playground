@@ -1,9 +1,10 @@
 # proxmox
 
-## create image to install into the laptop
+## create image to install into the laptop (usb unit is required)
 
 Follow these steps:
 
+- connect your `usb unit` to the laptop
 - download iso image from website
 - convert iso to dmg `hdiutil convert proxmox-ve_*.iso -format UDRW -o proxmox-ve_*.dmg`
 - list the usb `diskutil list`
@@ -12,6 +13,7 @@ Follow these steps:
 
 ## install into the laptop
 
+- connect your `usb unit` with the image to the laptop
 - Press F12
 - disable bios security boostraping
 - reboot
