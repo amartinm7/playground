@@ -5,6 +5,10 @@ import (
 	"github.com/playground/projects/go/challenges/rest_example/internal/infrastructure/product/repository"
 )
 
+type GetProductsServiceInterface interface {
+	Execute() (*product.Products, error)
+}
+
 type GetProductsService struct {
 	repository repository.ProductRepository
 }

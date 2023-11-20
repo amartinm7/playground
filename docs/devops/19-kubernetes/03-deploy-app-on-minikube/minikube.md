@@ -445,7 +445,7 @@ kubectl scale --replicas=2 deployment/nginx-deployment
 ### autoscale: min, max replicas of the pods
 kubectl autoscale deployment/nginx-deployment --min=10 --max=15 --cpu-percent=80
 
-### setup memory and controller
+### setup memory and server
 kubectl set resources deployment/nginx-deployment -c=nginx --limits=cpu=200m,memory=512Mi
 
 
@@ -479,7 +479,7 @@ for creating the ingress-controller to expose an external ip. just do it only on
 
 ````bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install my-ingress-controller ingress-nginx/ingress-nginx
+helm install my-ingress-server ingress-nginx/ingress-nginx
 ````
 (Not working for minikube)
 
