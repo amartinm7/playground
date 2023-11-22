@@ -24,6 +24,8 @@ Over the main root of the project /challenges/challenge_parser execute
 
 ```bash
 go run cmd/cli/main.go
+# 
+go run cmd/main.go
 ```
 
 ## compile and build the artifact
@@ -58,6 +60,7 @@ go test github.com/playground/projects/go/challenges/rest_example/...
 ```
 
 ## Running
+move to the folder with the main.go and execute:
 ```bash
 go run .
 ```

@@ -6,18 +6,18 @@ import (
 )
 
 type GetProductsServiceInterface interface {
-	Execute() (*product.Products, error)
+	Execute() (*ProductsResponse, error)
 }
 
 type GetProductsService struct {
 	repository repository.ProductRepository
 }
 
-func NewGetProductsService(repository repository.ProductRepository) GetProductsService {
-	return GetProductsService{repository: repository}
+func NewGetProductsService(repository repository.ProductRepository) GetProductsServiceInterface {
+	return &GetProductsService{repository: repository}
 }
 
-func (service *GetProductsService) Execute() (*product.Products, error) {
+func (service *GetProductsService) Execute() (*ProductsResponse, error) {
 	_products, err := service.repository.FetchAll()
 	if err != nil {
 		return nil, err
@@ -26,5 +26,13 @@ func (service *GetProductsService) Execute() (*product.Products, error) {
 	if err != nil {
 		return nil, err
 	}
-	return _products, nil
+	return mapProducts(_products), nil
+}
+
+type ProductsResponse struct {
+	Products product.Products
+}
+
+func mapProducts(products *product.Products) *ProductsResponse {
+	return &ProductsResponse{*products}
 }

@@ -3,18 +3,13 @@ package repository
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/playground/projects/go/challenges/rest_example/internal/domain/product"
+	"github.com/playground/projects/go/challenges/rest_example/internal/infrastructure/kit/server/httpclient"
 	"io"
 	"log"
-	"net/http"
-
-	"github.com/playground/projects/go/challenges/rest_example/internal/domain/product"
 )
 
-type HttpClient interface {
-	Get(url string) (resp *http.Response, err error)
-}
-
-type ProductResponse struct {
+type HttpApiProductResponse struct {
 	Id                 int      `json:"id"`
 	Title              string   `json:"title"`
 	Description        string   `json:"description"`
@@ -28,11 +23,11 @@ type ProductResponse struct {
 	Images             []string `json:"images"`
 }
 
-type ProductsResponse struct {
-	Items []ProductResponse `json:"products"`
-	Total int               `json:"total"`
-	Skip  int               `json:"skip"`
-	Limit int               `json:"limit"`
+type HttpApiProductsResponse struct {
+	Items []HttpApiProductResponse `json:"products"`
+	Total int                      `json:"total"`
+	Skip  int                      `json:"skip"`
+	Limit int                      `json:"limit"`
 }
 
 type ProductRepository interface {
@@ -40,34 +35,17 @@ type ProductRepository interface {
 }
 
 type ProductRepositoryImpl struct {
-	httpClient HttpClient
+	httpClient httpclient.WebClient
 }
 
-func NewProductRepositoryImpl(httpClient HttpClient) *ProductRepositoryImpl {
+func NewProductRepositoryImpl(httpClient httpclient.WebClient) *ProductRepositoryImpl {
 	return &ProductRepositoryImpl{
 		httpClient: httpClient,
 	}
 }
 
-func mapProductJsonToDomain(productResponse []ProductResponse) []product.Product {
-	productList := make([]product.Product, 0)
-	for _, item := range productResponse {
-		product, _ := product.NewProduct(item.Id, item.Title, item.Description, item.Price, item.DiscountPercentage, item.Rating, item.Stock, item.Brand, item.Category, item.Thumbnail, item.Images)
-		productList = append(productList, *product)
-	}
-	return productList
-}
-
-func mapProductsJsonToDomain(productsResponse ProductsResponse) *product.Products {
-	products := product.NewProducts(
-		mapProductJsonToDomain(productsResponse.Items),
-		productsResponse.Total, productsResponse.Skip, productsResponse.Limit,
-	)
-	return &products
-}
-
 func (repository *ProductRepositoryImpl) FetchAll() (*product.Products, error) {
-	var productsResponse = &ProductsResponse{}
+	var productsResponse = &HttpApiProductsResponse{}
 	resp, err := repository.httpClient.Get("https://dummyjson.com/products")
 	if err != nil {
 		return nil, err
@@ -84,4 +62,21 @@ func (repository *ProductRepositoryImpl) FetchAll() (*product.Products, error) {
 	}
 	fmt.Println(productsResponse)
 	return mapProductsJsonToDomain(*productsResponse), nil
+}
+
+func mapProductJsonToDomain(productResponse []HttpApiProductResponse) []product.Product {
+	productList := make([]product.Product, 0)
+	for _, item := range productResponse {
+		product := product.Product{Id: item.Id, Title: item.Title, Description: item.Description, Price: item.Price, DiscountPercentage: item.DiscountPercentage, Rating: item.Rating, Stock: item.Stock, Brand: item.Brand, Category: item.Category, Thumbnail: item.Thumbnail, Images: item.Images}
+		productList = append(productList, product)
+	}
+	return productList
+}
+
+func mapProductsJsonToDomain(productsResponse HttpApiProductsResponse) *product.Products {
+	products := product.Products{
+		Items: mapProductJsonToDomain(productsResponse.Items),
+		Total: productsResponse.Total, Skip: productsResponse.Skip, Limit: productsResponse.Limit,
+	}
+	return &products
 }
