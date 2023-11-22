@@ -64,3 +64,9 @@ move to the folder with the main.go and execute:
 ```bash
 go run .
 ```
+
+## execute cli
+move to the folder with the main and execute:
+```bash
+./main
+```
