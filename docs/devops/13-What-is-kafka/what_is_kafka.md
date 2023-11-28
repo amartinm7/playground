@@ -2,6 +2,8 @@
 
 ![whatiskafka.gif](_img%2Fwhatiskafka.gif)
 
+kafka saves the offset for every consumer-group. The consumer commits the consumption of the message, and informs to kafka that the consumption was fine. 
+
 Originally developed by LinkedIn, Apache Kafka is essentially a distributed 🌐, fault-tolerant ⚡, and highly scalable 📈 messaging system.
 
 It allows applications to publish and subscribe to real-time data feeds, providing both high throughput for publishing and subscribing to streams of records and the ability to process these streams in real-time.

@@ -25,3 +25,8 @@ If setup the `id("project-report")` in the plugin section do the same too
 ```bash
 ./gradlew dependencyReport
 ```
+
+Execute gradle without cache
+```bash
+./gradlew clean build integrationTest --no-configuration-cache
+```

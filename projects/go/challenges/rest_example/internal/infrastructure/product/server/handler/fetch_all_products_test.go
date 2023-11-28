@@ -42,6 +42,9 @@ func TestFetchAllProductsHandler_fetchAll(t *testing.T) {
 			c, _ := gin.CreateTestContext(w)
 			// execute handler
 			handler.GetHandlerFunc()(c)
+			//listID := "123"
+			//c.AddParam("list_id", listID)
+
 			// AAA: assert
 			assert.Equal(t, http.StatusOK, w.Code)
 
@@ -56,6 +59,13 @@ func TestFetchAllProductsHandler_fetchAll(t *testing.T) {
 			assert.Equal(t, actual.Limit, 10)
 			assert.Equal(t, actual.Total, 2)
 			// assert.Equal(t, tt.want, actual)
+
+			//expectedResponse := `{
+			//	"ad": {
+			//	  "list_id": "123"
+			//	}
+			//}`
+			//assert.JSONEq(t, expectedResponse, string(w.Body.Bytes()))
 		})
 	}
 }
