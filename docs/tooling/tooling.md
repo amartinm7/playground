@@ -7,8 +7,8 @@ https://www.youtube.com/watch?v=j2C3nS9tjls&t=1s
 ## install kubernetes on linux
 https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 
-##
-Build a Kubernetes Home Lab from Scratch step-by-step!
+## Build a Kubernetes Home Lab from Scratch step-by-step!
+
 https://www.youtube.com/watch?v=_WW16Sp8-Jw
 
 ## Table of contents
@@ -58,11 +58,14 @@ sudo apt update
 ## install the k8s tools
 sudo apt install kubeadm kubelet kubectl kubernetes-cni -y
 
+# the previous steps are the same for the master and worker nodes
+
 ## this step only on master node: create the cluster into the master node laptop
 sudo kubeadm init
 
-## after that run the kubeadm join command which is prompt into the console on the worker machines, to join the workers with the master
+## after that run the `kubeadm join` command which is `prompt` from the master node to the console on the worker machines, to join the workers with the master. It's an automatic process.
 
+## over master node machine
 # error when run 
 kubectl get nodes
 
