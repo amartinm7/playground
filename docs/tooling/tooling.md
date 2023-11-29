@@ -31,6 +31,8 @@ We are going to deploy Calico for container networking
 After container networking we check the STATE of our Kubernetes nodes
 Wrapping up and thoughts on building a Kubernetes Home Lab from Scratch
 
+do the same steps up to the `sudo kubeadm init` for the three laptops
+
 ## disable swap
 kubelet don't need the swap partition to work well, so it's needed to disabled 
 ````bash
@@ -56,7 +58,7 @@ sudo apt update
 ## install the k8s tools
 sudo apt install kubeadm kubelet kubectl kubernetes-cni -y
 
-## create the cluster into the master node laptop
+## this step only on master node: create the cluster into the master node laptop
 sudo kubeadm init
 
 ## after that run the kubeadm join command which is prompt into the console on the worker machines, to join the workers with the master
