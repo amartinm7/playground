@@ -4,6 +4,9 @@ Installing Kubernetes on cloud
 
 https://www.youtube.com/watch?v=j2C3nS9tjls&t=1s
 
+## reduce windows partition
+over the disk admin app, select the windows volume. Click the left mouse buttom and select reduce volume.  
+
 ## install kubernetes on linux
 https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 
