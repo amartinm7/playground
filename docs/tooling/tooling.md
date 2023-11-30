@@ -5,7 +5,7 @@ Installing Kubernetes on cloud
 ## resources
 [Creating a cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 
-https://www.virtualizationhowto.com/2023/05/best-kubernetes-home-lab-tools-in-2023/
+[Best Kubernetes Home Lab Tools in 2023](https://www.virtualizationhowto.com/2023/05/best-kubernetes-home-lab-tools-in-2023/=
 
 https://www.youtube.com/watch?v=j2C3nS9tjls&t=1s
 
