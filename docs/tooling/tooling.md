@@ -90,6 +90,7 @@ kubectl get nodes
 
 
 ### calico
+https://www.youtube.com/watch?v=kzM9GQTR8zk
 
 calico as container network interface or CNI instead of flannel.
 
