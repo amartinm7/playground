@@ -85,5 +85,14 @@ kubectl apply -f https://docs.projectcalico.org/manifiest/calico.yaml
 
 # try another time, the nodes are listed and ready 
 kubectl get nodes
-```` 
+````
+
+
+
+### calico
+
+calico as container network interface or CNI instead of flannel.
+
+flannel is simple but calico gives us some flexibility of having more security and network administration related controls.
+we need a file to store the calico configuration
 
