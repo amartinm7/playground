@@ -87,8 +87,6 @@ kubectl apply -f https://docs.projectcalico.org/manifiest/calico.yaml
 kubectl get nodes
 ````
 
-
-
 ### calico
 https://www.youtube.com/watch?v=kzM9GQTR8zk
 
@@ -97,3 +95,14 @@ calico as container network interface or CNI instead of flannel.
 flannel is simple but calico gives us some flexibility of having more security and network administration related controls.
 we need a file to store the calico configuration
 
+
+## static ips problem on a bare metal / on premise installation
+
+I have a bare metal kubernetes cluster installation, and I use the three computers as my personal room to explore and learn kubernetes, so everytime I run the linux machines the ips are changing because I have a wifi route which is in change to handle automatically the ip address when a new device is going to connect to the network. How can I handle this circunstance into my cluster, because the cluster has hardcoded the ips of the installation.
+
+To handle changing IP addresses in your Kubernetes cluster, you can follow the steps below:
+
+Update the `/etc/hosts` file on each node to include the new IP address of the other nodes in the cluster.
+Regenerate the `admin.conf` file on each node with the new IP address using the command `kubeadm alpha phase kubeconfig admin --apiserver-advertise-address <new_ip>`. 
+If you use an IP instead of a `hostname`, your API-server certificate will be invalid. So, either regenerate your certs (kubeadm alpha phase certs renew apiserver), `use hostnames` instead of `IPs` or add the `insecure --insecure-skip-tls-verify` flag when using `kubectl`.
+Restart the kubelet service on each node using the command systemctl restart kubelet.
