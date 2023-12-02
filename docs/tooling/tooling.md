@@ -7,6 +7,8 @@ Installing Kubernetes on cloud
 
 [Best Kubernetes Home Lab Tools in 2023](https://www.virtualizationhowto.com/2023/05/best-kubernetes-home-lab-tools-in-2023/)
 
+[installing in spanish](https://www.youtube.com/watch?v=y_c_tPXusqM)
+
 https://www.youtube.com/watch?v=j2C3nS9tjls&t=1s
 
 ## reduce windows partition
@@ -112,7 +114,7 @@ Regenerate the `admin.conf` file on each node with the new IP address using the 
 If you use an IP instead of a `hostname`, your API-server certificate will be invalid. So, either regenerate your certs (kubeadm alpha phase certs renew apiserver), `use hostnames` instead of `IPs` or add the `insecure --insecure-skip-tls-verify` flag when using `kubectl`.
 Restart the kubelet service on each node using the command systemctl restart kubelet.
 
-![k8s-main-concepts-01](k8s-main-concepts-01)
+![k8s-main-concepts-01](k8s-main-concepts-01.png)
 
-![k8s-main-concepts-02](k8s-main-concepts-02)
+![k8s-main-concepts-02](k8s-main-concepts-02.png)
 
