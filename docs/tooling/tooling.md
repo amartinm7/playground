@@ -111,3 +111,8 @@ Update the `/etc/hosts` file on each node to include the new IP address of the o
 Regenerate the `admin.conf` file on each node with the new IP address using the command `kubeadm alpha phase kubeconfig admin --apiserver-advertise-address <new_ip>`. 
 If you use an IP instead of a `hostname`, your API-server certificate will be invalid. So, either regenerate your certs (kubeadm alpha phase certs renew apiserver), `use hostnames` instead of `IPs` or add the `insecure --insecure-skip-tls-verify` flag when using `kubectl`.
 Restart the kubelet service on each node using the command systemctl restart kubelet.
+
+![k8s-main-concepts-01](k8s-main-concepts-01)
+
+![k8s-main-concepts-02](k8s-main-concepts-02)
+
