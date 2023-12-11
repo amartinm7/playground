@@ -749,6 +749,18 @@ How does partitions work?
 - The partition can be compacted a delete all the messages if the last one is tombstone. This is an special message with the empty body. So when the compactation is happening, all the messages with that message id is removed. 
 
 
+## Q & A
+
+escenario: sea un kluster de kafka, sea un kluster de kubernetes que consume y produce eventos en el kluster de kafka anterior. Cada evento tiene un id que se usa para decidir en que particion se publica para ese topic. Es decir, si se envia 10 veces un evento con el mismo id pero con el body distinto entre ellos, siempre se publicará en la misma particion, y se acumularan en el orden en el que vayan llegando. A la hora de consumir, tenemos un consumer group para un conjunto de microservicios que consumen el topic donde se publican los eventos anteriores. Sea el caso de una particion especifica, que tenga 10 eventos almacenados con el mismo id de evento y con diferente body y version, de tal forma que el primer evento en ser consumido es el que tiene version 1 y los demas version # consecutiva segun su posicion. Se puede dar el caso de que los consumers consuman varios eventos a la vez y seguidamente los quieran persistir en una base de datos, y que ocurra que haya una condicion de carrera en la cual un consumer logre leer un evento con una version mayor que otro consumer que lee otro evento, y que los dos procesos quieran insertan en base de datos al mismo tiempo y el evento con version mayor es el primero que se persiste en lugar de otro evento que tenga una version menor?
 
 
+Sí, es posible que ocurra una condición de carrera en el escenario que describes. Kafka garantiza el orden de los mensajes dentro de una misma partición, pero no entre particiones. Además, no hay garantías sobre el orden en el que los consumidores procesarán los mensajes.
 
+En tu caso, si varios consumidores del mismo grupo de consumidores leen eventos de la misma partición al mismo tiempo, pueden procesarlos a diferentes velocidades. Si intentan escribir en la base de datos al mismo tiempo, es posible que un evento con una versión mayor se escriba antes que un evento con una versión menor. Esto puede suceder debido a variaciones en el tiempo de procesamiento, la latencia de la red, la carga de la base de datos, etc.
+
+Para evitar este problema, puedes considerar las siguientes estrategias:
+
+Procesamiento secuencial: Asegúrate de que un solo consumidor procese los eventos de una partición a la vez. Esto puede ralentizar el procesamiento, pero garantizará el orden correcto.
+Control de concurrencia en la base de datos: Utiliza mecanismos de control de concurrencia en la base de datos, como bloqueos o transacciones, para garantizar que los eventos se escriban en el orden correcto.
+Campos de versión en la base de datos: Utiliza un campo de versión en tus registros de base de datos. Cuando un consumidor intenta escribir un evento, primero verifica si la versión en la base de datos es menor que la versión del evento. Si es así, actualiza el registro; si no, descarta el evento.
+Espero que esto te ayude a entender y manejar las condiciones de carrera en tu sistema. ¡Buena suerte con tu proyecto! 😊
