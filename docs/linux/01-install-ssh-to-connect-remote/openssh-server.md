@@ -14,9 +14,9 @@ sudo apt install openssh-client
 
 Once we have the client installed we can connect to the other machine as follows
 ```bash 
-ssh remote-user@192.168.0.34
-ssh remote-user@192.168.0.32
-ssh remote-user@192.168.0.31 
+ssh antodellr@192.168.0.34
+ssh chuwi2@192.168.0.32
+ssh chuwi1@192.168.0.31 
 ```
 the first time you connect you have to say `yes` to add the ssh key in your ssh keystore.
 In this way you can connect remotely.
