@@ -43,3 +43,67 @@ use the vars into the docker-compose.yml, and when the docker-compose starts, au
             retries: 3
             timeout: 5s
 ```
+## Docker ps
+
+docker ps -a -q
+docker rm pid
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+## docker-compose
+
+docker-compose up -d
+docker-compose -f docker-compose-xxx.yml up -d
+docker-compose down
+
+## docker volumen
+
+docker volume prune
+docker system prune 
+
+docker volume rm $(docker volume ls -q --filter dangling=true)
+
+docker volume rm $(docker volume ls -qf dangling=true)
+docker volume rm pid
+
+## docker image
+
+- Remove an image
+docker rmi image_name:version/image-id
+
+- Remove all images
+docker rmi $(docker images -qf "dangling=true")
+
+- Remove all images except "my-image"
+docker rmi $(docker images | grep -v 'ubuntu\|my-image' | awk {'print $3'})
+
+- Remove all images except "my-image"
+docker rmi $(docker images --quiet | grep -v $(docker images --quiet ubuntu:my-image))
+
+## docker containers
+
+- Kill containers and remove them
+  docker rm $(docker kill $(docker ps -aq))
+
+- stop containers and remove them
+  docker rm $(docker stop $(docker ps -aq))
+
+- Remove all containers
+  docker rm $(docker ps -a -q)
+
+## docker run
+
+- run a container
+docker container run --rm -it alpine ping 8.8.8.8
+
+## docker network
+
+- disconnect a network from a container
+docker network disconnect bridge <container-name>
+
+- Remove one or more networks
+docker network rm pid 
+
+- list networks
+  docker network ls
