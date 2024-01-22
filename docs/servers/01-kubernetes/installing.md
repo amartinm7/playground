@@ -173,6 +173,25 @@ kubeadm join master-node:6443 --token 70fma1.dty00ypu3ubitg2n \
 	--discovery-token-ca-cert-hash sha256:459ff63c64df4bc95cc04a14e91f8b8788fab03cfc6bc7eda41754cfb8a1e316 
 ```
 
+## Create tokens
+Token, launch this command on master server:
+```bash
+kubeadm token create
+```
+Token, launch this command on master server:
+```bash
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+```
+If you want to see the active tokens: 
+```bash
+kubeadm token list
+```
+use the command to join the worker nodes
+```bash
+kubeadm join
+sudo kubeadm join master-node:6443 --token $TOKEN --discovery-token-ca-cert-hash $CERTIFICATE_HASH
+```
+
 ## optional is kubelet is not working: /etc/docker/daemon.json
 
 ```bash
