@@ -2,6 +2,9 @@
 
 install openssh-server on the machine which is going to be visited
 ```bash
+sudo apt install net-tools
+ifconfig
+#
 sudo apt install openssh-server
 # ask for the host ip
 ip --brief addr show 
