@@ -11,7 +11,7 @@ sudo apt update
 sudo apt upgrade
 ```
 
-## disable swap memory
+## disable swap memory (if this step fails, the installation will fail)
 
 ```bash
 sudo free -h
@@ -106,6 +106,71 @@ sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/co
 sudo systemctl restart containerd.service
 sudo systemctl restart kubelet.service
 sudo systemctl enable kubelet.service
+
+sudo systemctl status docker.service
+sudo systemctl status containerd.service
+sudo systemctl status kubelet.service
+```
+
+## Initialize the Kubernetes cluster on the master node
+```bash
+sudo kubeadm config images pull
+
+sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint=master-node
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+kubectl cluster-info
+```
+
+## Installing the network plugin on the master node
+```bash
+curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
+kubectl create -f tigera-operator.yaml
+
+curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml
+sed -ie 's/192.168.0.0/172.24.0.0/g' custom-resources.yaml
+kubectl create -f custom-resources.yaml
+
+kubectl get pods --all-namespaces
+```
+
+## check everything is working well
+```bash
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+kubectl get nodes -o wide
+kubectl get pods --all-namespaces
+kubectl cluster-info
+
+## check if the kubelet is not working. If it's not, check the if the swap is disabled.
+sudo systemctl status kubelet.service
+sudo systemctl status docker.service
+sudo systemctl status containerd.service
+```
+
+## Add worker nodes to the cluster
+You can now join any number of the control-plane node running the following command on each as root:
+
+```bash
+  kubeadm join master-node:6443 --token 70fma1.dty00ypu3ubitg2n \
+	--discovery-token-ca-cert-hash sha256:459ff63c64df4bc95cc04a14e91f8b8788fab03cfc6bc7eda41754cfb8a1e316 \
+	--control-plane --certificate-key cd98f8ec2a38193db9ca7736e66da9bde0884fa42e7652a0fdcda9687ab73a7e
+```
+
+Please note that the certificate-key gives access to cluster sensitive data, keep it secret!
+As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you can use
+"kubeadm init phase upload-certs --upload-certs" to reload certs afterward.
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+```bash
+kubeadm join master-node:6443 --token 70fma1.dty00ypu3ubitg2n \
+	--discovery-token-ca-cert-hash sha256:459ff63c64df4bc95cc04a14e91f8b8788fab03cfc6bc7eda41754cfb8a1e316 
 ```
 
 ## optional is kubelet is not working: /etc/docker/daemon.json
@@ -165,7 +230,7 @@ staticPodPath: /etc/kubernetes/manifests
 streamingConnectionIdleTimeout: 0s
 syncFrequency: 0s
 volumeStatsAggPeriod: 0s
-``
+```
 
 
 
