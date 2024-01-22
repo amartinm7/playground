@@ -258,4 +258,14 @@ E: Conflicting values set for option Signed-By regarding source http://apt.kuber
 ```bash
 sudo rm /etc/apt/sources.list.d/kubernetes.list
 ```
+## Validate instalation on a docker container
 
+```bash
+podman run -it ubuntu:22.10 sh -c '\
+    apt-get update && \
+    apt-get install -y apt-transport-https ca-certificates curl && \
+    curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list && \
+    apt-get update && \
+    apt-get install -y kubelet'
+```
