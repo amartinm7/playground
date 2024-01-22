@@ -202,7 +202,7 @@ cat /etc/docker/daemon.json
 ```
 
 ## optional if kubelet is not working: /var/lib/kubelet/config.yaml
-
+Take into account the IPs
 ```bash
 sudo cat /var/lib/kubelet/config.yaml
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -251,6 +251,11 @@ syncFrequency: 0s
 volumeStatsAggPeriod: 0s
 ```
 
-
-
+## Conflicting values on sources.list.d
+```bash
+E: Conflicting values set for option Signed-By regarding source http://apt.kubernetes.io/ kubernetes-xenial: /etc/apt/keyrings/kubernetes.gpg != /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+```
+```bash
+sudo rm /etc/apt/sources.list.d/kubernetes.list
+```
 
