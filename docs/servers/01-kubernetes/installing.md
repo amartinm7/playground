@@ -258,7 +258,7 @@ E: Conflicting values set for option Signed-By regarding source http://apt.kuber
 ```bash
 sudo rm /etc/apt/sources.list.d/kubernetes.list
 ```
-## Validate instalation on a docker container
+## Validate installation on a docker container
 
 ```bash
 podman run -it ubuntu:22.10 sh -c '\
