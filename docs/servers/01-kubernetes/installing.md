@@ -112,7 +112,27 @@ sudo systemctl status containerd.service
 sudo systemctl status kubelet.service
 ```
 
-## Initialize the Kubernetes cluster on the master node
+## Review the connectivity into the machines
+
+That is, review the three machines can connect between them. To do that, install the opensshserver
+
+```bash
+# install the tools
+sudo apt install openssh-client
+sudo apt install openssh-server
+
+# test the connectivity
+ssh dell@192.168.0.34
+ssh worker-one@192.168.0.32
+ssh worker-two@192.168.0.31 
+```
+
+## Up to here is the same for the three machines, master and worker nodes
+
+---------------
+
+## Initialize the Kubernetes cluster on the master node (master node only)
+
 ```bash
 sudo kubeadm config images pull
 

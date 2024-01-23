@@ -17,7 +17,7 @@ sudo apt install openssh-client
 
 Once we have the client installed we can connect to the other machine as follows
 ```bash 
-ssh antodellr@192.168.0.34
+ssh dell@192.168.0.34
 ssh master@192.168.0.32
 ssh worker@192.168.0.31 
 ```
