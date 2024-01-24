@@ -24,6 +24,11 @@ ssh worker@192.168.0.32
 the first time you connect you have to say `yes` to add the ssh key in your ssh keystore.
 In this way you can connect remotely.
 
+If there is a problem with the fingerprint, you can remove it using this command and setting up the ip of the host with the ssh connection problem.
+```bash
+ssh-keygen -f "/home/worker-one/.ssh/known_hosts" -R "192.168.0.32"
+```
+
 ## copying files from one host to another
 
 copy the folder of the local-user user to the remote user in the ip and folder
