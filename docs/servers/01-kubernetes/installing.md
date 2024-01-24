@@ -4,6 +4,9 @@ https://www.cherryservers.com/blog/install-kubernetes-on-ubuntu
 
 https://pabpereza.notion.site/Install-kubernetes-1-28-on-Ubuntu-Server-20-04-LTS-6f8d28eadb6242f0a78c40eaa0211167
 
+##
+check the `sudo sed -i` commands works well after execute them.
+
 ## update system
 
 ```bash
