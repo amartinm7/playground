@@ -106,6 +106,7 @@ sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/co
 ## restart services
 ```bash 
 sudo systemctl restart containerd.service
+sudo systemctl enable containerd.service
 sudo systemctl restart kubelet.service
 sudo systemctl enable kubelet.service
 
