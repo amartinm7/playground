@@ -32,3 +32,16 @@ scp -r /home/local-user 192.168.0.31:/tmp
 ```
 the first time you connect you have to say `yes` to add the ssh key in your ssh keystore.
 In this way you can connect remotely.
+
+## Rename user name
+
+```bash
+# Renaming Users in Linux
+sudo usermod -l <new-name> <old-name>
+
+# Changing a User’s Home Directory in Linux
+sudo usermod -d /home/joedoe -m johndoe
+
+# Changing a User’s UID
+sudo usermod -u 5001 johndoe
+```
