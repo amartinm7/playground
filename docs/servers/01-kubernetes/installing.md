@@ -86,6 +86,8 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://a
 sudo apt-get update
 
 sudo apt install -y kubelet kubeadm kubectl
+
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 ## Install docker
