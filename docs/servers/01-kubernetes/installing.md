@@ -212,7 +212,7 @@ kubeadm token list
 use the command to join the worker nodes
 ```bash
 kubeadm join
-sudo kubeadm join master-node:6443 --token $TOKEN --discovery-token-ca-cert-hash $CERTIFICATE_HASH
+sudo kubeadm join master-node:6443 --token $TOKEN --discovery-token-ca-cert-hash sha256:$CERTIFICATE_HASH
 ```
 
 ## optional is kubelet is not working: /etc/docker/daemon.json
