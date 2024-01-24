@@ -221,6 +221,14 @@ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outfor
 ```
 ## Troubleshooting
 
+## kubelet is not running
+Check kubelet:
+```bash
+sudo systemctl status kubelet.service
+```
+If the status is not ok because an error and it's failling, maybe can be the swap memmory is not disabled.
+Return to the previous paragraph to proceed disabling the swap memmory
+
 ## optional is kubelet is not working: /etc/docker/daemon.json
 
 ```bash
