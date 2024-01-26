@@ -87,7 +87,8 @@ curl http://localhost:8080
 Open the browser, write down `http://localhost:8080`
 
 ## scalling replicas
-Over the yaml file, setup the number of pod replicas and apply the changes
+Over the yaml file, setup the number of pod replicas and apply the changes `kubectl apply -f helloworld.yaml
+`
 ```bash
 spec:
   replicas: 3
