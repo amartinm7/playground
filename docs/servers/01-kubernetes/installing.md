@@ -4,6 +4,9 @@ https://www.cherryservers.com/blog/install-kubernetes-on-ubuntu
 
 https://pabpereza.notion.site/Install-kubernetes-1-28-on-Ubuntu-Server-20-04-LTS-6f8d28eadb6242f0a78c40eaa0211167
 
+## setup a fixed ip for every host
+To do that, you can go to your router/switch, and from the console, you can setup a fixed ip to a host inside your network.
+
 ##
 check the `sudo sed -i` commands works well after execute them.
 
