@@ -68,8 +68,10 @@ service/hello-world-svc configured
 kubectl describe service hello-world-svc
 # get the deployment configuration deployed
 kubectl describe deployments.apps
-# get the pods
-kubectl get pods
+# get the deployment configuration deployed
+kubectl get deployment hello-world-dep
+# get the pods and the worker node
+kubectl get pods -o wide
 # get the logs on a docker container inside a pod
 kubectl logs <pod-name> -c <container-name>
 # get the logs of pod with only a docker container
@@ -84,4 +86,17 @@ curl http://localhost:8080
 ```
 Open the browser, write down `http://localhost:8080`
 
+## scalling replicas
+Over the yaml file, setup the number of pod replicas and apply the changes
+```bash
+spec:
+  replicas: 3
+```
+using kubectl
+```bash
+# with deployment name
+kubectl scale --replicas=3 deployment/hello-world-dep
+# with the yaml file
+kubectl scale --replicas=3 -f foo.yaml
+```
 
