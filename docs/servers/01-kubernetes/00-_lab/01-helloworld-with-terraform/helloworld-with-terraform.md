@@ -103,4 +103,38 @@ kubectl -n my-example-namespace get pods
 terraform destroy
 ```
 
+## destroy the terraform plan
+```bash
+terraform init
+terraform apply
+# say yes
+kubectl config get-contexts
+kubectl get namespaces
+kubeclt -n my-example-namespace describe desployments
+kubeclt -n my-example-namespace describe services
+kubectl -n my-example-namespace get pods
+terraform destroy
+# say yes
+kubectl get namespaces
+kubeclt -n my-example-namespace describe desployments
+kubeclt -n my-example-namespace describe services
+kubectl -n my-example-namespace get pods
+```
+output
+```bash
+ubernetes_namespace.my-example-namespace: Destroying... [id=my-example-namespace]
+kubernetes_manifest.helloworld-service: Destroying...
+kubernetes_manifest.helloworld-service: Destruction complete after 0s
+kubernetes_manifest.helloworld-deployment: Destroying...
+kubernetes_manifest.helloworld-deployment: Destruction complete after 0s
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 10s elapsed]
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 20s elapsed]
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 30s elapsed]
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 40s elapsed]
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 50s elapsed]
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 1m0s elapsed]
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 1m10s elapsed]
+kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 1m20s elapsed]
+
+```
 
