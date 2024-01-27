@@ -100,19 +100,10 @@ kubectl get namespaces
 kubeclt -n my-example-namespace describe desployments
 kubeclt -n my-example-namespace describe services
 kubectl -n my-example-namespace get pods
-terraform destroy
 ```
 
 ## destroy the terraform plan
 ```bash
-terraform init
-terraform apply
-# say yes
-kubectl config get-contexts
-kubectl get namespaces
-kubeclt -n my-example-namespace describe desployments
-kubeclt -n my-example-namespace describe services
-kubectl -n my-example-namespace get pods
 terraform destroy
 # say yes
 kubectl get namespaces
