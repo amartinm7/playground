@@ -100,4 +100,8 @@ kubectl scale --replicas=3 deployment/hello-world-dep
 # with the yaml file
 kubectl scale --replicas=3 -f foo.yaml
 ```
-
+## Remove deployment and service
+```bash
+kubectl delete services hello-world
+kubectl delete deployment hello-world
+```
