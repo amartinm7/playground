@@ -104,5 +104,6 @@ kubectl scale --replicas=3 -f foo.yaml
 ```bash
 kubectl delete services hello-world
 kubectl delete deployment hello-world
-kubectl delete pod hello-world-dep-66fbd4fb95-bbnm5
+kubectl delete pod [pod_name] -n [namespace] --grace-period 0 --force
+kubectl delete pod [pod_name]
 ```
