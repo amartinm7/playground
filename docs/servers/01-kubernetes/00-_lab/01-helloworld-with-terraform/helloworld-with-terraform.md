@@ -104,6 +104,9 @@ kubectl get services --all-namespaces -o wide
 kubectl get deployments --all-namespaces -o wide
 # port forward
 kubectl -n my-example-namespace port-forward hello-world-dep-66fbd4fb95-2gr77 8080:80
+#
+sudo lsof -i:8080
+sudo kill -9 pid
 ```
 
 ## destroy the terraform plan
