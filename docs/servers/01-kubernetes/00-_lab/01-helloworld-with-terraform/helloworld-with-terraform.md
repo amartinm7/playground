@@ -151,3 +151,11 @@ kubectl delete pod [pod_name]
 kubectl -n my-example-namespace delete pod hello-world-dep-66fbd4fb95-9bs8f --grace-period 0 --force
 kubectl get deployments --all-namespaces -o wide
 ```
+
+## other terraform commands
+```bash
+# check the status of the Terraform state
+terraform state list
+# remove of the Terraform resources
+terraform state rm <resource-type>.<resource-name>
+```
