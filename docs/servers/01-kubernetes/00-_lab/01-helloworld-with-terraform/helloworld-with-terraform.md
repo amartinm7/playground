@@ -102,6 +102,8 @@ kubeclt -n my-example-namespace describe services
 kubectl -n my-example-namespace get pods
 kubectl get services --all-namespaces -o wide
 kubectl get deployments --all-namespaces -o wide
+# port forward
+kubectl -n my-example-namespace port-forward hello-world-dep-66fbd4fb95-2gr77 8080:80
 ```
 
 ## destroy the terraform plan
