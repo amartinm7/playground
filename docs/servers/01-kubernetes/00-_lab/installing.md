@@ -176,6 +176,7 @@ kubectl get nodes -o wide
 kubectl get pods --all-namespaces
 kubectl cluster-info
 kubectl config view
+kubectl config get-contexts
 
 ## check if the kubelet is not working. If it's not, check the if the swap is disabled.
 sudo systemctl status kubelet.service
