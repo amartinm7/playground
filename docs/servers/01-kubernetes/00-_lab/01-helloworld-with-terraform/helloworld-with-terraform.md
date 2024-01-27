@@ -100,6 +100,8 @@ kubectl get namespaces
 kubeclt -n my-example-namespace describe desployments
 kubeclt -n my-example-namespace describe services
 kubectl -n my-example-namespace get pods
+kubectl get services --all-namespaces -o wide
+kubectl get deployments --all-namespaces -o wide
 ```
 
 ## destroy the terraform plan
@@ -112,6 +114,7 @@ terraform destroy
 # say yes
 kubectl get deployments --all-namespaces -o wide
 kubectl get namespaces
+kubectl get services --all-namespaces -o wide
 kubeclt -n my-example-namespace describe desployments
 kubeclt -n my-example-namespace describe services
 kubectl -n my-example-namespace get pods
