@@ -64,6 +64,8 @@ service/hello-world-svc configured
 ```
 ## inspect the deployment and the service
 ```bash
+# get the context
+kubectl config get-contexts
 # get the service configuration deployed
 kubectl describe service hello-world-svc
 # get the deployment configuration deployed
