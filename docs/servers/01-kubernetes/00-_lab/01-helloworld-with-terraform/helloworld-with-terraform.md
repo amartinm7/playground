@@ -126,6 +126,12 @@ kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-na
 kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 1m0s elapsed]
 kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 1m10s elapsed]
 kubernetes_namespace.my-example-namespace: Still destroying... [id=my-example-namespace, 1m20s elapsed]
-
 ```
 
+## destroy the terraform plan
+```bash
+kubectl delete services hello-world-svc
+kubectl delete deployment hello-world-dep
+kubectl delete pod [pod_name] -n [namespace] --grace-period 0 --force
+kubectl delete pod [pod_name]
+```
