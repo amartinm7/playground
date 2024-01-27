@@ -54,6 +54,11 @@ metadata:
   name: my-example-namespace
 EOT
 ```
+or with command line
+```bash
+kubectl create namespace my-example-namespace
+kubectl get namespaces
+```
 
 ## create the terraform main file
 Setup the kubernetes config with the `~/.kube/config` and the `kubectl config get-contexts`
@@ -91,6 +96,7 @@ terraform init
 terraform apply
 # say yes
 kubectl config get-contexts
+kubectl get namespaces
 kubeclt -n my-example-namespace describe desployments
 kubeclt -n my-example-namespace describe services
 kubectl -n my-example-namespace get pods
