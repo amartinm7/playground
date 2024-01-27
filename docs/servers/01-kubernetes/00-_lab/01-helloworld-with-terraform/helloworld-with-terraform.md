@@ -104,8 +104,13 @@ kubectl -n my-example-namespace get pods
 
 ## destroy the terraform plan
 ```bash
+# destroy manually the pod
+kubectl -n my-example-namespace scale --replicas=0 deployment/hello-world-dep
+kubectl -n my-example-namespace delete pod hello-world-dep-66fbd4fb95-9bs8f --grace-period 0 --force
+# 
 terraform destroy
 # say yes
+kubectl get deployments --all-namespaces -o wide
 kubectl get namespaces
 kubeclt -n my-example-namespace describe desployments
 kubeclt -n my-example-namespace describe services
@@ -136,4 +141,5 @@ kubectl delete pod [pod_name] -n [namespace] --grace-period 0 --force
 kubectl delete pod [pod_name]
 #
 kubectl -n my-example-namespace delete pod hello-world-dep-66fbd4fb95-9bs8f --grace-period 0 --force
+kubectl get deployments --all-namespaces -o wide
 ```
