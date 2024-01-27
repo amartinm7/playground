@@ -134,4 +134,6 @@ kubectl delete services hello-world-svc
 kubectl delete deployment hello-world-dep
 kubectl delete pod [pod_name] -n [namespace] --grace-period 0 --force
 kubectl delete pod [pod_name]
+#
+kubectl -n my-example-namespace delete pod hello-world-dep-66fbd4fb95-9bs8f --grace-period 0 --force
 ```
