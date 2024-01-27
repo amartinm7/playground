@@ -60,8 +60,8 @@ So, this is how Terraform works, and this way, it tries to help you provision an
 ### example
 
 create a `main.tf` file:
-
 ```bash
+cat <<EOT >> main.tf
 terraform {
   required_providers {
     docker =  {
@@ -82,6 +82,7 @@ resource "docker_container" "web" {
     external =  80
   }
 }
+EOT
 ```
 
 execute one by one (during the process some tmp files are created): 
