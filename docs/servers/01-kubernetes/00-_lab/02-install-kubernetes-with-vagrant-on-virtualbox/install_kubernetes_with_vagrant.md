@@ -72,8 +72,8 @@ output
 ==> default: Mounting shared folders...
 ```
 ## Shared folder
-The current folder is a shared folder between the host and guest operative system. It's bidirectional. 
+The current folder is a shared folder between the host and guest operative system. It's bidirectional. Create a `data` folder a change the line to setup the `./data folder
 
 ```bash
-  config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder "./data", "/vagrant_data"
 ```
