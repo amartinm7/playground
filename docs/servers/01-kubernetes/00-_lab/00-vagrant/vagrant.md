@@ -104,3 +104,39 @@ ip --brief addr show
 ## watch /etc/hosts
 cat /etc/hosts
 ```
+
+## Configure port forwarding
+uncomment the this line `config.vm.network :forwarded_port, guest: 80, host: 8080` on the Vagrantfile, and reload the changes `vagrant reload`. You can access `http://127.0.0.1:8080`
+
+### Test it
+Create an `index.html` in the shared folder of the `host` machine 
+```bash
+cat <<EOT >> index.html
+<!doctype html>
+<html>
+  <head>
+    <title>This is the title of the webpage!</title>
+  </head>
+  <body>
+    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
+  </body>
+</html>
+EOT
+```
+
+open a `ssh` connection over the `guess` machine:
+```bash
+## run the virtual machine
+vagrant up
+## connect to the virtual machine via ssh
+vagrant ssh
+# install python 3
+sudo apt-get update
+sudo apt-get install python3.6
+# execute the http server
+sudo python3 -m http.server 80
+```
+over the `host` machine open a browser a visit the page `http://127.0.0.1:8080` to watch the index page served by the `guess` machine. (http not https)
+
+
+
