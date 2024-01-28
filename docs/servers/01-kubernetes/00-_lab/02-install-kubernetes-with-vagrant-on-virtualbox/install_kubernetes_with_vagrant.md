@@ -85,4 +85,18 @@ vagrant ssh
 cd /vagrant_data && ls -al
 ```
 
-
+## Inspect the vagrant box
+```bash
+## run the virtual machine
+vagrant up
+## connect to the virtual machine via ssh
+vagrant ssh
+## watch the used memory
+free -h
+## watch the host name
+hostnamectl
+## watch the interfaces: eth0 (cable) and lo (wifi)
+ip --brief addr show
+## watch /etc/hosts
+cat /etc/hosts
+```
