@@ -4,3 +4,4 @@ The main goal is create three vagrant scripts to create the master-node image, a
 
 After that, you can run vagrant and the you will have the kubernetes cluster running with a simple click.
 
+
