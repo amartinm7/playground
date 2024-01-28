@@ -17,5 +17,6 @@ https://app.vagrantup.com/bento/boxes/ubuntu-22.04
 ```bash 
 vagrant init bento/ubuntu-22.04
 ``` 
+This commnand creates a vagrantfile with the provider setup as ubuntu and more things to config.
 
 
