@@ -30,6 +30,7 @@ vagrant up
 vagrant ssh
 ```
 A ssh username and private key are created so if you run vagrant ssh, you can access to the virtual machine
+
 output
 ```
 ==> default: Clearing any previously set network interfaces...
