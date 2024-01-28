@@ -16,6 +16,8 @@ https://developer.hashicorp.com/vagrant/install#Linux
 ```bash
 # Bring a box online.
 vagrant up
+# reload changes
+vagrant reload
 # Show current box status.
 vagrant status
 # Pause the current box.
