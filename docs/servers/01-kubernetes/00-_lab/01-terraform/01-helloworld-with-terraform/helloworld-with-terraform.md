@@ -92,8 +92,8 @@ EOT
 
 ## execute terraform
 ```bash
-01-terraform init
-01-terraform apply
+terraform init
+terraform apply
 # say yes
 kubectl config get-contexts
 kubectl get namespaces
