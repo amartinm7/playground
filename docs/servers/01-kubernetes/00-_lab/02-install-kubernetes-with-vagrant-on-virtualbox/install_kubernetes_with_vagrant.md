@@ -77,7 +77,7 @@ The current folder is a shared folder between the host and guest operative syste
 ```bash
   config.vm.synced_folder "./data", "/vagrant_data"
 ```
-Reload the changes
+Reload the changes and access to the shrared folder:
 ```bash
 vagrant halt
 vagrant up
