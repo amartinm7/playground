@@ -155,7 +155,7 @@ kubectl get deployments --all-namespaces -o wide
 ## other terraform commands
 ```bash
 # check the status of the Terraform state
-01-terraform state list
+terraform state list
 # remove of the Terraform resources
-01-terraform state rm <resource-type>.<resource-name>
+terraform state rm <resource-type>.<resource-name>
 ```
