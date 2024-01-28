@@ -10,6 +10,23 @@ After that, you can run vagrant and the you will have the kubernetes cluster run
 
 https://developer.hashicorp.com/vagrant/install#Linux
 
+## vagrant command
+```bash
+# Bring a box online.
+vagrant up
+# Show current box status.
+vagrant status
+# Pause the current box.
+vagrant suspend
+# Resume the current box.
+vagrant resume
+# Shutdown the current box. 
+vagrant halt
+# Destroy the current box.
+vagrant destroy
+# Take a snapshot of the current box.
+vagrant snapshot
+``` 
 ## Create vagrantfile
 
 https://app.vagrantup.com/bento/boxes/ubuntu-22.04
@@ -54,4 +71,9 @@ output
 ==> default: Checking for guest additions in VM...
 ==> default: Mounting shared folders...
 ```
+## Shared folder
 The current folder is a shared folder between the host and guest operative system. It's bidirectional. 
+
+```bash
+  config.vm.synced_folder "../data", "/vagrant_data"
+```
