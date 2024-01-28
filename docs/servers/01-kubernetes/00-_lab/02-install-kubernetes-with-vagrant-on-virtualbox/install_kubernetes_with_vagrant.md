@@ -53,6 +53,5 @@ output
 ==> default: Machine booted and ready!
 ==> default: Checking for guest additions in VM...
 ==> default: Mounting shared folders...
-
 ```
-
+The current folder is a shared folder between the host and guest operative system. It's bidirectional. 
