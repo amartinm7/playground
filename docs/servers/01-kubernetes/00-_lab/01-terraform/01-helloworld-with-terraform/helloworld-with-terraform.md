@@ -92,8 +92,8 @@ EOT
 
 ## execute terraform
 ```bash
-terraform init
-terraform apply
+01-terraform init
+01-terraform apply
 # say yes
 kubectl config get-contexts
 kubectl get namespaces
@@ -115,7 +115,7 @@ sudo kill -9 pid
 kubectl -n my-example-namespace scale --replicas=0 deployment/hello-world-dep
 kubectl -n my-example-namespace delete pod hello-world-dep-66fbd4fb95-9bs8f --grace-period 0 --force
 # 
-terraform destroy
+01-terraform destroy
 # say yes
 kubectl get deployments --all-namespaces -o wide
 kubectl get namespaces
@@ -155,7 +155,7 @@ kubectl get deployments --all-namespaces -o wide
 ## other terraform commands
 ```bash
 # check the status of the Terraform state
-terraform state list
+01-terraform state list
 # remove of the Terraform resources
-terraform state rm <resource-type>.<resource-name>
+01-terraform state rm <resource-type>.<resource-name>
 ```

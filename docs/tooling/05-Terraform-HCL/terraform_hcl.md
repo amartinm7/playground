@@ -6,7 +6,7 @@ Similar to kubernetes is some aspects.
 - terraform try to provide/achieve the plan
 
 ```bash
-brew install terraform
+brew install 01-terraform
 ```
 
 ## Terraform Core concepts
