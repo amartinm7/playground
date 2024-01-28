@@ -1,6 +1,6 @@
 # Vagrant basics
 
-https://developer.hashicorp.com/vagrant/docs/networking
+https://developer.hashicorp.com/vagrant/docs/index.html
 
 The main goal is create three vagrant scripts to create the master-node image, and the two worker-nodes images.
 
