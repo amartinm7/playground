@@ -231,12 +231,14 @@ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outfor
 
 - create an user account https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
 - install dashboard https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
-  
+
+download the dashboard template and install it:
 ```bash
 curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 kubectl apply -f recommended.yaml
 ```
-create admin user and secret to store the token
+
+### create admin user and secret to store the token
 ```bash
 cat <<EOF | sudo tee dashboard-adminuser.yaml
 apiVersion: v1
