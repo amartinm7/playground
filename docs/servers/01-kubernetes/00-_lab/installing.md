@@ -228,15 +228,76 @@ Token, launch this command on master server:
 openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 ```
 ## Install the kubernetes dashboard
+
+- create an user account https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+- install dashboard https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+  
 ```bash
 curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 kubectl apply -f recommended.yaml
 ```
+create admin user and secret to store the token
+```bash
+cat <<EOF | sudo tee dashboard-adminuser.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+
+# apply the ServiceAccount template
+kubectl apply -f dashboard-adminuser.yaml
+
+# (optional step) create ClusterRoleBinding if not exists from the k8s installation
+cat <<EOF | sudo tee ClusterRoleBinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+
+# apply the ServiceAccount template
+kubectl apply -f ClusterRoleBinding.yaml
+
+# create the token to login into the dashboard
+kubectl -n kubernetes-dashboard create token admin-user
+
+# create the token and store it into a secret
+cat <<EOF | sudo tee admin-user-secret.yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+  annotations:
+    kubernetes.io/service-account.name: "admin-user"   
+type: kubernetes.io/service-account-token  
+EOF
+
+# apply the secret template
+kubectl apply -f admin-user-secret.yml
+
+# create the token and store it into the secret
+kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d
+```
+
 check the installation on the next url
 ```bash
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/
 ```
-
+access to the dashboard and use the token if it's needed
+```bash
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/.
+```
 ## Troubleshooting
 
 ## kubelet is not running
