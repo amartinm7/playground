@@ -251,7 +251,7 @@ EOF
 # apply the ServiceAccount template
 kubectl apply -f dashboard-adminuser.yaml
 
-# (optional step) create ClusterRoleBinding if not exists from the k8s installation
+# create ClusterRoleBinding if not exists from the k8s installation
 cat <<EOF | sudo tee ClusterRoleBinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
