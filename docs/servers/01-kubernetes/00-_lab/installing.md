@@ -227,6 +227,16 @@ Token, launch this command on master server:
 ```bash
 openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 ```
+## Install the kubernetes dashboard
+```bash
+curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+kubectl apply -f recommended.yaml
+```
+check the installation on the next url
+```bash
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/
+```
+
 ## Troubleshooting
 
 ## kubelet is not running
