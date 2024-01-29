@@ -24,6 +24,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-world-dep
+  namespace: my-example-namespace
 spec:
   replicas: 1
   selector:
