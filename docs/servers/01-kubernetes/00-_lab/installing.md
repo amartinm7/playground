@@ -291,6 +291,10 @@ kubectl apply -f admin-user-secret.yml
 # create the token and store it into the secret
 kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d
 ```
+execute the next command to enable the proxy an listen on the 8001 port of the current host
+```bash
+kubectl proxy	
+```
 
 check the installation on the next url
 ```bash
