@@ -20,6 +20,7 @@ curl http://localhost:8080
 
 ## Create the deployment and the service
 ```yaml
+cat <<EOF | sudo tee helloworld_k8s.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -45,6 +46,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: hello-world-svc
+  namespace: my-example-namespace
 spec:
   selector:
     app: hello-world
@@ -53,6 +55,7 @@ spec:
     port: 8080
     targetPort: 80
   type: ClusterIP
+EOF
 ```
 
 ## apply the deployment and the service
