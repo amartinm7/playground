@@ -36,6 +36,11 @@ vagrant logout
 vagrant box list
 # remove a box
 vagrant box remove hashicorp/bionic64
+# install the shared universal link plugin
+# Vagrant Share is a plugin that lets you share your Vagrant environment to anyone around the world with an Internet connection. It will give you a URL that will route directly to your Vagrant environment from any device in the world that is connected to the Internet.
+# Open a web browser and visit the URL from your output. It should load the Apache page we setup earlier.
+vagrant plugin install vagrant-share
+vagrant share
 ``` 
 ## Create vagrantfile
 
