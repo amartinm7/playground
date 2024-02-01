@@ -1,9 +1,11 @@
 # helloworld with apache
 
+## Summary: 
 - The main point here is to expose the 80 port in the guess to the 8080 on the host machine
 - use the shared folder between machines with a symbolic link `ln -fs /vagrant /var/www`
 - access from the host to the guess on the `localhost:8080` address. The guess serves the index fil of the host machine via shared folder, and the host retuns the result to the client on the port 8080.
 
+## Steps
 Create new project, and execute `vagrant init`
 In the VagrantFile, setup the next properties:
 ```bash
