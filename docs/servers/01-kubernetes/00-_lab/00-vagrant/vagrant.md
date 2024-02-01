@@ -32,6 +32,10 @@ vagrant snapshot
 vagrant ssh
 # exit on logout on a guess machine
 vagrant logout
+# list the installed box on local
+vagrant box list
+# remove a box
+vagrant box remove hashicorp/bionic64
 ``` 
 ## Create vagrantfile
 
