@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/bionic64"
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.provision "shell", path: "bootstrap.sh"
+  # setup shared folder, optional
+  # config.vm.synced_folder "./data", "/vagrant_data"
 end
 ```
 Create "bootstrap.sh" file in the current folder
