@@ -28,6 +28,10 @@ vagrant halt
 vagrant destroy
 # Take a snapshot of the current box.
 vagrant snapshot
+# Login into a guess machine
+vagrant ssh
+# exit on logout on a guess machine
+vagrant logout
 ``` 
 ## Create vagrantfile
 
