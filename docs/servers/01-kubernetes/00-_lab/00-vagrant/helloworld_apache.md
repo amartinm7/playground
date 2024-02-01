@@ -51,6 +51,6 @@ vagrant@vagrant: wget -qO- 127.0.0.1
   </body>
 </html>
 ```
-
+Access to the index.html on the host machine in the address `localhost:8080`
 
 
