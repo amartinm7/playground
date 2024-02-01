@@ -79,6 +79,13 @@ The current folder is a shared folder between the host and guest operative syste
 ```bash
   config.vm.synced_folder "./data", "/vagrant_data"
 ```
+
+other option is to use the a sh script and create a symbolic link:
+```bash
+ln -fs /vagrant /var/www
+```
+where /vagrant is the current host folder and /var/www is the guest folder
+
 Reload the changes and access to the shrared folder:
 ```bash
 vagrant halt
