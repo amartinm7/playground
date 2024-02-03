@@ -51,7 +51,7 @@ cd /var/www
 ls -al
 cat index.html
 ```
-Once there, verify the index.html file is accessed by the guess machine to the host machine with the command ` wget -qO- 127.0.0.1`
+Once there, verify the index.html file is accessed by the guess machine to the host machine with the command ` wget -qO- 127.0.0.1` or `curl http://localhost` 
 ```text
 vagrant@vagrant: wget -qO- 127.0.0.1
 <!DOCTYPE html>
