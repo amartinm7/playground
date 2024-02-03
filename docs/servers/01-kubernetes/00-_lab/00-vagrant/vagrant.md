@@ -12,6 +12,8 @@ https://developer.hashicorp.com/vagrant/install#Linux
 
 ## vagrant command
 ```bash
+# creates a vagrant file
+vagrant init
 # Bring a box online.
 vagrant up
 # reload changes
