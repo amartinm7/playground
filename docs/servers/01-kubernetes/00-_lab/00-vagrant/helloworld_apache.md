@@ -43,7 +43,15 @@ cat <<EOF | sudo tee index.html
 </html>
 EOF
 ```
-execute `vagrant up`, and `vagrant ssh` in another terminal in the same folder to login into the guess machine. Once there, verify the index.html file is accessed by the guess machine to the host machine with the command ` wget -qO- 127.0.0.1`
+execute `vagrant up`, and `vagrant ssh` in another terminal in the same folder to login into the guess machine. 
+into the guess host, check if the index.html is into the `/var/www` folder. To do that:
+```bash
+vagrant ssh
+cd /var/www
+ls -al
+cat index.html
+```
+Once there, verify the index.html file is accessed by the guess machine to the host machine with the command ` wget -qO- 127.0.0.1`
 ```text
 vagrant@vagrant: wget -qO- 127.0.0.1
 <!DOCTYPE html>
