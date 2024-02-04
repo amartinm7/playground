@@ -1,7 +1,10 @@
 #
+#  try this
+#  sudo sed -i 's|/swap.img|#/swap.img|g' /etc/fstab
+#
+#  try this if the previous alternatives doesn't work
 #  sudo sed -i 's/.* none.* swap.* sw.*/#&/' /etc/fstab
 #  sudo sed -i '/.* none.* swap.* sw.*/s/^#//' /etc/fstab
-#  sudo sed -i 's|/swap.img|#/swap.img|g' /etc/fstab
 #
 # /etc/fstab: static file system information.
 #
