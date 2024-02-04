@@ -36,8 +36,10 @@ sudo reboot
 ## setup host name
 
 ```bash
+# setup host name
+MY_HOST_NAME = "master-node"
 # change host name
-sudo hostnamectl set-hostname "master-node"
+sudo hostnamectl set-hostname $MY_HOST_NAME
 # reload the changes
 sudo exec bash 
 ```
@@ -51,6 +53,13 @@ ip --brief addr show
 sudo vim /etc/hosts 
 # check the file
 ping master-node
+```
+or 
+```bash
+# find current IP address
+MY_ETH_IP=$(ip a s eth0 | grep -E -o 'inet [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d' ' -f2)
+# adding line `current IP "master-node"`
+sudo echo $MY_ETH_IP $MY_HOST_NAME >> /etc/hosts
 ```
 
 ## Set up the IPV4 bridge on all nodes
@@ -145,7 +154,7 @@ ssh worker-two@192.168.0.31
 ```bash
 sudo kubeadm config images pull
 
-sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint=master-node
+sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint=$MY_HOST_NAME
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
