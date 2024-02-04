@@ -98,7 +98,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ## Install docker
 ```bash 
-sudo apt install docker.io
+sudo apt install -y docker.io
 ```
 
 ## setup containerd
