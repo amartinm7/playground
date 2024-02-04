@@ -393,6 +393,17 @@ podman run -it ubuntu:22.10 sh -c '\
 ```
 
 
+```bash
+docker run -it ubuntu:22.10 sh -c '\
+    apt-get update && \
+    apt-get install -y apt-transport-https ca-certificates curl && \
+    curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list && \
+    apt-get update && \
+    apt-get install -y kubelet'
+```
+
+
 ## Testing endpoints
 doing an infinitive loop in single line (sleeping 1sec evrytime)
 ```bash
