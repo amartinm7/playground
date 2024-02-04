@@ -161,6 +161,7 @@ over the `host` machine open a browser a visit the page `http://127.0.0.1:8080` 
 ## Several boxes on the same Vagrantfile
 The idea behind is use the vagranfile as a Dockercompose file. I mean, you can define several instances of boxes and up and running all of them using only a Vagrantfile.
 ```bash
+cat <<EOF | sudo tee /Vagrantfile
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -183,7 +184,7 @@ Vagrant.configure("2") do |config|
     vb.memory = "2048"
     vb.cpus = "2"
   end
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+
   config.vm.define "master" do |master|
     master.vm.box = "hashicorp/bionic64"
     master.vm.network "private_network", ip: "192.168.56.0"
