@@ -29,6 +29,7 @@ sudo vim /etc/fstab
 ## comment the line starts with swap using a #
 
 # or do this
+sudo sed -i 's|/swap.img|#/swap.img|g' /etc/fstab
 sudo sudo sed -i '/ swap / s/^/#/' /etc/fstab
 sudo free -h
 
