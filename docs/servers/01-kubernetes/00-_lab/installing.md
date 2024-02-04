@@ -218,23 +218,23 @@ First of all create the token and the certificate token on the next steps over t
 
 use the command to join the worker nodes into the worker machine.
 ```bash
-kubeadm join
+sudo kubeadm join
 #
 sudo kubeadm join master-node:6443 --token $TOKEN --discovery-token-ca-cert-hash sha256:$CERTIFICATE_HASH
 ```
 ### Create token
 Token, launch this command on master server:
 ```bash
-kubeadm token create
+sudo kubeadm token create
 ```
 If you want to see the active tokens: 
 ```bash
-kubeadm token list
+sudo kubeadm token list
 ```
 ### Create token certificate
 Token, launch this command on master server:
 ```bash
-openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+sudo openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 ```
 ## Install the kubernetes dashboard
 
