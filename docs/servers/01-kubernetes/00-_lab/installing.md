@@ -21,7 +21,7 @@ sudo apt upgrade
 
 ```bash
 sudo free -h
-sudo swappoff -a 
+sudo swapoff -a 
 sudo free -h
 sudo vim /etc/fstab 
 ## comment the line starts with swap using a #
