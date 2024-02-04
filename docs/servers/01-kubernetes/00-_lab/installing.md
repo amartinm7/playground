@@ -391,3 +391,10 @@ podman run -it ubuntu:22.10 sh -c '\
     apt-get update && \
     apt-get install -y kubelet'
 ```
+
+
+## Testing endpoints
+doing an infinitive loop in single line (sleeping 1sec evrytime)
+```bash
+while sleep 1; do curl localhost:8080/v1 && curl localhost:8080/v2; done
+```
