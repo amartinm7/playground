@@ -205,5 +205,5 @@ Vagrant.configure("2") do |config|
 end
 EOF
 ```
-
+The way to access to every instance is using `vagrant ssh master`, `vagrant ssh worker1`, `vagrant ssh worker2`
 
