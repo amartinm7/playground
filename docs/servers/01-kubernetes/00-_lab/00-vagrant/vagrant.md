@@ -187,23 +187,24 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "master" do |master|
     master.vm.box = "hashicorp/bionic64"
-    master.vm.network "private_network", ip: "192.168.56.0"
+    master.vm.network "private_network", ip: "192.168.56.1"
     master.vm.provision "shell", path: "bootstrap-master.sh"
   end
 
   config.vm.define "worker1" do |worker1|
     worker1.vm.box = "hashicorp/bionic64"
-    worker1.vm.network "private_network", ip: "192.168.56.1"
+    worker1.vm.network "private_network", ip: "192.168.56.2"
     worker1.vm.provision "shell", path: "bootstrap-worker.sh"
   end
 
   config.vm.define "worker2" do |worker2|
     worker2.vm.box = "hashicorp/bionic64"
-    worker2.vm.network "private_network", ip: "192.168.56.2"
+    worker2.vm.network "private_network", ip: "192.168.56.3"
     worker2.vm.provision "shell", path: "bootstrap-worker.sh"
   end
 end
 EOF
 ```
 The way to access to every instance is using `vagrant ssh master`, `vagrant ssh worker1`, `vagrant ssh worker2`
+
 
