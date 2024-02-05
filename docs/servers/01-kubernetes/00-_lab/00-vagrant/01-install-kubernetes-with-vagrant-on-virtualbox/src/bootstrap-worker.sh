@@ -44,9 +44,14 @@ sudo exec bash
 # ping master-node
 #```
 # find current IP address
-MY_ETH_IP=$(ip a s eth0 | grep -E -o 'inet [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d' ' -f2)
+MY_ETH_IP=$(ip a s eth1 | grep -E -o 'inet [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d' ' -f2)
 # setup "master-node" and current IP
 sudo echo $MY_ETH_IP $MY_HOST_NAME >> /etc/hosts
+
+## TODO add the MASTER IP here SETUP
+MY_HOST_MASTER_NAME="master-node"
+MY_HOST_MASTER_IP="192.168.56.1"
+sudo echo $MY_HOST_MASTER_IP $MY_HOST_MASTER_NAME >> /etc/hosts
 
 ## Set up the IPV4 bridge on all nodes
 
@@ -117,3 +122,10 @@ sudo systemctl enable kubelet.service
 # sudo systemctl status containerd.service
 # sudo systemctl status kubelet.service
 #```
+
+# Reads the token and the certificate
+TOKEN=$(cat /vagrant_data/token.txt)
+CERTIFICATE_HASH=$(cat /vagrant_data/certificate.txt)
+# Join to the cluster
+sudo kubeadm join master-node:6443 --token $TOKEN --discovery-token-ca-cert-hash sha256:$CERTIFICATE_HASH
+
