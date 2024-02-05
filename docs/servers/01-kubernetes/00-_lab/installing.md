@@ -124,6 +124,8 @@ sudo systemctl restart containerd.service
 sudo systemctl enable containerd.service
 sudo systemctl restart kubelet.service
 sudo systemctl enable kubelet.service
+sudo systemctl restart docker.service
+sudo systemctl enable docker.service
 
 sudo systemctl status docker.service
 sudo systemctl status containerd.service
