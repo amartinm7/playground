@@ -111,7 +111,6 @@ Vagrant.configure("2") do |config|
       </html>
       EOF
     SHELL
-    worker1.vm.network "forwarded_port", guest: 80, host: 8080
   end
 end
 EOF
