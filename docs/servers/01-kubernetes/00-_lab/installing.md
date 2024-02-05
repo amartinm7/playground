@@ -384,6 +384,26 @@ syncFrequency: 0s
 volumeStatsAggPeriod: 0s
 ```
 
+### Problems with the .kube/config file
+Check your KUBECONFIG with a cat /etc/kubernetes/admin.conf, you shoud see the same configuration if you run this command : `sudo kubectl config view` . 
+If not, if the config is null/empty it means that the environment cannot be accessed only with sudo but with `sudo -E`
+
+The `sudo -E` option preserves the user environment, which includes the KUBECONFIG variable you set. 
+So when you run `sudo -E kubectl config view`, it uses the KUBECONFIG variable from your user environment, allowing kubectl to find and use your admin.conf file.
+Always use `sudo -E` with kubectl commands you run, if you want to use the KUBECONFIG configuration.
+
+solution
+```bash
+# copy the /etc/kubernetes/admin.conf to $HOME/.kube/config
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+kubectl cluster-info
+```
+
 ## Conflicting values on sources.list.d
 ```bash
 E: Conflicting values set for option Signed-By regarding source http://apt.kubernetes.io/ kubernetes-xenial: /etc/apt/keyrings/kubernetes.gpg != /etc/apt/keyrings/kubernetes-archive-keyring.gpg
