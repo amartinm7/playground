@@ -6,9 +6,17 @@ https://developer.hashicorp.com/vagrant/docs/index.html
 
 https://www.virtualbox.org/
 
-## Install vagrant
+## Install vagrant on linux
 
 https://developer.hashicorp.com/vagrant/install#Linux
+
+## Install vagrant macosx without virtualbox
+
+```bash
+brew install --cask vagrant
+# install the plugin in order avoid installing virtualbox
+vagrant plugin install vagrant-vbguest
+```
 
 ## vagrant command
 ```bash
