@@ -28,41 +28,19 @@ MY_HOST_IP_REF="192.168.56.2"
 ./install_docker_containerd.sh
 
 ## Initialize the Kubernetes cluster on the master node (master node only)
-
-#```bash
-sudo kubeadm config images pull
-
-sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint=$MY_HOST_NAME
-
-# Create kube config
-echo "CREATE KUBECONFIG"
-./create_kube_config.sh
-
-export KUBECONFIG=/etc/kubernetes/admin.conf
-
-kubectl cluster-info
-#```
+./initialize_k8s_cluster_on_master_node.sh $MY_HOST_NAME
 
 ## Installing the network plugin on the master node
-#```bash
-curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
-kubectl create -f tigera-operator.yaml
-
-curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml
-sed -ie 's/192.168.0.0/172.24.0.0/g' custom-resources.yaml
-kubectl create -f custom-resources.yaml
-
-kubectl get pods --all-namespaces
-#```
-
-## check everything is working well
-#```bash
-export KUBECONFIG=/etc/kubernetes/admin.conf
+./install_network_plugin_on_master_node.sh
 
 ## Create a token and sha256 certificate
-sudo kubeadm token create > /vagrant_data/token.txt
-sudo openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //' > /vagrant_data/certificate.txt
+./create_token_and_sha256_certificate.sh
 
+# Install the kubernetes dashboard
+./install_dashboard.sh
+
+## check the cluster info
+#
 # kubectl get nodes -o wide
 # kubectl get pods --all-namespaces
 # kubectl cluster-info
@@ -74,58 +52,3 @@ sudo openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -o
 # sudo systemctl status docker.service
 # sudo systemctl status containerd.service
 #```
-
-# Install the kubernetes dashboard
-curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-kubectl apply -f recommended.yaml
-
-cat <<EOF | sudo tee dashboard-adminuser.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
-EOF
-
-# apply the ServiceAccount template
-kubectl apply -f dashboard-adminuser.yaml
-
-# create ClusterRoleBinding if not exists from the k8s installation
-cat <<EOF | sudo tee ClusterRoleBinding.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: admin-user
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: admin-user
-  namespace: kubernetes-dashboard
-EOF
-
-# apply the ServiceAccount template
-kubectl apply -f ClusterRoleBinding.yaml
-
-# create the token to login into the dashboard
-kubectl -n kubernetes-dashboard create token admin-user
-
-# create the token and store it into a secret
-cat <<EOF | sudo tee admin-user-secret.yml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
-  annotations:
-    kubernetes.io/service-account.name: "admin-user"   
-type: kubernetes.io/service-account-token  
-EOF
-
-# apply the secret template
-kubectl apply -f admin-user-secret.yml
-
-# create the token and store it into the secret
-kubectl get secret admin-user -n kubernetes-dashboard -o jsonpath={".data.token"} | base64 -d
