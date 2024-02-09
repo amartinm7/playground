@@ -28,8 +28,5 @@ MY_HOST_IP_REF="192.168.56.1"
 ./install_docker_containerd.sh
 
 # Reads the token and the certificate
-TOKEN=$(cat /vagrant_data/token.txt)
-CERTIFICATE_HASH=$(cat /vagrant_data/certificate.txt)
-# Join to the cluster
-sudo kubeadm join master-node:6443 --token $TOKEN --discovery-token-ca-cert-hash sha256:$CERTIFICATE_HASH
+./worker_join_to_the_cluster.sh
 
