@@ -89,18 +89,19 @@ Vagrant.configure("2") do |config|
   # end
 
   config.vm.define "master" do |master|
-    master.vm.box = "hashicorp/bionic64"
+    # master.vm.box = "hashicorp/bionic64"
+    master.vm.box = "master_node"
     master.vm.network "public_network", ip: "192.168.56.1", bridge: "wlp0s20f3"
-    master.vm.provision "shell", path: "bootstrap-master.sh", :args => "'master-node' 'worker' '192.168.56.2'"
+    master.vm.provision "shell", path: "bootstrap-master.sh", :args => "'master-node' 'worker' '192.168.56.2'", run: "always"
     master.vm.network "forwarded_port", guest: 80, host: 8080
     master.vm.network "forwarded_port", guest: 8001, host: 8001
   end
 
-  config.vm.define "worker" do |worker1|
-    worker1.vm.box = "hashicorp/bionic64"
-    worker1.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
-    worker1.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'worker' 'master-node' '192.168.56.1'"
-  end
+  #config.vm.define "worker" do |worker1|
+  #  worker1.vm.box = "hashicorp/bionic64"
+  #  worker1.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
+  #  worker1.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'worker' 'master-node' '192.168.56.1'"
+  #end
 end
 
 # git reset --hard origin/master
@@ -113,4 +114,18 @@ end
 # or remove the module forever (rancher is using this module, so it's not going to work after this)
 # sudo modprobe -r kvm_intel 
 # sudo modprobe -r kvm
+#
+# create a box
+# vagrant package master --output master_node
+# 
+# add the box to the engine
+# vagrant box add --name master_node file://./master_node.box
+#
+# now you can use it as master.vm.box = "master_node"
+#
+#
+# create a snapshot 
+# vagrant snapshot save master_node_update
+#
+# vagrant snapshot list
 #

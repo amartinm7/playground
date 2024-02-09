@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # update system
-sudo apt update
-sudo apt upgrade
+sudo apt update -y
+sudo apt upgrade -y
