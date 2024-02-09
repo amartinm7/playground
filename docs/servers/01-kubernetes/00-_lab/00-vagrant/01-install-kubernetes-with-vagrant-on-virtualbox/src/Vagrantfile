@@ -102,3 +102,15 @@ Vagrant.configure("2") do |config|
     worker1.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'worker' 'master-node' '192.168.56.1'"
   end
 end
+
+# git reset --hard origin/master
+# FIX Stderr: VBoxManage: error: VirtualBox can't operate in VMX root mode. Please disable the KVM kernel extension
+#
+# stop kvm the process
+# lsof | grep /dev/kvm
+# sudo kill -9 pid
+#
+# or remove the module forever (rancher is using this module, so it's not going to work after this)
+# sudo modprobe -r kvm_intel 
+# sudo modprobe -r kvm
+#
