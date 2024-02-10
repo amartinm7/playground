@@ -7,15 +7,15 @@ sh /vagrant/update_system.sh
 sh /vagrant/disable_swap_memory.sh
 
 ## setup host name
-MY_HOST_NAME=$1 //"master-node"
-sh /vagrant/setup_host_name $MY_HOST_NAME
+MY_HOST_NAME=$1 #"master-node"
+sh /vagrant/setup_host_name.sh $MY_HOST_NAME
 
 ## setup /etc/hosts
 sh /vagrant/setup_etc_hosts_with_eth1_ip.sh $MY_HOST_NAME
 
 ## add the woker-node into the master-node /etc/hosts to get visibility between them
-MY_HOST_NAME_REF=$2 //"worker"
-MY_HOST_IP_REF=$3 //"192.168.56.2"
+MY_HOST_NAME_REF=$2 #"worker"
+MY_HOST_IP_REF=$3 #"192.168.56.2"
 sh /vagrant/setup_etc_hosts_with_fixed_ips.sh $MY_HOST_IP_REF $MY_HOST_NAME_REF
 
 ## Set up the IPV4 bridge on all nodes
