@@ -81,6 +81,8 @@ vagrant snapshot
 vagrant box list
 # create box image
 vagrant package worker --output k8s_cli_docker.box
+# add the image
+vagrant box add --name k8s_cli_docker ./k8s_cli_docker.box
 ``` 
 ## Create vagrantfile
 
