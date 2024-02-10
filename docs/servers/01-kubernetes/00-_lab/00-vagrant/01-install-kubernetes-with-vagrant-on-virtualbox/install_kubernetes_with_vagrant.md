@@ -51,7 +51,7 @@ setup vagrantfile
     worker1.vm.provision "shell", path: "common.sh"
   end
 ```
-Execute `vagrant up`, after that `vagrant package worker --output k8s_cli_docker`
+Execute `vagrant up`, after that `vagrant package worker --output k8s_cli_docker.box`. Now we can use the box image as `worker1.vm.box = "k8s_cli_docker"`
 
 ## Install virtualbox
 
