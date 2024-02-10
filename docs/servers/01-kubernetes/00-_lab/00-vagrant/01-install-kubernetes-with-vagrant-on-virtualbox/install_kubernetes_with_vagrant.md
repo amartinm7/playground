@@ -19,6 +19,40 @@ After that, you can run vagrant and the you will have the kubernetes cluster run
 
 Everytime we run the vagrant file `vagrant up` the master and worker starts to download a lot of dependencies as updating the SO, downloading the docker and kubernetes files. This is doing that the process is so slow, because we have to spend a lot of time to do it every time. So in order to improve th process, the first thing that we have to do is to create a box with the downloaded updates. Once done, we package the current box. The box can be named 'my_k8s_so_updates'. To that, we do `vagrant up` and exec only the so dependecies script. We create the box `vagrant package worker --output my_k8s_so_updates`. After that we can use it into the vagrant file as `master.vm.box="my_k8s_so_updates"` and `worker.vm.box="my_k8s_so_updates"`. We iterate the process creating more boxes with the docker and kubernetes files. So in this way, when we run the vagrant, all it's downloaded and you don't have to spend a lot of time in the process.
 
+Example: 
+
+```bash
+## common.sh script: download SO dependencies, install docker and k8s cli
+cat <<EOF | sudo tee common.sh
+#!/bin/bash -e
+
+## update system
+sh /vagrant/update_system.sh
+
+## disable swap memory (if this step fails, the installation will fail)
+sh /vagrant/disable_swap_memory.sh
+
+## Set up the IPV4 bridge on all nodes
+sh /vagrant/setup_overlay_IPV4_bridge_in_modules.sh
+
+## Install kubelet, kubeadm, and kubectl on each node
+sh /vagrant/install_kubelet_kubeadm_kubectl.sh
+
+## Install docker and containerd
+sh /vagrant/install_docker_containerd.sh
+EOF
+```
+
+setup vagrantfile
+```bash
+  config.vm.define "worker" do |worker1|
+    worker1.vm.box = "master_node"
+    worker1.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
+    worker1.vm.provision "shell", path: "common.sh"
+  end
+```
+Execute `vagrant up`, after that `vagrant package worker --output k8s_cli_docker`
+
 ## Install virtualbox
 
 ## Install vagrant
