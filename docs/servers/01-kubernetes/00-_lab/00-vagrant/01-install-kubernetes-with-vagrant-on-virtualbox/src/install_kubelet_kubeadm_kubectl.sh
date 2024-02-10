@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 sudo apt-get update -y
 
@@ -16,5 +16,5 @@ sudo apt install -y kubelet kubeadm kubectl
 
 sudo apt-mark hold kubelet kubeadm kubectl
 
-sudo kubeadm config images pull
+
 

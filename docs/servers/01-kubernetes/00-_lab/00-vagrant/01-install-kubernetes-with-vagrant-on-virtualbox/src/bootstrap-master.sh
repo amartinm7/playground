@@ -19,8 +19,8 @@
 
 ## setup host name
 MY_MASTER_NODE_NAME=$1 #"master-node"
-MY_WORKER_NODE_NAME=$2 #"worker-node"
-MY_MASTER_NODE_IP=$3 #"master-node"
+MY_MASTER_NODE_IP=$2 #"master-node"
+MY_WORKER_NODE_NAME=$3 #"worker-node"
 MY_WORKER_NODE_IP=$4 #"worker-node"
 sh /vagrant/setup_host_name.sh $MY_MASTER_NODE_NAME
 
@@ -28,9 +28,7 @@ sh /vagrant/setup_host_name.sh $MY_MASTER_NODE_NAME
 sh /vagrant/setup_etc_hosts_with_eth1_ip.sh $MY_MASTER_NODE_NAME
 
 ## add the woker-node into the master-node /etc/hosts to get visibility between them
-MY_HOST_NAME_REF=$2 #"worker"
-MY_HOST_IP_REF=$3 #"192.168.56.2"
-sh /vagrant/setup_etc_hosts_with_fixed_ips.sh $MY_HOST_IP_REF $MY_HOST_NAME_REF
+sh /vagrant/setup_etc_hosts_with_fixed_ips.sh $MY_MASTER_NODE_NAME $MY_MASTER_NODE_IP $MY_WORKER_NODE_NAME $MY_WORKER_NODE_IP
 
 ## Initialize the Kubernetes cluster on the master node (master node only)
 sh /vagrant/initialize_k8s_cluster_on_master_node.sh $MY_MASTER_NODE_NAME
@@ -42,7 +40,7 @@ sh /vagrant/install_network_plugin_on_master_node.sh
 sh /vagrant/create_token_and_sha256_certificate.sh
 
 # Install the kubernetes dashboard
-sh /vagrant/install_dashboard.sh
+# sh /vagrant/install_dashboard.sh
 
 ## check the cluster info
 #

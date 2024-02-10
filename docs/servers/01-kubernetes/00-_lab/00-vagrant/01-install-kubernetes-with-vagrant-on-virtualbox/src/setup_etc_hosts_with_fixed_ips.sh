@@ -1,12 +1,10 @@
 #!/bin/bash -e
 
 ## setup fixed IP.
-# Use cases:
-# - to the master-node, setup the worker ip,
-# - to the worker-node, setup the master-node ip,
-MY_HOST_WORKER_NAME=$1
-MY_HOST_WORKER_IP=$2
-# sudo echo "$MY_HOST_WORKER_IP" "$MY_HOST_WORKER_NAME" >> /etc/hosts
-sudo echo "$MY_HOST_WORKER_IP" "$MY_HOST_WORKER_NAME" | sudo tee -a /etc/hosts
-
-echo "Setup /etc/hosts fixed ips $MY_ETH_IP $MY_HOST_NAME" | sudo tee setup_etc_hosts_with_fixed_ips.output.txt
+MY_MASTER_NODE_NAME=$1 #"master-node"
+MY_MASTER_NODE_IP=$2 #"master-node"
+MY_WORKER_NODE_NAME=$3 #"worker-node"
+MY_WORKER_NODE_IP=$4 #"worker-node"
+# 
+sudo echo "$MY_MASTER_NODE_IP" "$MY_MASTER_NODE_NAME" | sudo tee -a /etc/hosts
+sudo echo "$MY_WORKER_NODE_IP" "$MY_WORKER_NODE_NAME" | sudo tee -a /etc/hosts
