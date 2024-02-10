@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/bash -e
 
-#
 MY_HOST_NAME=$1
-#
-sudo kubeadm config images pull
+
+echo "Init cluster with $MY_HOST_NAME" | sudo tee initialize_k8s_cluster_on_master_node.output.txt
+
+# sudo kubeadm config images pull
 
 sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint="$MY_HOST_NAME"
 

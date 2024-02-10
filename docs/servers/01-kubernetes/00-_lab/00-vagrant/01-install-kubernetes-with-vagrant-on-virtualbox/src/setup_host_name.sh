@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # change host name
-echo "Reading param MY_HOST_NAME: $1"
+echo "Setup hostname as machine name MY_HOST_NAME: $1" | sudo tee setup_host_name.output.txt
 #
 MY_HOST_NAME=$1
 #
