@@ -5,7 +5,7 @@ sudo apt install -y docker.io
 
 sudo mkdir /etc/containerd
 
-sudo sh -c "containerd config default > /etc/containerd/config.toml"
+sudo sh -c "containerd config default | sudo tee /etc/containerd/config.toml"
 
 sudo sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/config.toml
 
