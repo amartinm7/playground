@@ -87,7 +87,6 @@ Vagrant.configure("2") do |config|
   #     FORCE=#{ENV['FORCE']}       \
   #     bash my_script.sh)
   # end
-
   config.vm.define "master" do |master|
     # master.vm.box = "hashicorp/bionic64"
     master.vm.box = "master_node"
@@ -97,11 +96,11 @@ Vagrant.configure("2") do |config|
     master.vm.network "forwarded_port", guest: 8001, host: 8001
   end
 
-  #config.vm.define "worker" do |worker1|
-  #  worker1.vm.box = "hashicorp/bionic64"
-  #  worker1.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
-  #  worker1.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'worker' 'master-node' '192.168.56.1'"
-  #end
+  config.vm.define "worker" do |worker1|
+    worker1.vm.box = "master_node"
+    worker1.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
+    worker1.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'worker' 'master-node' '192.168.56.1'", run: "always"
+  end
 end
 
 # git reset --hard origin/master
