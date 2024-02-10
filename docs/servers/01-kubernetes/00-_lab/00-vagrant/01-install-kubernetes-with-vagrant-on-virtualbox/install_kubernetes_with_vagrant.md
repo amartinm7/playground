@@ -15,6 +15,10 @@ After that, you can run vagrant and the you will have the kubernetes cluster run
   - Open the forwarded_port into the master box to allow communicate the master host with the host
   - Setup the scripts to be executed in order create the kubernetes cluster. The current script will have more references to another scripts.
 
+### Accelerate the proccess
+
+Everytime we run the vagrant file `vagrant up` the master and worker starts to download a lot of dependencies as updating the SO, downloading the docker and kubernetes files. This is doing that the process is so slow, because we have to spend a lot of time to do it every time. So in order to improve th process, the first thing that we have to do is to create a box with the downloaded updates. Once done, we package the current box. The box can be named 'my_k8s_so_updates'. To that, we do `vagrant up` and exec only the so dependecies script. We create the box `vagrant package my_k8s_so_updates`. After that we can use it into the vagrant file as `master.vm.box="my_k8s_so_updates"` and `worker.vm.box="my_k8s_so_updates"`. We iterate the process creating more boxes with the docker and kubernetes files. So in this way, when we run the vagrant, all it's downloaded and you don't have to spend a lot of time in the process.
+
 ## Install virtualbox
 
 ## Install vagrant
