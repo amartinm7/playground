@@ -11,9 +11,9 @@ After that, you can run vagrant and the you will have the kubernetes cluster run
 - Define the hypervisor or provider. Virtualbox is fine, but you have to install it into your host.
 - Define the shared folders between the host machine (your host) and the guess machine (the created box)
 - Define the guests. To create a kubernets cluster, we want a master and worker node `config.vm.define "master"` and `config.vm.define "worker"`
--- Define a public network and the current ip for every guest. The brige interface is the interface is currently used to access to internet. In my case is wifi ethernet. You can check the interfaces with the command ` ip --brief addr show` for instance.
--- Open the forwarded_port into the master box to allow communicate the master host with the host
-  -- Setup the scripts to be executed in order create the kubernetes cluster
+  - Define a public network and the current ip for every guest. The brige interface is the interface is currently used to access to internet. In my case is wifi ethernet. You can check the interfaces with the command ` ip --brief addr show` for instance.
+  - Open the forwarded_port into the master box to allow communicate the master host with the host
+  - Setup the scripts to be executed in order create the kubernetes cluster
 
 ## Install virtualbox
 
