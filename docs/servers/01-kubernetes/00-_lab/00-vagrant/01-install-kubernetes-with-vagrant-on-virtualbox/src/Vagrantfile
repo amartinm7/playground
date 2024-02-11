@@ -92,7 +92,7 @@ Vagrant.configure("2") do |config|
     # master.vm.box = "hashicorp/bionic64"
     # master.vm.box = "k8s_cli_docker"
     master.vm.box = "master-with-kubeadm"
-    master.vm.network "public_network", ip: "10.0.0.10", bridge: "wlp0s20f3"
+    master.vm.network "private_network", ip: "10.0.0.10"
     master.vm.provision "shell", path: "bootstrap-master-with-kubeadmin.sh", :args => "'master' '10.0.0.10' 'worker' '10.0.0.11'", run: "always"
     # master.vm.network "forwarded_port", guest: 80, host: 8080
     # master.vm.network "forwarded_port", guest: 8001, host: 8001
@@ -101,14 +101,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "worker" do |worker|
     worker.vm.box = "k8s_cli_docker"
-    worker.vm.network "public_network", ip: "10.0.0.11", bridge: "wlp0s20f3"
+    worker.vm.network "private_network", ip: "10.0.0.11"
     worker.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'master' '10.0.0.10' 'worker' '10.0.0.11'", run: "always"
   end
 #
   #config.vm.define "worker" do |worker|
   #  worker.vm.box = "master_node"
   #  worker.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
-  #  worker.vm.provision "shell", path: "common.sh", :args => "'worker' 'master-node' '192.168.56.1'", run: "always"
+  #  worker.vm.provision "shell", path: "common.sh", :args => "'worker' 'master' '192.168.56.1'", run: "always"
   #end
 end
 #

@@ -18,20 +18,20 @@
 # sh /vagrant/common.sh
 
 ## setup host name
-MY_MASTER_NODE_NAME=$1 #"master-node"
-MY_MASTER_NODE_IP=$2 #"master-node"
+MY_MASTER_NODE_NAME=$1 #"master"
+MY_MASTER_NODE_IP=$2 #"master"
 MY_WORKER_NODE_NAME=$3 #"worker-node"
 MY_WORKER_NODE_IP=$4 #"worker-node"
-sh /vagrant/setup_host_name.sh $MY_MASTER_NODE_NAME
+sh /vagrant/setup_host_name.sh "$MY_MASTER_NODE_NAME"
 
 ## setup /etc/hosts
-sh /vagrant/setup_etc_hosts_with_eth1_ip.sh $MY_MASTER_NODE_NAME
+sh /vagrant/setup_etc_hosts_with_eth1_ip.sh "$MY_MASTER_NODE_NAME"
 
 ## add the woker-node into the master-node /etc/hosts to get visibility between them
-sh /vagrant/setup_etc_hosts_with_fixed_ips.sh $MY_MASTER_NODE_NAME $MY_MASTER_NODE_IP $MY_WORKER_NODE_NAME $MY_WORKER_NODE_IP
+sh /vagrant/setup_etc_hosts_with_fixed_ips.sh "$MY_MASTER_NODE_NAME" "$MY_MASTER_NODE_IP" "$MY_WORKER_NODE_NAME" "$MY_WORKER_NODE_IP"
 
 ## Initialize the Kubernetes cluster on the master node (master node only)
-sh /vagrant/initialize_k8s_cluster_on_master_node.sh $MY_MASTER_NODE_NAME
+sh /vagrant/initialize_k8s_cluster_on_master_node.sh "$MY_MASTER_NODE_NAME"
 
 ## Installing the network plugin on the master node
 # sh /vagrant/install_network_plugin_on_master_node.sh

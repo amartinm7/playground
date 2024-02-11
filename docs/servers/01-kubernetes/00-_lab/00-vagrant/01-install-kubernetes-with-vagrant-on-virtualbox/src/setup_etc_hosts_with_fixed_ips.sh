@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 ## setup fixed IP.
-MY_MASTER_NODE_NAME=$1 #"master-node"
-MY_MASTER_NODE_IP=$2 #"master-node"
+MY_MASTER_NODE_NAME=$1 #"master"
+MY_MASTER_NODE_IP=$2 #"master"
 MY_WORKER_NODE_NAME=$3 #"worker-node"
 MY_WORKER_NODE_IP=$4 #"worker-node"
 # 
