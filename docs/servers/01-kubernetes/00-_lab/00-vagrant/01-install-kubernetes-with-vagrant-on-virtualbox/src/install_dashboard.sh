@@ -1,7 +1,12 @@
 #!/bin/bash
 
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
 curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-kubectl apply -f recommended.yaml
+
+sudo mv recommended.yaml dashboard.yaml
+
+kubectl apply -f dashboard.yaml
 
 cat <<EOF | sudo tee dashboard-adminuser.yaml
 apiVersion: v1

@@ -34,10 +34,10 @@ sh /vagrant/setup_etc_hosts_with_fixed_ips.sh $MY_MASTER_NODE_NAME $MY_MASTER_NO
 sh /vagrant/initialize_k8s_cluster_on_master_node.sh $MY_MASTER_NODE_NAME
 
 ## Installing the network plugin on the master node
-sh /vagrant/install_network_plugin_on_master_node.sh
+# sh /vagrant/install_network_plugin_on_master_node.sh
 
 ## Create a token and sha256 certificate
-sh /vagrant/create_token_and_sha256_certificate.sh
+# sh /vagrant/create_token_and_sha256_certificate.sh
 
 # Install the kubernetes dashboard
 # sh /vagrant/install_dashboard.sh

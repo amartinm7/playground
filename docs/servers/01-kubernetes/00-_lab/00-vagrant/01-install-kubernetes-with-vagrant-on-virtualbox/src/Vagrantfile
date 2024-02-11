@@ -64,8 +64,9 @@ Vagrant.configure("2") do |config|
   #   # Customize the amount of memory on the VM:
     vb.memory = "2048"
     vb.cpus = "2"
+    vb.customize ["modifyvm", :id, "--groups", ("/k8s")]
   end
-  #
+  ##
   # View the documentation for the provider you are using for more
   # information on available options.
 
@@ -89,26 +90,33 @@ Vagrant.configure("2") do |config|
   # end
   config.vm.define "master" do |master|
     # master.vm.box = "hashicorp/bionic64"
-    master.vm.box = "k8s_cli_docker"
-    master.vm.network "public_network", ip: "192.168.56.1", bridge: "wlp0s20f3"
-    master.vm.provision "shell", path: "bootstrap-master.sh", :args => "'master-node' '192.168.56.1' 'worker' '192.168.56.2'", run: "always"
-    master.vm.network "forwarded_port", guest: 80, host: 8080
-    master.vm.network "forwarded_port", guest: 8001, host: 8001
+    # master.vm.box = "k8s_cli_docker"
+    master.vm.box = "master-with-kubeadm"
+    master.vm.network "public_network", ip: "10.0.0.10", bridge: "wlp0s20f3"
+    master.vm.provision "shell", path: "bootstrap-master-with-kubeadmin.sh", :args => "'master' '10.0.0.10' 'worker' '10.0.0.11'", run: "always"
+    # master.vm.network "forwarded_port", guest: 80, host: 8080
+    # master.vm.network "forwarded_port", guest: 8001, host: 8001
+    # master.vm.network "forwarded_port", guest: 6643, host: 6643
   end
 
   config.vm.define "worker" do |worker|
     worker.vm.box = "k8s_cli_docker"
-    worker.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
-    worker.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'master-node' '192.168.56.1' 'worker' '192.168.56.2'", run: "always"
+    worker.vm.network "public_network", ip: "10.0.0.11", bridge: "wlp0s20f3"
+    worker.vm.provision "shell", path: "bootstrap-worker.sh", :args => "'master' '10.0.0.10' 'worker' '10.0.0.11'", run: "always"
   end
-
+#
   #config.vm.define "worker" do |worker|
   #  worker.vm.box = "master_node"
   #  worker.vm.network "public_network", ip: "192.168.56.2", bridge: "wlp0s20f3"
   #  worker.vm.provision "shell", path: "common.sh", :args => "'worker' 'master-node' '192.168.56.1'", run: "always"
   #end
 end
+#
+#  you are right. In VMware workstation, i changed the subnet address for host-only and NAT from 192.168.177.0 / 192.168.152.0 to 172.16.177.0 / 172.16.152.0
 
+# kill process
+# ps aux | grep -i vagrant
+#
 # git reset --hard origin/master
 # FIX Stderr: VBoxManage: error: VirtualBox can't operate in VMX root mode. Please disable the KVM kernel extension
 #
