@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo rm -f /vagrant_data/token.txt /vagrant_data/certificate.txt
+
 # creates token and save it into the vagrant shared folder
 sudo kubeadm token create | sudo tee /vagrant_data/token.txt
 
