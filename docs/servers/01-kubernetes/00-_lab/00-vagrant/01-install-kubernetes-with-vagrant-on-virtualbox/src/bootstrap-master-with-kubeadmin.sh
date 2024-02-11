@@ -33,6 +33,13 @@ MY_WORKER_NODE_IP=$4 #"worker-node"
 ### Initialize the Kubernetes cluster on the master node (master node only)
 # sh /vagrant/initialize_k8s_cluster_on_master_node.sh $MY_MASTER_NODE_NAME
 
+cat <<EOF | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf
+[Resolve]
+DNS=DNS=8.8.8.8 1.1.1.1
+EOF
+
+sudo systemctl restart systemd-resolved
+
 ## Installing the network plugin on the master node
 sh /vagrant/install_network_plugin_on_master_node.sh
 
