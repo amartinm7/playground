@@ -1,6 +1,10 @@
 #!/bin/bash
 
 MY_MASTER_NODE_NAME=$1 #"master"
+NODENAME=$(hostname -s) #"master"
+CONTROL_IP="10.0.0.10"
+POD_CIDR="172.16.1.0/16"
+SERVICE_CIDR="172.17.1.0/18"
 
 echo "Init cluster with $MY_MASTER_NODE_NAME" | sudo tee initialize_k8s_cluster_on_master_node.output.txt
 
@@ -8,9 +12,9 @@ sudo apt-get update -y
 
 sudo kubeadm config images pull
 
-sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint="$MY_MASTER_NODE_NAME"
+# sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint="$MY_MASTER_NODE_NAME"
 
-# sudo kubeadm init --apiserver-advertise-address=$CONTROL_IP --apiserver-cert-extra-sans=$CONTROL_IP --pod-network-cidr=$POD_CIDR --service-cidr=$SERVICE_CIDR --node-name "$NODENAME" --ignore-preflight-errors Swap
+sudo kubeadm init --apiserver-advertise-address=$CONTROL_IP --apiserver-cert-extra-sans=$CONTROL_IP --pod-network-cidr=$POD_CIDR --service-cidr=$SERVICE_CIDR --node-name "$NODENAME" --ignore-preflight-errors Swap
 
 # Create kube config
 sudo mkdir -p /home/vagrant/.kube

@@ -28,6 +28,9 @@ sh /vagrant/setup_etc_hosts_with_eth1_ip.sh "$MY_WORKER_NODE_NAME"
 ## add the master-node into the worker-node /etc/hosts to get visibility between them
 sh /vagrant/setup_etc_hosts_with_fixed_ips.sh "$MY_MASTER_NODE_NAME" "$MY_MASTER_NODE_IP" "$MY_WORKER_NODE_NAME" "$MY_WORKER_NODE_IP"
 
+if [ ! -d /etc/systemd/resolved.conf.d ]; then
+	sudo mkdir /etc/systemd/resolved.conf.d/
+fi
 cat <<EOF | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf
 [Resolve]
 DNS=DNS=8.8.8.8 1.1.1.1

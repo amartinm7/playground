@@ -33,6 +33,9 @@ MY_WORKER_NODE_IP=$4 #"worker-node"
 ### Initialize the Kubernetes cluster on the master node (master node only)
 # sh /vagrant/initialize_k8s_cluster_on_master_node.sh $MY_MASTER_NODE_NAME
 
+if [ ! -d /etc/systemd/resolved.conf.d ]; then
+	sudo mkdir /etc/systemd/resolved.conf.d/
+fi
 cat <<EOF | sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf
 [Resolve]
 DNS=DNS=8.8.8.8 1.1.1.1
