@@ -94,9 +94,9 @@ Vagrant.configure("2") do |config|
     master.vm.box = "master-with-kubeadm"
     master.vm.network "private_network", ip: "10.0.0.10"
     master.vm.provision "shell", path: "bootstrap-master-with-kubeadmin.sh", :args => "'master' '10.0.0.10' 'worker' '10.0.0.11'", run: "always"
-    # master.vm.network "forwarded_port", guest: 80, host: 8080
-    # master.vm.network "forwarded_port", guest: 8001, host: 8001
-    # master.vm.network "forwarded_port", guest: 6643, host: 6643
+    master.vm.network "forwarded_port", guest: 80, host: 8080
+    master.vm.network "forwarded_port", guest: 8001, host: 8001
+    master.vm.network "forwarded_port", guest: 6643, host: 6643
   end
 
   config.vm.define "worker" do |worker|

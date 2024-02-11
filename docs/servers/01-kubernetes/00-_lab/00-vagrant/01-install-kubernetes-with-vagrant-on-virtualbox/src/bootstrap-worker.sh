@@ -15,8 +15,6 @@
 ## Install docker and containerd
 #h /vagrant/install_docker_containerd.sh
 
-# sh /vagrant/common.sh
-
 ## setup host name
 MY_MASTER_NODE_NAME=$1 #"master"
 MY_MASTER_NODE_IP=$2 #"master"
