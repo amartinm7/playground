@@ -1,3 +1,12 @@
 # Handling errors
 
 functores, monoides, monadas
+
+Functional programming in Go involves the following concepts:
+- First-class and higher-order functions: functions can be assigned to variables, passed as arguments to other functions, or returned from other functions.
+- Pure functions: functions that do not modify their input and always return the same output for the same input.
+- Recursion: a function that calls itself.
+- Lazy evaluation: a technique that delays the evaluation of an expression until its value is needed.
+- Type system: Go's type system supports functional programming concepts.
+- Referential transparency: an expression can be replaced with its value without changing the behavior of the program.
+- Data structures: functional programming in Go can be done with immutable data structures.
