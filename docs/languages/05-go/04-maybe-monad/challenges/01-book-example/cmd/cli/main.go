@@ -45,7 +45,7 @@ type Repository[T any] struct {
 }
 
 func (r *Repository[T]) Save(book T) Maybe[T] {
-	fmt.Println("El libro se guardó en la base de datos", book)
+	fmt.Println("El libro se guardó en la base de datos, si no se guarda puede retornar Nothing(err)", book)
 	return Just(book)
 }
 
@@ -64,8 +64,8 @@ func main() {
 			return Just(this.updatePrice(100))
 		}).OnSuccess(
 		func(this Book) Maybe[Book] { return repository.Save(this) }).OnError(
-		func(err error) error {
-			return err
+		func(thisError error) error {
+			return thisError
 		})
 
 	if resultant1.err != nil {
@@ -79,8 +79,8 @@ func main() {
 		func(this Book) Maybe[Book] {
 			return repository.Save(this)
 		}).OnError(
-		func(err error) error {
-			return err
+		func(thisError error) error {
+			return thisError
 		})
 
 	if resultant2.err != nil {
