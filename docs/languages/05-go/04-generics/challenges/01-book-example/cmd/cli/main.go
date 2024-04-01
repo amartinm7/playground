@@ -60,10 +60,10 @@ func main() {
 	var defaultBook = Book{ID: 1, Title: "El nombre del viento", Price: 20.0}
 	repository := Repository[Book]{}
 	resultant1 := repository.FindBy(1, defaultBook).OnSuccess(
-		func(book Book) Maybe[Book] {
-			return Just(book.updatePrice(100))
+		func(this Book) Maybe[Book] {
+			return Just(this.updatePrice(100))
 		}).OnSuccess(
-		func(book Book) Maybe[Book] { return repository.Save(book) }).OnError(
+		func(this Book) Maybe[Book] { return repository.Save(this) }).OnError(
 		func(err error) error {
 			return err
 		})
@@ -73,11 +73,11 @@ func main() {
 	}
 
 	resultant2 := repository.FindBy(2, defaultBook).OnSuccess(
-		func(book Book) Maybe[Book] {
-			return Just(book.updatePrice(100))
+		func(this Book) Maybe[Book] {
+			return Just(this.updatePrice(100))
 		}).OnSuccess(
-		func(book Book) Maybe[Book] {
-			return repository.Save(book)
+		func(this Book) Maybe[Book] {
+			return repository.Save(this)
 		}).OnError(
 		func(err error) error {
 			return err
