@@ -2,6 +2,8 @@
 
 functores, monoides, monadas
 
+Either<Left, Right>
+
 Functional programming in Go involves the following concepts:
 - First-class and higher-order functions: functions can be assigned to variables, passed as arguments to other functions, or returned from other functions.
 - Pure functions: functions that do not modify their input and always return the same output for the same input.
