@@ -63,9 +63,7 @@ func main() {
 		func(book Book) Maybe[Book] {
 			return Just(book.updatePrice(100))
 		}).OnSuccess(
-		func(book Book) Maybe[Book] {
-			return repository.Save(book)
-		}).OnError(
+		func(book Book) Maybe[Book] { return repository.Save(book) }).OnError(
 		func(err error) error {
 			return err
 		})
