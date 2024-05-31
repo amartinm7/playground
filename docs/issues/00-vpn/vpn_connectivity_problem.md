@@ -12,4 +12,4 @@ sudo networksetup -setv6off Wi-Fi
 ![disable_ipv6.png](_img%2Fdisable_ipv6.png)
 
 
-##  
+## disable NAT from router
