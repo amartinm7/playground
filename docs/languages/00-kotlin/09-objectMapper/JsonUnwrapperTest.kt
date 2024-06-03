@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.skyscreamer.jsonassert.JSONAssert
 
-class MyTest {
+class JsonUnwrapperTest {
 
     @Test
     fun `should validate the brand object is embedded into the request and response objects`() {
