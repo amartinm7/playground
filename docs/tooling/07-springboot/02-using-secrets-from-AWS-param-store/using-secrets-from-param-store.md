@@ -26,6 +26,26 @@ aws:
 
 ![spring_boot_param_store_config.png](_img%2Fspring_boot_param_store_config.png)
 
+Create several properties files enable the param-store in the application-dev.yml, application-pre.yml, and application-pro.yml files.
+
+application-dev.yml
+```yaml
+aws:
+  paramstore:
+    enabled: false
+```
+application-pre.yml
+```yaml
+aws:
+  paramstore:
+    enabled: true
+```
+application-pro.yml
+```yaml
+aws:
+  paramstore:
+    enabled: true
+```
 ## AWS Console Parameter Store
 
 Go to the AWS Console and create a new parameter:
