@@ -1,6 +1,6 @@
 # Using secrets from Param Store    
 
-In this guide, we will learn how to use secrets from AWS Param Store in a Spring Boot application.
+In this guide, we will learn how to use secrets from AWS KMS in a Spring Boot application.
 
 setup your build.gradle.kt with parameter-store lib
 
@@ -12,55 +12,50 @@ or kms-lib
 
 ## Setup springboot bootstrap.yml
 
-Into the bootstrap file, setup the param-store config:
+Into the bootstrap file, setup the kms config:
 
 ```yaml
 spring:
   application:
     name: ms-your-application-name
-  cloud:
-    config:
-      enabled: false
       
 aws:
-  paramstore:
-    prefix: /microservices/${spring.application.name}
-    default-context: application
-    name: ${aws.paramstore.default-context}
-    enabled: false
   kms:
     region: eu-west-1
+    enabled: true
 ```
 
 ![spring_boot_param_store_config.png](_img%2Fspring_boot_param_store_config.png)
 
-Create several properties files enable the param-store in the application-dev.yml, application-pre.yml, and application-pro.yml files.
+Create several properties files enable the kms in the application-dev.yml, application-pre.yml, and application-pro.yml files.
 
 application-dev.yml
 ```yaml
 aws:
-  paramstore:
+  kms:
     enabled: false
 ```
 application-pre.yml
 ```yaml
 aws:
-  paramstore:
+  kms:
     enabled: true
 ```
 application-pro.yml
 ```yaml
 aws:
-  paramstore:
+  kms:
     enabled: true
 ```
 ![enable-services-on-bootstrapping.png](_img%2Fenable-services-on-bootstrapping.png)
 
 ## AWS Console Parameter Store
 
-Go to the AWS Console and create a new parameter:
+Go to the AWS Console and KMS to create a new master key for encrypting and decrypting:
 
-![aws-parameter-store.png](_img%2Faws-parameter-store.png)
+![kms-console.png](_img%2Fkms-console.png)
+
+![kms-console-new.png](_img%2Fkms-console-new.png)
 
 To do that, click on the "create parameter" button and fill the form:
 
