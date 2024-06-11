@@ -2,6 +2,14 @@
 
 In this guide, we will learn how to use secrets from AWS Param Store in a Spring Boot application.
 
+setup your build.gradle.kt with parameter-store lib
+
+![param-store-dependencies.png](_img%2Fparam-store-dependencies.png)
+
+or kms-lib
+
+![kms-dependencies.png](_img%2Fkms-dependencies.png)
+
 ## Setup springboot bootstrap.yml
 
 Into the bootstrap file, setup the param-store config:
@@ -46,6 +54,8 @@ aws:
   paramstore:
     enabled: true
 ```
+![enable-services-on-bootstrapping.png](_img%2Fenable-services-on-bootstrapping.png)
+
 ## AWS Console Parameter Store
 
 Go to the AWS Console and create a new parameter:
