@@ -57,27 +57,37 @@ Go to the AWS Console and KMS to create a new master key for encrypting and decr
 
 ![kms-console-new.png](_img%2Fkms-console-new.png)
 
-To do that, click on the "create parameter" button and fill the form:
+## Encrypt the secret value
 
-- fill a key name, split by "/" to create a path
-- select standard tier
-- select secure string to use KMS to encrypt the API-KEY value
-- Paste the value and the end of form and click on the "create parameter" button
+Use the `KMS command` to encrypt the value you want to use as password or secret in your application.
+For instance, the database password, the API key, or any other secret you want to use in your application.
+You can use a random key generator online service to generate the value.
 
-![aws-parameter-store-form.png](_img%2Faws-parameter-store-form.png)
+Apply the command to encrypt the value:
 
-The KMS service encrypts the value and stores it in the parameter store.
+```bash
+aws kms encrypt \
+--key-id <ARN_of_my_KMS_master_key> \
+--plaintext "my-secret-token-before-encrypt" \
+--output text \
+--query CiphertextBlob
+```
+## Decrypt the secret value on springboot
 
-## How to use it in your code
+It occurs automatically when you use the value in your application.yml file in boostrapping time.
 
-In your application.yml, use the `${your-param-store.key}` to get the value from the parameter store. Use the part without the prefix to get the value. 
+In your application.yml, use the {cipher} token to mark the secret to decrypt the value automatically when springboot starts up. The decrypt value is used in the application in runtime as password to connect to the database for instance.
 
-If you see the bootstrap.yml file, you can see the prefix used to get the value from the parameter store. So you need to use the key without the prefix in the application.yml file.
-
-```application.yml
-app:
-  yourapp:
-    apiKey: "${your.key}"
+```yaml
+    password: "{cipher}AQIC..."
 ```
 
-Springboot will use the KMS library to decrypt the value and use it in your application.
+## Decrypt the secret value on local
+
+```bash
+aws kms decrypt \
+--ciphertext-blob 'AQICAHjmSj9FB9J0...' \
+--key-id alias/my-kms-key \
+--output text \
+--query Plaintext | base64 -d
+```
