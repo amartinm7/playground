@@ -5,12 +5,12 @@ For example, you can change the commit message, add or remove files, or change t
 
 ```
 HEAD
-Commit1  aac723ab
-Commit2  cdc213ff
-Commit3  aff521cd
+Commit1  aaaaaaaa
+Commit2  cccccccc
+Commit3  dddddddd
 ```
 
-Choose the commit you want to modify. In this case, we want to modify `cdc213ff`.
+Choose the commit you want to modify. In this case, we want to modify `aaaaaaaa`.
 ```bash
 git rebase --interactive cdc213ff^
 ```
@@ -19,11 +19,11 @@ This will open an editor with a list of commits. Find the commit you want to mod
 
 ```bash     
 
-pick aac723ab
+pick aaaaaaaa
 
-edit cdc213ff   # Change pick to edit       
+edit cccccccc   # Change pick to edit       
 
-pick aff521cd
+pick dddddddd
 ```
 
 Save and close the editor. Git will stop at the commit you want to modify.
