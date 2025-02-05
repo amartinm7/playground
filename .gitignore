@@ -1,0 +1,21 @@
+### Gradle template
+.gradle
+build/
+out/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+.idea
+*.iml
+
+# Jenv
+.version
+.java-version
+
+#vagrant
+.vagrant
+/docs/languages/01-nodejs/02-rest-api/src/node_modules/
