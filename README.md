@@ -14,6 +14,9 @@ git add README.md
 git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/your-github-user-goes-here/playground.git
+
+git push --set-upstream https://user:pass-apikey@github.com/amartinm7/playground.git master
+
 git push -u origin main
 ```
 …or push an existing repository from the command line
