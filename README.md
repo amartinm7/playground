@@ -49,4 +49,6 @@ git push --set-upstream https://user:pass-apikey@github.com/amartinm7/playground
 
 # global configuration
 echo "protocol=https\nhost=github.com" | git credential fill
+
+cat ~/.gitconfig
 ```
