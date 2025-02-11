@@ -59,3 +59,8 @@ Monitoring - prometheus
 ![devops-05.jpg](_img%2Fdevops-05.jpg)
 
 ![devops-06.jpg](_img%2Fdevops-06.jpg)
+
+
+## localstack
+
+https://github.com/localstack/localstack
