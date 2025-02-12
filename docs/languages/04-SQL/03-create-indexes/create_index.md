@@ -102,7 +102,7 @@ Index Scan using usuarios_id_idx on usuarios  (cost=0.29..8.30 rows=1 width=32)
   Index Cond: (id = 123)
 ```
 
-### INFRASCTRUCTURA
+### INFRAESCTRUCTURA
 
 Muy muy importante tener en cuenta el tamaño de la RAM del servidor y la memoria principal. Resulta que si tenemos una consulta que retorna mas gigas/megas, que la memoria que disponemos, el servidor tiene que paginar la memoria, lo que hace que la consulta sea muy lenta. Es decir, en la memoria cargada no encuentra el resultado, entonces tiene que ir a buscar otra 'página' de registros a la memoria secundaria del servidor, lo que hace que la consulta sea muy lenta. Que pasa si esta página no tiene los resultados, pues tiene que hacer otra busqueda en la memoria secundaria, y asi sucesivamente hasta que encuentra el resultado. Pero estas busquedas en la memoria secundaria son muy lentas, por lo que la consulta se ralentiza mucho. Ademas, cuando tiene los datos cargados en memoria, hay que tener en cuenta que si tiene un indice o no para buscar. Porque en caso negativo tiene que hacer un scan secuencial de la tabla entera, lo que hace que la consulta sea muy lenta. 
 
