@@ -12,4 +12,6 @@ import org.junit.jupiter.api.Test
 
 Assertions.assertThat((it["updated_at"] as Timestamp).toOffsetDateTime())
     .isCloseTo(NOW, Assertions.within(3, ChronoUnit.MINUTES))
+
+private fun Timestamp.toOffsetDateTime(): OffsetDateTime = toInstant().atOffset(ZoneOffset.UTC)
 ```
