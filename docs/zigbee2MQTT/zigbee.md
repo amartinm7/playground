@@ -42,3 +42,11 @@ or
 sudo usermod -aG dialout $USER && reboot
 ```
 
+## run the docker-compose.yml
+
+```bash
+docker-compose up -d
+```
+
+open a browser on the `http://localhost:8080/` url
+
