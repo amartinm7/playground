@@ -1,5 +1,9 @@
 # Zigbee2MQTT
 
+official documentation:
+
+https://www.zigbee2mqtt.io/guide/getting-started/
+
 ## Insert the zigbee dongle on the usb port
 
 ```bash
