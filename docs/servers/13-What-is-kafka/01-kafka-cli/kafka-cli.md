@@ -56,3 +56,23 @@ To fetch all the topics configured on machine, we can use kafka-topics.
 ```bash
 kafka-topics --list --bootstrap-server localhost:9092
 ```
+
+## Send messages to topic
+
+```
+echo '{"adId": "123456789"}' | kcat -P -b localhost:9092 -t topic_name
+```
+
+## Consume messages from topic
+
+```
+kcat -C -b localhost:9092 -t topic_name -o beginning
+```
+
+## revisar config consumer_group
+
+Look for the consumer_group name on application.yml and use it to consume messages from the topic.
+
+```
+kafka-consumer-groups --bootstrap-server localhost:9092 --group consumer_group_name --describe
+```
