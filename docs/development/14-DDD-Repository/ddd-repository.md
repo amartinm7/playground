@@ -1,5 +1,18 @@
 # Repository Pattern in DDD: When **NOT** to Use It
 
+**¿Qué es el Patrón de Repositorio?**
+
+El patrón de repositorio actúa como un intermediario entre la capa de dominio y la capa de datos, encapsulando la lógica de acceso a los datos y las operaciones realizadas sobre ellos. Esto permite que la lógica del dominio permanezca agnóstica respecto a los mecanismos de persistencia, como `bases de datos` o `servicios externos`.
+
+**Implementación del Patrón de Repositorio**
+
+Un repositorio debe corresponder a una raíz de agregado específico en tu modelo de dominio. Aquí hay algunas recomendaciones para implementarlo:
+Enfoque en el Agregado: Cada repositorio debe manejar un solo agregado, asegurando así que las reglas de negocio se mantengan intactas
+
+1.- Interfaz Clara: Las interfaces de los repositorios deben centrarse en operaciones esenciales (agregar, eliminar, buscar), evitando complejidades innecesarias
+
+2.- Métodos Específicos del Dominio: En lugar de exponer operaciones crudas de base de datos, los métodos deben reflejar las operaciones del dominio, como findByUserId o addCommentToPost
+
 ## Quick Reminder – What Is a Repository?
 - Manages **Aggregate Roots** from the domain
 - Exposes only **minimal** persistence/query operations (`findById`, `save`, etc.)
