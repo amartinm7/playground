@@ -23,6 +23,13 @@ Topics
 - Actors, Commands, Events, and Subscriptions
 
 
+(Magic) Delete unused docker images and containers:
+
+```
+docker system prune -f
+```
+
+
 # What are the different types of performance tests?
 
 - `Load Tests` Load testing simulates the number of virtual users that might use an application. 
