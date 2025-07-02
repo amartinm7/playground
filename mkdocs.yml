@@ -1,6 +1,9 @@
-site_name: My Docs
+site_name: Playground
+site_url: https://amartinm7.github.io/playground/
 theme:
   name: material
   favicon: './docs/_img/favicon.ico'
   features:
     - navigation.path
+extra_css:
+  - ./docs/css/extra.css
