@@ -93,7 +93,7 @@ Setup the notebook environment in the upper right corner
 
 Open the jupyter notebook. On the top right corner, choose configure Jupyter server.
 
-![configure_jupyter_interpreter.png](_img/configure_jupyter_interpreter.png)
+![configure_jupyter_interpreter.jpg](_img/configure_jupyter_interpreter.jpg)
 
 Select python interpreter, choose the uoc20242pec3
 
@@ -101,7 +101,7 @@ Select python interpreter, choose the uoc20242pec3
 
 Somtimes is needed to click on reload bottom
 
-![settings_add_interpreter.png](_img/settings_add_interpreter.png)
+![settings_add_interpreter.jgp](_img/settings_add_interpreter.jpg)
 
 Apply the changes
 
