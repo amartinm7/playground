@@ -1,6 +1,4 @@
-# playground
-
-<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="docs/css/extra.css">
 
 <div class="custom-bg" >
 
