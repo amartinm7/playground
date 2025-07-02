@@ -19,3 +19,5 @@ gradle-app.setting
 #vagrant
 .vagrant
 /docs/languages/01-nodejs/02-rest-api/src/node_modules/
+
+node_modules/
