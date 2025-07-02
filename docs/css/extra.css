@@ -1,5 +1,5 @@
 .custom-bg {
-    background-image: url('background/noria.jpg');
+    background-image: url('./background/noria.jpg');
     background-size: cover;
     background-position: center;
     min-height: 400px; /* Ajusta según lo que necesites */
