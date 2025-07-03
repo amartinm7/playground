@@ -92,3 +92,31 @@ execute one by one (during the process some tmp files are created):
 - `terraform apply`
 - wget -qO- http://localhost to check the infra is working. Nginx message is shown
 - `terraform destroy`
+
+## integración con github actions
+
+Los pasos habituales en CI/CD con Terraform son:
+
+- terraform init: Inicializa el directorio de trabajo y configura el backend de estado remoto si lo tienes configurado.
+
+- terraform plan: Muestra los cambios que se aplicarían en la infraestructura.
+
+- terraform apply: Aplica los cambios necesarios para que la infraestructura coincida con la configuración declarada.
+
+Normalmente, los pipelines están divididos en dos tipos de workflows:
+
+- Uno para validación y plan (terraform fmt, terraform validate, terraform plan) en los pull requests.
+
+- Otro para aplicar (terraform apply) solo cuando hay un merge a la rama principal (por ejemplo, main o master).
+
+- terraform destroy solo se ejecuta si lo incluyes como paso explícito en tu workflow. Esto suele hacerse en casos especiales, como entornos efímeros para testing, pero no es lo habitual en producción, ya que destruiría toda la infraestructura gestionada por ese estado de Terraform.
+
+Resumen:
+
+El pipeline típico NO destruye la infraestructura al terminar.
+
+Solo aplica los cambios definidos en tu código Terraform.
+
+Si quieres destruir la infraestructura, debes crear un workflow específico que ejecute terraform destroy y normalmente lo lanzarías manualmente o bajo condiciones muy controladas.
+
+Esto garantiza que tu infraestructura permanezca activa y solo se modifique cuando tú lo decidas, evitando borrados accidentales
