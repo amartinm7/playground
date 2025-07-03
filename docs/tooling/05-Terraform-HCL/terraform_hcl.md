@@ -114,10 +114,10 @@ Normalmente, los pipelines están divididos en dos tipos de workflows:
 
 Resumen:
 
-El pipeline típico NO destruye la infraestructura al terminar.
+- El pipeline típico NO destruye la infraestructura al terminar.
 
-Solo aplica los cambios definidos en tu código Terraform.
+- Solo aplica los cambios definidos en tu código Terraform.
 
-Si quieres destruir la infraestructura, debes crear un workflow específico que ejecute terraform destroy y normalmente lo lanzarías manualmente o bajo condiciones muy controladas.
+- Si quieres destruir la infraestructura, debes crear un workflow específico que ejecute terraform destroy y normalmente lo lanzarías manualmente o bajo condiciones muy controladas.
 
-Esto garantiza que tu infraestructura permanezca activa y solo se modifique cuando tú lo decidas, evitando borrados accidentales
+- Esto garantiza que tu infraestructura permanezca activa y solo se modifique cuando tú lo decidas, evitando borrados accidentales
